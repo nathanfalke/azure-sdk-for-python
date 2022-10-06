@@ -1,9 +1,9 @@
 # Managing Discovery Runs
-___
+
 This sample shows you how to create and manage discovery runs in your workspace using the `disco_groups` module of the `EasmClient` 
 
 # Creating an `EasmClient`
-___
+
 To create an `EasmClient`, you need your subscription ID, region, and some sort of credential. For the purposes of this demo, I've chosen the `InteractiveBrowserCredential` but any credential will work.
 
 ```python 
@@ -18,7 +18,7 @@ client = EasmClient(sub_id, browser_credential, region=region)
 ```
 
 # Creating New Discovery Groups
-___
+
 in order to start discovery runs, we must first create a discovery group, which is a collection of known assets that we can pivot off of. these are created using the `disco_groups.put` method
 ```python
 from azure.easm.models import (AssetId, DiscoGroupRequest)
@@ -36,7 +36,7 @@ response = client.disco_groups.put(name, rg, workspace_name, request)
 ```
 
 # Start a Discovery Run
-___
+
 Discovery groups created through the API's `put` method don't get run automatically, so we need to start the run ourselves.
 
 ```
@@ -44,7 +44,8 @@ client.disco_groups.run(name)
 ```
 
 # Iterating Over Discovery Groups and Runs
-We can list the disco groups using the `disco_groups.list` method, and then list the runs using the `disco_groups.list_runs` method. 
+
+We can list the disco groups using the `disco_groups.list` method, and then list the runs using the `disco_groups.list_runs` method. runs are returned as `ItemPaged`, so we can use `itertools.islice` to take the top 5 most recent runs.
 
 Runs show up immediately after they've started, so if you don't see your run in the list, that means it hasn't been started
 
