@@ -1,7 +1,7 @@
-# Create discovery group from a template
+# Create discovery groups from templates
 This sample shows you how to use the `disco_groups` module to create discovery groups using templates provided by the `disco_templates` module of the `EasmClient`
 
-# Creating an `EasmClient`
+## Creating an `EasmClient`
 To create an `EasmClient`, you need your subscription ID, region, and some sort of credential. For the purposes of this demo, I've chosen the `InteractiveBrowserCredential` but any credential will work.
 
 ```python 
@@ -51,9 +51,11 @@ for seed in template.seeds:
 The discovery template can be used to create a discovery group with using a `DiscoGroupRequest` and the `EasmClient`'s `disco_groups.put` method. Don't forget to run your new disco group with `disco_groups.run`
 
 ```python
-group_name = '<your group name here>'
-request = DiscoGroupRequest(template_id=template_id)
+from azure.easm.models import DiscoGroupRequest
 
+group_name = '<your group name here>'
+
+request = DiscoGroupRequest(template_id=template_id)
 response = client.disco_groups.put(
 	group_name, resource_group, workspace_name, body=request)
 

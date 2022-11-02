@@ -1,8 +1,8 @@
-# Managing Discovery Runs
+# Managing discovery runs
 
 This sample shows you how to create and manage discovery runs in your workspace using the `disco_groups` module of the `EasmClient` 
 
-# Creating an `EasmClient`
+## Creating an `EasmClient`
 
 To create an `EasmClient`, you need your subscription ID, region, and some sort of credential. For the purposes of this demo, I've chosen the `InteractiveBrowserCredential` but any credential will work.
 
@@ -10,40 +10,43 @@ To create an `EasmClient`, you need your subscription ID, region, and some sort 
 from azure.identity import InteractiveBrowserCredential
 from azure.easm import EasmClient
 
-sub_id = "<your subscription ID here>"
-region = "<your region here>"
+sub_id = '<your subscription ID here>'
+region = '<your region here>'
 
 browser_credential = InteractiveBrowserCredential()
 client = EasmClient(sub_id, browser_credential, region=region)
 ```
 
-# Creating New Discovery Groups
+## Creating new discovery groups
 
 in order to start discovery runs, we must first create a discovery group, which is a collection of known assets that we can pivot off of. these are created using the `disco_groups.put` method
 ```python
-from azure.easm.models import (AssetId, DiscoGroupRequest)
+from azure.easm.models import AssetId, DiscoGroupRequest
 
-name = "sample_discovery_group"
+workspace_name = '<your workspace name here>'
+resource_group = '<your resource group here>'
+
+name = '<your discovery group name here>'
 assets = [
-    AssetId(kind="domain", name="xkcd.com"),
-    AssetId(kind="host", name="xkcd.com")
+    AssetId(kind='domain', name='<a domain you want to run discovery against>'),
+    AssetId(kind='host', name='<a host you want to run discovery against>')
 ]
 request = DiscoGroupRequest(
-	description="Sample discovery group", 
+	description='<a description for your discovery group>', 
 	seeds=assets
 )
-response = client.disco_groups.put(name, rg, workspace_name, request)
+response = client.disco_groups.put(name, resource_group, workspace_name, request)
 ```
 
-# Start a Discovery Run
+## Start a discovery run
 
 Discovery groups created through the API's `put` method don't get run automatically, so we need to start the run ourselves.
 
-```
+```python
 client.disco_groups.run(name)
 ```
 
-# Iterating Over Discovery Groups and Runs
+## Iterating over discovery groups and runs
 
 We can list the disco groups using the `disco_groups.list` method, and then list the runs using the `disco_groups.list_runs` method. runs are returned as `ItemPaged`, so we can use `itertools.islice` to take the top 5 most recent runs.
 
