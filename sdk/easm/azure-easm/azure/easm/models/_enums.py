@@ -10,19 +10,6 @@ from enum import Enum
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class AssetIdKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """AssetIdKind."""
-
-    AS = "as"
-    CONTACT = "contact"
-    DOMAIN = "domain"
-    HOST = "host"
-    IP_ADDRESS = "ipAddress"
-    IP_BLOCK = "ipBlock"
-    PAGE = "page"
-    SSL_CERT = "sslCert"
-
-
 class AssetLabelRequestTransfers(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """A list of asset types to cascade the updates to."""
 
@@ -37,7 +24,7 @@ class AssetLabelRequestTransfers(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class AssetResponseKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """AssetResponseKind."""
+    """The kind of asset."""
 
     AS = "as"
     CONTACT = "contact"
@@ -73,7 +60,7 @@ class AssetUpdateRequestState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class AuditTrailItemKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """AuditTrailItemKind."""
+    """The kind of asset."""
 
     AS = "as"
     CONTACT = "contact"
@@ -86,13 +73,13 @@ class AuditTrailItemKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class DataConnectionRequestKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The type of the data connection."""
+    """The kind of data connection."""
 
     SENTINEL = "sentinel"
 
 
 class DataConnectionResponseKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The type of the data connection."""
+    """The kind of data connection."""
 
     SENTINEL = "sentinel"
 
@@ -104,6 +91,17 @@ class DiscoRunResponseState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     RUNNING = "running"
     COMPLETED = "completed"
     FAILED = "failed"
+
+
+class DiscoSourceKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The kind of disco source."""
+
+    AS = "as"
+    ATTRIBUTE = "attribute"
+    CONTACT = "contact"
+    DOMAIN = "domain"
+    HOST = "host"
+    IP_BLOCK = "ipBlock"
 
 
 class ObservedPortStateValue(str, Enum, metaclass=CaseInsensitiveEnumMeta):

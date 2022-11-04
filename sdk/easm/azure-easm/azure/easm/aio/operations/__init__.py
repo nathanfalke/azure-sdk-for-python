@@ -6,7 +6,6 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from ._operations import WorkspacesOperations
 from ._operations import AssetsOperations
 from ._operations import DataConnectionsOperations
 from ._operations import DiscoGroupsOperations
@@ -20,7 +19,6 @@ from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
-    "WorkspacesOperations",
     "AssetsOperations",
     "DataConnectionsOperations",
     "DiscoGroupsOperations",

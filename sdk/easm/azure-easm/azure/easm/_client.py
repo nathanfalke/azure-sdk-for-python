@@ -23,7 +23,6 @@ from .operations import (
     ReportsOperations,
     SavedFiltersOperations,
     TasksOperations,
-    WorkspacesOperations,
 )
 
 if TYPE_CHECKING:
@@ -38,8 +37,6 @@ class EasmClient:  # pylint: disable=client-accepts-api-version-keyword,too-many
     prioritize external risk. The EASM REST API enables you to develop clients that integrate with
     your application.
 
-    :ivar workspaces: WorkspacesOperations operations
-    :vartype workspaces: azure.easm.operations.WorkspacesOperations
     :ivar assets: AssetsOperations operations
     :vartype assets: azure.easm.operations.AssetsOperations
     :ivar data_connections: DataConnectionsOperations operations
@@ -76,7 +73,6 @@ class EasmClient:  # pylint: disable=client-accepts-api-version-keyword,too-many
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.workspaces = WorkspacesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.assets = AssetsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.data_connections = DataConnectionsOperations(
             self._client, self._config, self._serialize, self._deserialize

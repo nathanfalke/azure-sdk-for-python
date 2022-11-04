@@ -291,18 +291,18 @@ class AssetResponse(_serialization.Model):  # pylint: disable=too-many-instance-
     :vartype created_date: ~datetime.datetime
     :ivar disco_group_name:
     :vartype disco_group_name: str
-    :ivar display_name:
+    :ivar display_name: The name that can be used for display purposes.
     :vartype display_name: str
     :ivar external_id:
     :vartype external_id: str
-    :ivar id:
+    :ivar id: The system generated unique id for the resource.
     :vartype id: str
-    :ivar kind: Required. Known values are: "as", "contact", "domain", "host", "ipAddress",
-     "ipBlock", "page", and "sslCert".
+    :ivar kind: The kind of asset. Required. Known values are: "as", "contact", "domain", "host",
+     "ipAddress", "ipBlock", "page", and "sslCert".
     :vartype kind: str or ~azure.easm.models.AssetResponseKind
     :ivar labels:
     :vartype labels: list[~azure.easm.models.LabelResource]
-    :ivar name:
+    :ivar name: The caller provided unique name for the resource.
     :vartype name: str
     :ivar reason:
     :vartype reason: str
@@ -376,15 +376,15 @@ class AssetResponse(_serialization.Model):  # pylint: disable=too-many-instance-
         :paramtype created_date: ~datetime.datetime
         :keyword disco_group_name:
         :paramtype disco_group_name: str
-        :keyword display_name:
+        :keyword display_name: The name that can be used for display purposes.
         :paramtype display_name: str
         :keyword external_id:
         :paramtype external_id: str
-        :keyword id:
+        :keyword id: The system generated unique id for the resource.
         :paramtype id: str
         :keyword labels:
         :paramtype labels: list[~azure.easm.models.LabelResource]
-        :keyword name:
+        :keyword name: The caller provided unique name for the resource.
         :paramtype name: str
         :keyword reason:
         :paramtype reason: str
@@ -426,18 +426,18 @@ class AsAssetResponse(AssetResponse):  # pylint: disable=too-many-instance-attri
     :vartype created_date: ~datetime.datetime
     :ivar disco_group_name:
     :vartype disco_group_name: str
-    :ivar display_name:
+    :ivar display_name: The name that can be used for display purposes.
     :vartype display_name: str
     :ivar external_id:
     :vartype external_id: str
-    :ivar id:
+    :ivar id: The system generated unique id for the resource.
     :vartype id: str
-    :ivar kind: Required. Known values are: "as", "contact", "domain", "host", "ipAddress",
-     "ipBlock", "page", and "sslCert".
+    :ivar kind: The kind of asset. Required. Known values are: "as", "contact", "domain", "host",
+     "ipAddress", "ipBlock", "page", and "sslCert".
     :vartype kind: str or ~azure.easm.models.AssetResponseKind
     :ivar labels:
     :vartype labels: list[~azure.easm.models.LabelResource]
-    :ivar name:
+    :ivar name: The caller provided unique name for the resource.
     :vartype name: str
     :ivar reason:
     :vartype reason: str
@@ -503,15 +503,15 @@ class AsAssetResponse(AssetResponse):  # pylint: disable=too-many-instance-attri
         :paramtype created_date: ~datetime.datetime
         :keyword disco_group_name:
         :paramtype disco_group_name: str
-        :keyword display_name:
+        :keyword display_name: The name that can be used for display purposes.
         :paramtype display_name: str
         :keyword external_id:
         :paramtype external_id: str
-        :keyword id:
+        :keyword id: The system generated unique id for the resource.
         :paramtype id: str
         :keyword labels:
         :paramtype labels: list[~azure.easm.models.LabelResource]
-        :keyword name:
+        :keyword name: The caller provided unique name for the resource.
         :paramtype name: str
         :keyword reason:
         :paramtype reason: str
@@ -545,54 +545,6 @@ class AsAssetResponse(AssetResponse):  # pylint: disable=too-many-instance-attri
         )
         self.kind = "as"  # type: str
         self.asset = asset
-
-
-class AssetId(_serialization.Model):
-    """A set of values to uniquely identify an asset.
-
-    :ivar display_name:
-    :vartype display_name: str
-    :ivar id:
-    :vartype id: str
-    :ivar kind: Known values are: "as", "contact", "domain", "host", "ipAddress", "ipBlock",
-     "page", and "sslCert".
-    :vartype kind: str or ~azure.easm.models.AssetIdKind
-    :ivar name:
-    :vartype name: str
-    """
-
-    _attribute_map = {
-        "display_name": {"key": "displayName", "type": "str"},
-        "id": {"key": "id", "type": "str"},
-        "kind": {"key": "kind", "type": "str"},
-        "name": {"key": "name", "type": "str"},
-    }
-
-    def __init__(
-        self,
-        *,
-        display_name: Optional[str] = None,
-        id: Optional[str] = None,  # pylint: disable=redefined-builtin
-        kind: Optional[Union[str, "_models.AssetIdKind"]] = None,
-        name: Optional[str] = None,
-        **kwargs
-    ):
-        """
-        :keyword display_name:
-        :paramtype display_name: str
-        :keyword id:
-        :paramtype id: str
-        :keyword kind: Known values are: "as", "contact", "domain", "host", "ipAddress", "ipBlock",
-         "page", and "sslCert".
-        :paramtype kind: str or ~azure.easm.models.AssetIdKind
-        :keyword name:
-        :paramtype name: str
-        """
-        super().__init__(**kwargs)
-        self.display_name = display_name
-        self.id = id
-        self.kind = kind
-        self.name = name
 
 
 class AssetLabelRequest(_serialization.Model):
@@ -983,14 +935,14 @@ class Attribute(_serialization.Model):
 class AuditTrailItem(_serialization.Model):
     """AuditTrailItem.
 
-    :ivar display_name:
+    :ivar display_name: The name that can be used for display purposes.
     :vartype display_name: str
-    :ivar id:
+    :ivar id: The system generated unique id for the resource.
     :vartype id: str
-    :ivar kind: Known values are: "as", "contact", "domain", "host", "ipAddress", "ipBlock",
-     "page", and "sslCert".
+    :ivar kind: The kind of asset. Known values are: "as", "contact", "domain", "host",
+     "ipAddress", "ipBlock", "page", and "sslCert".
     :vartype kind: str or ~azure.easm.models.AuditTrailItemKind
-    :ivar name:
+    :ivar name: The caller provided unique name for the resource.
     :vartype name: str
     :ivar reason:
     :vartype reason: str
@@ -1015,14 +967,14 @@ class AuditTrailItem(_serialization.Model):
         **kwargs
     ):
         """
-        :keyword display_name:
+        :keyword display_name: The name that can be used for display purposes.
         :paramtype display_name: str
-        :keyword id:
+        :keyword id: The system generated unique id for the resource.
         :paramtype id: str
-        :keyword kind: Known values are: "as", "contact", "domain", "host", "ipAddress", "ipBlock",
-         "page", and "sslCert".
+        :keyword kind: The kind of asset. Known values are: "as", "contact", "domain", "host",
+         "ipAddress", "ipBlock", "page", and "sslCert".
         :paramtype kind: str or ~azure.easm.models.AuditTrailItemKind
-        :keyword name:
+        :keyword name: The caller provided unique name for the resource.
         :paramtype name: str
         :keyword reason:
         :paramtype reason: str
@@ -1201,18 +1153,18 @@ class ContactAssetResponse(AssetResponse):  # pylint: disable=too-many-instance-
     :vartype created_date: ~datetime.datetime
     :ivar disco_group_name:
     :vartype disco_group_name: str
-    :ivar display_name:
+    :ivar display_name: The name that can be used for display purposes.
     :vartype display_name: str
     :ivar external_id:
     :vartype external_id: str
-    :ivar id:
+    :ivar id: The system generated unique id for the resource.
     :vartype id: str
-    :ivar kind: Required. Known values are: "as", "contact", "domain", "host", "ipAddress",
-     "ipBlock", "page", and "sslCert".
+    :ivar kind: The kind of asset. Required. Known values are: "as", "contact", "domain", "host",
+     "ipAddress", "ipBlock", "page", and "sslCert".
     :vartype kind: str or ~azure.easm.models.AssetResponseKind
     :ivar labels:
     :vartype labels: list[~azure.easm.models.LabelResource]
-    :ivar name:
+    :ivar name: The caller provided unique name for the resource.
     :vartype name: str
     :ivar reason:
     :vartype reason: str
@@ -1278,15 +1230,15 @@ class ContactAssetResponse(AssetResponse):  # pylint: disable=too-many-instance-
         :paramtype created_date: ~datetime.datetime
         :keyword disco_group_name:
         :paramtype disco_group_name: str
-        :keyword display_name:
+        :keyword display_name: The name that can be used for display purposes.
         :paramtype display_name: str
         :keyword external_id:
         :paramtype external_id: str
-        :keyword id:
+        :keyword id: The system generated unique id for the resource.
         :paramtype id: str
         :keyword labels:
         :paramtype labels: list[~azure.easm.models.LabelResource]
-        :keyword name:
+        :keyword name: The caller provided unique name for the resource.
         :paramtype name: str
         :keyword reason:
         :paramtype reason: str
@@ -1660,7 +1612,7 @@ class DataConnectionRequest(_serialization.Model):
 
     :ivar connection_string: The connection string for the data connection.
     :vartype connection_string: str
-    :ivar kind: The type of the data connection. "sentinel"
+    :ivar kind: The kind of data connection. "sentinel"
     :vartype kind: str or ~azure.easm.models.DataConnectionRequestKind
     :ivar options: Any connection specific options.
     :vartype options: str
@@ -1683,7 +1635,7 @@ class DataConnectionRequest(_serialization.Model):
         """
         :keyword connection_string: The connection string for the data connection.
         :paramtype connection_string: str
-        :keyword kind: The type of the data connection. "sentinel"
+        :keyword kind: The kind of data connection. "sentinel"
         :paramtype kind: str or ~azure.easm.models.DataConnectionRequestKind
         :keyword options: Any connection specific options.
         :paramtype options: str
@@ -1701,13 +1653,13 @@ class DataConnectionResponse(_serialization.Model):
     :vartype connection_string: str
     :ivar created_date: The date the data connection was created.
     :vartype created_date: ~datetime.datetime
-    :ivar display_name:
+    :ivar display_name: The name that can be used for display purposes.
     :vartype display_name: str
-    :ivar id:
+    :ivar id: The system generated unique id for the resource.
     :vartype id: str
-    :ivar kind: The type of the data connection. "sentinel"
+    :ivar kind: The kind of data connection. "sentinel"
     :vartype kind: str or ~azure.easm.models.DataConnectionResponseKind
-    :ivar name:
+    :ivar name: The caller provided unique name for the resource.
     :vartype name: str
     :ivar options: Any connection specific options.
     :vartype options: str
@@ -1744,13 +1696,13 @@ class DataConnectionResponse(_serialization.Model):
         :paramtype connection_string: str
         :keyword created_date: The date the data connection was created.
         :paramtype created_date: ~datetime.datetime
-        :keyword display_name:
+        :keyword display_name: The name that can be used for display purposes.
         :paramtype display_name: str
-        :keyword id:
+        :keyword id: The system generated unique id for the resource.
         :paramtype id: str
-        :keyword kind: The type of the data connection. "sentinel"
+        :keyword kind: The kind of data connection. "sentinel"
         :paramtype kind: str or ~azure.easm.models.DataConnectionResponseKind
-        :keyword name:
+        :keyword name: The caller provided unique name for the resource.
         :paramtype name: str
         :keyword options: Any connection specific options.
         :paramtype options: str
@@ -2044,14 +1996,14 @@ class DiscoGroupRequest(_serialization.Model):
     :vartype description: str
     :ivar excludes: The list of excludes used for the disco group runs, aka assets to exclude from
      the discovery algorithm.
-    :vartype excludes: list[~azure.easm.models.AssetId]
+    :vartype excludes: list[~azure.easm.models.DiscoSource]
     :ivar frequency_milliseconds: The frequency at which the disco group is supposed to be rerun in
      milliseconds.
     :vartype frequency_milliseconds: int
     :ivar names: The list of names used for the disco group runs.
     :vartype names: list[str]
     :ivar seeds: The list of seeds used for the disco group runs.
-    :vartype seeds: list[~azure.easm.models.AssetId]
+    :vartype seeds: list[~azure.easm.models.DiscoSource]
     :ivar template_id: The unique identifier for the disco template used for the disco group
      creation.
     :vartype template_id: str
@@ -2062,10 +2014,10 @@ class DiscoGroupRequest(_serialization.Model):
 
     _attribute_map = {
         "description": {"key": "description", "type": "str"},
-        "excludes": {"key": "excludes", "type": "[AssetId]"},
+        "excludes": {"key": "excludes", "type": "[DiscoSource]"},
         "frequency_milliseconds": {"key": "frequencyMilliseconds", "type": "int"},
         "names": {"key": "names", "type": "[str]"},
-        "seeds": {"key": "seeds", "type": "[AssetId]"},
+        "seeds": {"key": "seeds", "type": "[DiscoSource]"},
         "template_id": {"key": "templateId", "type": "str"},
         "tier": {"key": "tier", "type": "str"},
     }
@@ -2074,10 +2026,10 @@ class DiscoGroupRequest(_serialization.Model):
         self,
         *,
         description: Optional[str] = None,
-        excludes: Optional[List["_models.AssetId"]] = None,
+        excludes: Optional[List["_models.DiscoSource"]] = None,
         frequency_milliseconds: Optional[int] = None,
         names: Optional[List[str]] = None,
-        seeds: Optional[List["_models.AssetId"]] = None,
+        seeds: Optional[List["_models.DiscoSource"]] = None,
         template_id: Optional[str] = None,
         tier: Optional[str] = None,
         **kwargs
@@ -2087,14 +2039,14 @@ class DiscoGroupRequest(_serialization.Model):
         :paramtype description: str
         :keyword excludes: The list of excludes used for the disco group runs, aka assets to exclude
          from the discovery algorithm.
-        :paramtype excludes: list[~azure.easm.models.AssetId]
+        :paramtype excludes: list[~azure.easm.models.DiscoSource]
         :keyword frequency_milliseconds: The frequency at which the disco group is supposed to be rerun
          in milliseconds.
         :paramtype frequency_milliseconds: int
         :keyword names: The list of names used for the disco group runs.
         :paramtype names: list[str]
         :keyword seeds: The list of seeds used for the disco group runs.
-        :paramtype seeds: list[~azure.easm.models.AssetId]
+        :paramtype seeds: list[~azure.easm.models.DiscoSource]
         :keyword template_id: The unique identifier for the disco template used for the disco group
          creation.
         :paramtype template_id: str
@@ -2119,25 +2071,25 @@ class DiscoGroupResponse(_serialization.Model):  # pylint: disable=too-many-inst
     :vartype created_date: ~datetime.datetime
     :ivar description: The description for a disco group.
     :vartype description: str
-    :ivar display_name:
+    :ivar display_name: The name that can be used for display purposes.
     :vartype display_name: str
     :ivar excludes: The list of excludes used for the disco group runs, aka assets to exclude from
      the discovery algorithm.
-    :vartype excludes: list[~azure.easm.models.AssetId]
+    :vartype excludes: list[~azure.easm.models.DiscoSource]
     :ivar frequency_milliseconds: The frequency at which the disco group is supposed to be rerun in
      milliseconds.
     :vartype frequency_milliseconds: int
-    :ivar id:
+    :ivar id: The system generated unique id for the resource.
     :vartype id: str
     :ivar latest_run: The latest run of this disco group with some limited information, null if the
      group has never been run.
     :vartype latest_run: ~azure.easm.models.DiscoRunResponse
-    :ivar name:
+    :ivar name: The caller provided unique name for the resource.
     :vartype name: str
     :ivar names: The list of names used for the disco group runs.
     :vartype names: list[str]
     :ivar seeds: The list of seeds used for the disco group runs.
-    :vartype seeds: list[~azure.easm.models.AssetId]
+    :vartype seeds: list[~azure.easm.models.DiscoSource]
     :ivar template_id: The unique identifier for the disco template used for the disco group
      creation.
     :vartype template_id: str
@@ -2150,13 +2102,13 @@ class DiscoGroupResponse(_serialization.Model):  # pylint: disable=too-many-inst
         "created_date": {"key": "createdDate", "type": "iso-8601"},
         "description": {"key": "description", "type": "str"},
         "display_name": {"key": "displayName", "type": "str"},
-        "excludes": {"key": "excludes", "type": "[AssetId]"},
+        "excludes": {"key": "excludes", "type": "[DiscoSource]"},
         "frequency_milliseconds": {"key": "frequencyMilliseconds", "type": "int"},
         "id": {"key": "id", "type": "str"},
         "latest_run": {"key": "latestRun", "type": "DiscoRunResponse"},
         "name": {"key": "name", "type": "str"},
         "names": {"key": "names", "type": "[str]"},
-        "seeds": {"key": "seeds", "type": "[AssetId]"},
+        "seeds": {"key": "seeds", "type": "[DiscoSource]"},
         "template_id": {"key": "templateId", "type": "str"},
         "tier": {"key": "tier", "type": "str"},
     }
@@ -2167,13 +2119,13 @@ class DiscoGroupResponse(_serialization.Model):  # pylint: disable=too-many-inst
         created_date: Optional[datetime.datetime] = None,
         description: Optional[str] = None,
         display_name: Optional[str] = None,
-        excludes: Optional[List["_models.AssetId"]] = None,
+        excludes: Optional[List["_models.DiscoSource"]] = None,
         frequency_milliseconds: Optional[int] = None,
         id: Optional[str] = None,  # pylint: disable=redefined-builtin
         latest_run: Optional["_models.DiscoRunResponse"] = None,
         name: Optional[str] = None,
         names: Optional[List[str]] = None,
-        seeds: Optional[List["_models.AssetId"]] = None,
+        seeds: Optional[List["_models.DiscoSource"]] = None,
         template_id: Optional[str] = None,
         tier: Optional[str] = None,
         **kwargs
@@ -2183,25 +2135,25 @@ class DiscoGroupResponse(_serialization.Model):  # pylint: disable=too-many-inst
         :paramtype created_date: ~datetime.datetime
         :keyword description: The description for a disco group.
         :paramtype description: str
-        :keyword display_name:
+        :keyword display_name: The name that can be used for display purposes.
         :paramtype display_name: str
         :keyword excludes: The list of excludes used for the disco group runs, aka assets to exclude
          from the discovery algorithm.
-        :paramtype excludes: list[~azure.easm.models.AssetId]
+        :paramtype excludes: list[~azure.easm.models.DiscoSource]
         :keyword frequency_milliseconds: The frequency at which the disco group is supposed to be rerun
          in milliseconds.
         :paramtype frequency_milliseconds: int
-        :keyword id:
+        :keyword id: The system generated unique id for the resource.
         :paramtype id: str
         :keyword latest_run: The latest run of this disco group with some limited information, null if
          the group has never been run.
         :paramtype latest_run: ~azure.easm.models.DiscoRunResponse
-        :keyword name:
+        :keyword name: The caller provided unique name for the resource.
         :paramtype name: str
         :keyword names: The list of names used for the disco group runs.
         :paramtype names: list[str]
         :keyword seeds: The list of seeds used for the disco group runs.
-        :paramtype seeds: list[~azure.easm.models.AssetId]
+        :paramtype seeds: list[~azure.easm.models.DiscoSource]
         :keyword template_id: The unique identifier for the disco template used for the disco group
          creation.
         :paramtype template_id: str
@@ -2314,9 +2266,11 @@ class DiscoRunResponse(_serialization.Model):
     :vartype completed_date: ~datetime.datetime
     :ivar excludes: The list of excludes used for the disco run, aka assets to exclude from the
      discovery algorithm.
-    :vartype excludes: list[~azure.easm.models.AssetId]
+    :vartype excludes: list[~azure.easm.models.DiscoSource]
+    :ivar names: The list of names used for the disco run.
+    :vartype names: list[str]
     :ivar seeds: The list of seeds used for the disco run.
-    :vartype seeds: list[~azure.easm.models.AssetId]
+    :vartype seeds: list[~azure.easm.models.DiscoSource]
     :ivar started_date: The date for when the disco run was actually started by the system.
     :vartype started_date: ~datetime.datetime
     :ivar state: The State of the disco run. Known values are: "pending", "running", "completed",
@@ -2332,8 +2286,9 @@ class DiscoRunResponse(_serialization.Model):
 
     _attribute_map = {
         "completed_date": {"key": "completedDate", "type": "iso-8601"},
-        "excludes": {"key": "excludes", "type": "[AssetId]"},
-        "seeds": {"key": "seeds", "type": "[AssetId]"},
+        "excludes": {"key": "excludes", "type": "[DiscoSource]"},
+        "names": {"key": "names", "type": "[str]"},
+        "seeds": {"key": "seeds", "type": "[DiscoSource]"},
         "started_date": {"key": "startedDate", "type": "iso-8601"},
         "state": {"key": "state", "type": "str"},
         "submitted_date": {"key": "submittedDate", "type": "iso-8601"},
@@ -2345,8 +2300,9 @@ class DiscoRunResponse(_serialization.Model):
         self,
         *,
         completed_date: Optional[datetime.datetime] = None,
-        excludes: Optional[List["_models.AssetId"]] = None,
-        seeds: Optional[List["_models.AssetId"]] = None,
+        excludes: Optional[List["_models.DiscoSource"]] = None,
+        names: Optional[List[str]] = None,
+        seeds: Optional[List["_models.DiscoSource"]] = None,
         started_date: Optional[datetime.datetime] = None,
         state: Optional[Union[str, "_models.DiscoRunResponseState"]] = None,
         submitted_date: Optional[datetime.datetime] = None,
@@ -2359,9 +2315,11 @@ class DiscoRunResponse(_serialization.Model):
         :paramtype completed_date: ~datetime.datetime
         :keyword excludes: The list of excludes used for the disco run, aka assets to exclude from the
          discovery algorithm.
-        :paramtype excludes: list[~azure.easm.models.AssetId]
+        :paramtype excludes: list[~azure.easm.models.DiscoSource]
+        :keyword names: The list of names used for the disco run.
+        :paramtype names: list[str]
         :keyword seeds: The list of seeds used for the disco run.
-        :paramtype seeds: list[~azure.easm.models.AssetId]
+        :paramtype seeds: list[~azure.easm.models.DiscoSource]
         :keyword started_date: The date for when the disco run was actually started by the system.
         :paramtype started_date: ~datetime.datetime
         :keyword state: The State of the disco run. Known values are: "pending", "running",
@@ -2377,12 +2335,43 @@ class DiscoRunResponse(_serialization.Model):
         super().__init__(**kwargs)
         self.completed_date = completed_date
         self.excludes = excludes
+        self.names = names
         self.seeds = seeds
         self.started_date = started_date
         self.state = state
         self.submitted_date = submitted_date
         self.tier = tier
         self.total_assets_found_count = total_assets_found_count
+
+
+class DiscoSource(_serialization.Model):
+    """Source entity used to drive discovery.
+
+    :ivar kind: The kind of disco source. Known values are: "as", "attribute", "contact", "domain",
+     "host", and "ipBlock".
+    :vartype kind: str or ~azure.easm.models.DiscoSourceKind
+    :ivar name: The name for the disco source.
+    :vartype name: str
+    """
+
+    _attribute_map = {
+        "kind": {"key": "kind", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+    }
+
+    def __init__(
+        self, *, kind: Optional[Union[str, "_models.DiscoSourceKind"]] = None, name: Optional[str] = None, **kwargs
+    ):
+        """
+        :keyword kind: The kind of disco source. Known values are: "as", "attribute", "contact",
+         "domain", "host", and "ipBlock".
+        :paramtype kind: str or ~azure.easm.models.DiscoSourceKind
+        :keyword name: The name for the disco source.
+        :paramtype name: str
+        """
+        super().__init__(**kwargs)
+        self.kind = kind
+        self.name = name
 
 
 class DiscoTemplatePageResponse(_serialization.Model):
@@ -2475,20 +2464,20 @@ class DiscoTemplateResponse(_serialization.Model):
     :vartype city: str
     :ivar country_code: The country code.
     :vartype country_code: str
-    :ivar display_name:
+    :ivar display_name: The name that can be used for display purposes.
     :vartype display_name: str
-    :ivar id:
+    :ivar id: The system generated unique id for the resource.
     :vartype id: str
     :ivar industry: The name of the industry.
     :vartype industry: str
-    :ivar name:
+    :ivar name: The caller provided unique name for the resource.
     :vartype name: str
     :ivar names: The list of disco template names.
     :vartype names: list[str]
     :ivar region: The name of the region.
     :vartype region: str
     :ivar seeds: The list of disco template seeds.
-    :vartype seeds: list[~azure.easm.models.AssetId]
+    :vartype seeds: list[~azure.easm.models.DiscoSource]
     :ivar state_code: The state code.
     :vartype state_code: str
     """
@@ -2502,7 +2491,7 @@ class DiscoTemplateResponse(_serialization.Model):
         "name": {"key": "name", "type": "str"},
         "names": {"key": "names", "type": "[str]"},
         "region": {"key": "region", "type": "str"},
-        "seeds": {"key": "seeds", "type": "[AssetId]"},
+        "seeds": {"key": "seeds", "type": "[DiscoSource]"},
         "state_code": {"key": "stateCode", "type": "str"},
     }
 
@@ -2517,7 +2506,7 @@ class DiscoTemplateResponse(_serialization.Model):
         name: Optional[str] = None,
         names: Optional[List[str]] = None,
         region: Optional[str] = None,
-        seeds: Optional[List["_models.AssetId"]] = None,
+        seeds: Optional[List["_models.DiscoSource"]] = None,
         state_code: Optional[str] = None,
         **kwargs
     ):
@@ -2526,20 +2515,20 @@ class DiscoTemplateResponse(_serialization.Model):
         :paramtype city: str
         :keyword country_code: The country code.
         :paramtype country_code: str
-        :keyword display_name:
+        :keyword display_name: The name that can be used for display purposes.
         :paramtype display_name: str
-        :keyword id:
+        :keyword id: The system generated unique id for the resource.
         :paramtype id: str
         :keyword industry: The name of the industry.
         :paramtype industry: str
-        :keyword name:
+        :keyword name: The caller provided unique name for the resource.
         :paramtype name: str
         :keyword names: The list of disco template names.
         :paramtype names: list[str]
         :keyword region: The name of the region.
         :paramtype region: str
         :keyword seeds: The list of disco template seeds.
-        :paramtype seeds: list[~azure.easm.models.AssetId]
+        :paramtype seeds: list[~azure.easm.models.DiscoSource]
         :keyword state_code: The state code.
         :paramtype state_code: str
         """
@@ -2802,18 +2791,18 @@ class DomainAssetResponse(AssetResponse):  # pylint: disable=too-many-instance-a
     :vartype created_date: ~datetime.datetime
     :ivar disco_group_name:
     :vartype disco_group_name: str
-    :ivar display_name:
+    :ivar display_name: The name that can be used for display purposes.
     :vartype display_name: str
     :ivar external_id:
     :vartype external_id: str
-    :ivar id:
+    :ivar id: The system generated unique id for the resource.
     :vartype id: str
-    :ivar kind: Required. Known values are: "as", "contact", "domain", "host", "ipAddress",
-     "ipBlock", "page", and "sslCert".
+    :ivar kind: The kind of asset. Required. Known values are: "as", "contact", "domain", "host",
+     "ipAddress", "ipBlock", "page", and "sslCert".
     :vartype kind: str or ~azure.easm.models.AssetResponseKind
     :ivar labels:
     :vartype labels: list[~azure.easm.models.LabelResource]
-    :ivar name:
+    :ivar name: The caller provided unique name for the resource.
     :vartype name: str
     :ivar reason:
     :vartype reason: str
@@ -2879,15 +2868,15 @@ class DomainAssetResponse(AssetResponse):  # pylint: disable=too-many-instance-a
         :paramtype created_date: ~datetime.datetime
         :keyword disco_group_name:
         :paramtype disco_group_name: str
-        :keyword display_name:
+        :keyword display_name: The name that can be used for display purposes.
         :paramtype display_name: str
         :keyword external_id:
         :paramtype external_id: str
-        :keyword id:
+        :keyword id: The system generated unique id for the resource.
         :paramtype id: str
         :keyword labels:
         :paramtype labels: list[~azure.easm.models.LabelResource]
-        :keyword name:
+        :keyword name: The caller provided unique name for the resource.
         :paramtype name: str
         :keyword reason:
         :paramtype reason: str
@@ -3315,18 +3304,18 @@ class HostAssetResponse(AssetResponse):  # pylint: disable=too-many-instance-att
     :vartype created_date: ~datetime.datetime
     :ivar disco_group_name:
     :vartype disco_group_name: str
-    :ivar display_name:
+    :ivar display_name: The name that can be used for display purposes.
     :vartype display_name: str
     :ivar external_id:
     :vartype external_id: str
-    :ivar id:
+    :ivar id: The system generated unique id for the resource.
     :vartype id: str
-    :ivar kind: Required. Known values are: "as", "contact", "domain", "host", "ipAddress",
-     "ipBlock", "page", and "sslCert".
+    :ivar kind: The kind of asset. Required. Known values are: "as", "contact", "domain", "host",
+     "ipAddress", "ipBlock", "page", and "sslCert".
     :vartype kind: str or ~azure.easm.models.AssetResponseKind
     :ivar labels:
     :vartype labels: list[~azure.easm.models.LabelResource]
-    :ivar name:
+    :ivar name: The caller provided unique name for the resource.
     :vartype name: str
     :ivar reason:
     :vartype reason: str
@@ -3392,15 +3381,15 @@ class HostAssetResponse(AssetResponse):  # pylint: disable=too-many-instance-att
         :paramtype created_date: ~datetime.datetime
         :keyword disco_group_name:
         :paramtype disco_group_name: str
-        :keyword display_name:
+        :keyword display_name: The name that can be used for display purposes.
         :paramtype display_name: str
         :keyword external_id:
         :paramtype external_id: str
-        :keyword id:
+        :keyword id: The system generated unique id for the resource.
         :paramtype id: str
         :keyword labels:
         :paramtype labels: list[~azure.easm.models.LabelResource]
-        :keyword name:
+        :keyword name: The caller provided unique name for the resource.
         :paramtype name: str
         :keyword reason:
         :paramtype reason: str
@@ -3952,18 +3941,18 @@ class IpAddressAssetResponse(AssetResponse):  # pylint: disable=too-many-instanc
     :vartype created_date: ~datetime.datetime
     :ivar disco_group_name:
     :vartype disco_group_name: str
-    :ivar display_name:
+    :ivar display_name: The name that can be used for display purposes.
     :vartype display_name: str
     :ivar external_id:
     :vartype external_id: str
-    :ivar id:
+    :ivar id: The system generated unique id for the resource.
     :vartype id: str
-    :ivar kind: Required. Known values are: "as", "contact", "domain", "host", "ipAddress",
-     "ipBlock", "page", and "sslCert".
+    :ivar kind: The kind of asset. Required. Known values are: "as", "contact", "domain", "host",
+     "ipAddress", "ipBlock", "page", and "sslCert".
     :vartype kind: str or ~azure.easm.models.AssetResponseKind
     :ivar labels:
     :vartype labels: list[~azure.easm.models.LabelResource]
-    :ivar name:
+    :ivar name: The caller provided unique name for the resource.
     :vartype name: str
     :ivar reason:
     :vartype reason: str
@@ -4029,15 +4018,15 @@ class IpAddressAssetResponse(AssetResponse):  # pylint: disable=too-many-instanc
         :paramtype created_date: ~datetime.datetime
         :keyword disco_group_name:
         :paramtype disco_group_name: str
-        :keyword display_name:
+        :keyword display_name: The name that can be used for display purposes.
         :paramtype display_name: str
         :keyword external_id:
         :paramtype external_id: str
-        :keyword id:
+        :keyword id: The system generated unique id for the resource.
         :paramtype id: str
         :keyword labels:
         :paramtype labels: list[~azure.easm.models.LabelResource]
-        :keyword name:
+        :keyword name: The caller provided unique name for the resource.
         :paramtype name: str
         :keyword reason:
         :paramtype reason: str
@@ -4379,18 +4368,18 @@ class IpBlockAssetResponse(AssetResponse):  # pylint: disable=too-many-instance-
     :vartype created_date: ~datetime.datetime
     :ivar disco_group_name:
     :vartype disco_group_name: str
-    :ivar display_name:
+    :ivar display_name: The name that can be used for display purposes.
     :vartype display_name: str
     :ivar external_id:
     :vartype external_id: str
-    :ivar id:
+    :ivar id: The system generated unique id for the resource.
     :vartype id: str
-    :ivar kind: Required. Known values are: "as", "contact", "domain", "host", "ipAddress",
-     "ipBlock", "page", and "sslCert".
+    :ivar kind: The kind of asset. Required. Known values are: "as", "contact", "domain", "host",
+     "ipAddress", "ipBlock", "page", and "sslCert".
     :vartype kind: str or ~azure.easm.models.AssetResponseKind
     :ivar labels:
     :vartype labels: list[~azure.easm.models.LabelResource]
-    :ivar name:
+    :ivar name: The caller provided unique name for the resource.
     :vartype name: str
     :ivar reason:
     :vartype reason: str
@@ -4456,15 +4445,15 @@ class IpBlockAssetResponse(AssetResponse):  # pylint: disable=too-many-instance-
         :paramtype created_date: ~datetime.datetime
         :keyword disco_group_name:
         :paramtype disco_group_name: str
-        :keyword display_name:
+        :keyword display_name: The name that can be used for display purposes.
         :paramtype display_name: str
         :keyword external_id:
         :paramtype external_id: str
-        :keyword id:
+        :keyword id: The system generated unique id for the resource.
         :paramtype id: str
         :keyword labels:
         :paramtype labels: list[~azure.easm.models.LabelResource]
-        :keyword name:
+        :keyword name: The caller provided unique name for the resource.
         :paramtype name: str
         :keyword reason:
         :paramtype reason: str
@@ -5543,18 +5532,18 @@ class PageAssetResponse(AssetResponse):  # pylint: disable=too-many-instance-att
     :vartype created_date: ~datetime.datetime
     :ivar disco_group_name:
     :vartype disco_group_name: str
-    :ivar display_name:
+    :ivar display_name: The name that can be used for display purposes.
     :vartype display_name: str
     :ivar external_id:
     :vartype external_id: str
-    :ivar id:
+    :ivar id: The system generated unique id for the resource.
     :vartype id: str
-    :ivar kind: Required. Known values are: "as", "contact", "domain", "host", "ipAddress",
-     "ipBlock", "page", and "sslCert".
+    :ivar kind: The kind of asset. Required. Known values are: "as", "contact", "domain", "host",
+     "ipAddress", "ipBlock", "page", and "sslCert".
     :vartype kind: str or ~azure.easm.models.AssetResponseKind
     :ivar labels:
     :vartype labels: list[~azure.easm.models.LabelResource]
-    :ivar name:
+    :ivar name: The caller provided unique name for the resource.
     :vartype name: str
     :ivar reason:
     :vartype reason: str
@@ -5620,15 +5609,15 @@ class PageAssetResponse(AssetResponse):  # pylint: disable=too-many-instance-att
         :paramtype created_date: ~datetime.datetime
         :keyword disco_group_name:
         :paramtype disco_group_name: str
-        :keyword display_name:
+        :keyword display_name: The name that can be used for display purposes.
         :paramtype display_name: str
         :keyword external_id:
         :paramtype external_id: str
-        :keyword id:
+        :keyword id: The system generated unique id for the resource.
         :paramtype id: str
         :keyword labels:
         :paramtype labels: list[~azure.easm.models.LabelResource]
-        :keyword name:
+        :keyword name: The caller provided unique name for the resource.
         :paramtype name: str
         :keyword reason:
         :paramtype reason: str
@@ -5747,13 +5736,13 @@ class Port(_serialization.Model):
 class ReportAssetSnapshotRequest(_serialization.Model):
     """A request body used to retrieve an asset report snapshot.
 
-    :ivar label_name: the name of the label to retrieve a snapshot for.
+    :ivar label_name: The name of the label to retrieve a snapshot for.
     :vartype label_name: str
-    :ivar metric: the metric to retrieve a snapshot for.
+    :ivar metric: The metric to retrieve a snapshot for.
     :vartype metric: str
-    :ivar page: the page to retrieve.
+    :ivar page: The page to retrieve.
     :vartype page: int
-    :ivar size: the number of assets per page.
+    :ivar size: The number of assets per page.
     :vartype size: int
     """
 
@@ -5774,13 +5763,13 @@ class ReportAssetSnapshotRequest(_serialization.Model):
         **kwargs
     ):
         """
-        :keyword label_name: the name of the label to retrieve a snapshot for.
+        :keyword label_name: The name of the label to retrieve a snapshot for.
         :paramtype label_name: str
-        :keyword metric: the metric to retrieve a snapshot for.
+        :keyword metric: The metric to retrieve a snapshot for.
         :paramtype metric: str
-        :keyword page: the page to retrieve.
+        :keyword page: The page to retrieve.
         :paramtype page: int
-        :keyword size: the number of assets per page.
+        :keyword size: The number of assets per page.
         :paramtype size: int
         """
         super().__init__(**kwargs)
@@ -5860,9 +5849,9 @@ class ReportAssetSummaryRequest(_serialization.Model):
     :vartype group_by: str
     :ivar label_name: Currently unused.
     :vartype label_name: str
-    :ivar metric_categories: categories to retrieve risk reporting data for.
+    :ivar metric_categories: Categories to retrieve risk reporting data for.
     :vartype metric_categories: list[str]
-    :ivar metrics: metrics to retrieve risk reporting data for.
+    :ivar metrics: Metrics to retrieve risk reporting data for.
     :vartype metrics: list[str]
     :ivar segment_by: A parameter to segment the assets by (second level facet field), only used
      when the chosen summary identifier is filters.
@@ -5897,9 +5886,9 @@ class ReportAssetSummaryRequest(_serialization.Model):
         :paramtype group_by: str
         :keyword label_name: Currently unused.
         :paramtype label_name: str
-        :keyword metric_categories: categories to retrieve risk reporting data for.
+        :keyword metric_categories: Categories to retrieve risk reporting data for.
         :paramtype metric_categories: list[str]
-        :keyword metrics: metrics to retrieve risk reporting data for.
+        :keyword metrics: Metrics to retrieve risk reporting data for.
         :paramtype metrics: list[str]
         :keyword segment_by: A parameter to segment the assets by (second level facet field), only used
          when the chosen summary identifier is filters.
@@ -6154,40 +6143,36 @@ class SavedFilterPageResponse(_serialization.Model):
 class SavedFilterRequest(_serialization.Model):
     """A request body used to create a saved filter.
 
-    :ivar description: A human readable description of the saved filter.
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar description: A human readable description of the saved filter. Required.
     :vartype description: str
     :ivar filter: An expression on the resource type that selects the resources to be returned.
+     Required.
     :vartype filter: str
-    :ivar id: The unique identifier for the saved filter.
-    :vartype id: str
     """
+
+    _validation = {
+        "description": {"required": True},
+        "filter": {"required": True},
+    }
 
     _attribute_map = {
         "description": {"key": "description", "type": "str"},
         "filter": {"key": "filter", "type": "str"},
-        "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        description: Optional[str] = None,
-        filter: Optional[str] = None,  # pylint: disable=redefined-builtin
-        id: Optional[str] = None,  # pylint: disable=redefined-builtin
-        **kwargs
-    ):
+    def __init__(self, *, description: str, filter: str, **kwargs):  # pylint: disable=redefined-builtin
         """
-        :keyword description: A human readable description of the saved filter.
+        :keyword description: A human readable description of the saved filter. Required.
         :paramtype description: str
         :keyword filter: An expression on the resource type that selects the resources to be returned.
+         Required.
         :paramtype filter: str
-        :keyword id: The unique identifier for the saved filter.
-        :paramtype id: str
         """
         super().__init__(**kwargs)
         self.description = description
         self.filter = filter
-        self.id = id
 
 
 class SavedFilterResponse(_serialization.Model):
@@ -6195,13 +6180,13 @@ class SavedFilterResponse(_serialization.Model):
 
     :ivar description:
     :vartype description: str
-    :ivar display_name:
+    :ivar display_name: The name that can be used for display purposes.
     :vartype display_name: str
     :ivar filter:
     :vartype filter: str
-    :ivar id:
+    :ivar id: The system generated unique id for the resource.
     :vartype id: str
-    :ivar name:
+    :ivar name: The caller provided unique name for the resource.
     :vartype name: str
     """
 
@@ -6226,13 +6211,13 @@ class SavedFilterResponse(_serialization.Model):
         """
         :keyword description:
         :paramtype description: str
-        :keyword display_name:
+        :keyword display_name: The name that can be used for display purposes.
         :paramtype display_name: str
         :keyword filter:
         :paramtype filter: str
-        :keyword id:
+        :keyword id: The system generated unique id for the resource.
         :paramtype id: str
-        :keyword name:
+        :keyword name: The caller provided unique name for the resource.
         :paramtype name: str
         """
         super().__init__(**kwargs)
@@ -6766,18 +6751,18 @@ class SslCertAssetResponse(AssetResponse):  # pylint: disable=too-many-instance-
     :vartype created_date: ~datetime.datetime
     :ivar disco_group_name:
     :vartype disco_group_name: str
-    :ivar display_name:
+    :ivar display_name: The name that can be used for display purposes.
     :vartype display_name: str
     :ivar external_id:
     :vartype external_id: str
-    :ivar id:
+    :ivar id: The system generated unique id for the resource.
     :vartype id: str
-    :ivar kind: Required. Known values are: "as", "contact", "domain", "host", "ipAddress",
-     "ipBlock", "page", and "sslCert".
+    :ivar kind: The kind of asset. Required. Known values are: "as", "contact", "domain", "host",
+     "ipAddress", "ipBlock", "page", and "sslCert".
     :vartype kind: str or ~azure.easm.models.AssetResponseKind
     :ivar labels:
     :vartype labels: list[~azure.easm.models.LabelResource]
-    :ivar name:
+    :ivar name: The caller provided unique name for the resource.
     :vartype name: str
     :ivar reason:
     :vartype reason: str
@@ -6843,15 +6828,15 @@ class SslCertAssetResponse(AssetResponse):  # pylint: disable=too-many-instance-
         :paramtype created_date: ~datetime.datetime
         :keyword disco_group_name:
         :paramtype disco_group_name: str
-        :keyword display_name:
+        :keyword display_name: The name that can be used for display purposes.
         :paramtype display_name: str
         :keyword external_id:
         :paramtype external_id: str
-        :keyword id:
+        :keyword id: The system generated unique id for the resource.
         :paramtype id: str
         :keyword labels:
         :paramtype labels: list[~azure.easm.models.LabelResource]
-        :keyword name:
+        :keyword name: The caller provided unique name for the resource.
         :paramtype name: str
         :keyword reason:
         :paramtype reason: str
@@ -7280,102 +7265,3 @@ class WebComponent(_serialization.Model):  # pylint: disable=too-many-instance-a
         self.sources = sources
         self.type = type
         self.version = version
-
-
-class WorkspaceMode(_serialization.Model):
-    """WorkspaceMode.
-
-    :ivar free_trial:
-    :vartype free_trial: bool
-    :ivar free_trial_days_left:
-    :vartype free_trial_days_left: int
-    :ivar in_progress:
-    :vartype in_progress: bool
-    :ivar read_only:
-    :vartype read_only: bool
-    :ivar setup:
-    :vartype setup: bool
-    """
-
-    _attribute_map = {
-        "free_trial": {"key": "freeTrial", "type": "bool"},
-        "free_trial_days_left": {"key": "freeTrialDaysLeft", "type": "int"},
-        "in_progress": {"key": "inProgress", "type": "bool"},
-        "read_only": {"key": "readOnly", "type": "bool"},
-        "setup": {"key": "setup", "type": "bool"},
-    }
-
-    def __init__(
-        self,
-        *,
-        free_trial: Optional[bool] = None,
-        free_trial_days_left: Optional[int] = None,
-        in_progress: Optional[bool] = None,
-        read_only: Optional[bool] = None,
-        setup: Optional[bool] = None,
-        **kwargs
-    ):
-        """
-        :keyword free_trial:
-        :paramtype free_trial: bool
-        :keyword free_trial_days_left:
-        :paramtype free_trial_days_left: int
-        :keyword in_progress:
-        :paramtype in_progress: bool
-        :keyword read_only:
-        :paramtype read_only: bool
-        :keyword setup:
-        :paramtype setup: bool
-        """
-        super().__init__(**kwargs)
-        self.free_trial = free_trial
-        self.free_trial_days_left = free_trial_days_left
-        self.in_progress = in_progress
-        self.read_only = read_only
-        self.setup = setup
-
-
-class WorkspaceResponse(_serialization.Model):
-    """WorkspaceResponse.
-
-    :ivar display_name:
-    :vartype display_name: str
-    :ivar id:
-    :vartype id: str
-    :ivar mode:
-    :vartype mode: ~azure.easm.models.WorkspaceMode
-    :ivar name:
-    :vartype name: str
-    """
-
-    _attribute_map = {
-        "display_name": {"key": "displayName", "type": "str"},
-        "id": {"key": "id", "type": "str"},
-        "mode": {"key": "mode", "type": "WorkspaceMode"},
-        "name": {"key": "name", "type": "str"},
-    }
-
-    def __init__(
-        self,
-        *,
-        display_name: Optional[str] = None,
-        id: Optional[str] = None,  # pylint: disable=redefined-builtin
-        mode: Optional["_models.WorkspaceMode"] = None,
-        name: Optional[str] = None,
-        **kwargs
-    ):
-        """
-        :keyword display_name:
-        :paramtype display_name: str
-        :keyword id:
-        :paramtype id: str
-        :keyword mode:
-        :paramtype mode: ~azure.easm.models.WorkspaceMode
-        :keyword name:
-        :paramtype name: str
-        """
-        super().__init__(**kwargs)
-        self.display_name = display_name
-        self.id = id
-        self.mode = mode
-        self.name = name

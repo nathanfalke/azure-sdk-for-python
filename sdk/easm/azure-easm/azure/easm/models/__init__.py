@@ -9,7 +9,6 @@
 from ._models import AlexaInfo
 from ._models import AsAsset
 from ._models import AsAssetResponse
-from ._models import AssetId
 from ._models import AssetLabelRequest
 from ._models import AssetResponse
 from ._models import AssetSecurityPolicy
@@ -29,6 +28,7 @@ from ._models import DependentResource
 from ._models import DiscoGroupRequest
 from ._models import DiscoGroupResponse
 from ._models import DiscoRunResponse
+from ._models import DiscoSource
 from ._models import DiscoTemplateResponse
 from ._models import DomainAsset
 from ._models import DomainAssetResponse
@@ -76,10 +76,7 @@ from ._models import SslServerConfig
 from ._models import SubResourceIntegrityCheck
 from ._models import TaskResponse
 from ._models import WebComponent
-from ._models import WorkspaceMode
-from ._models import WorkspaceResponse
 
-from ._enums import AssetIdKind
 from ._enums import AssetLabelRequestTransfers
 from ._enums import AssetResponseKind
 from ._enums import AssetResponseState
@@ -88,6 +85,7 @@ from ._enums import AuditTrailItemKind
 from ._enums import DataConnectionRequestKind
 from ._enums import DataConnectionResponseKind
 from ._enums import DiscoRunResponseState
+from ._enums import DiscoSourceKind
 from ._enums import ObservedPortStateValue
 from ._enums import PageAssetRedirectType
 from ._enums import SslCertAssetValidationType
@@ -101,7 +99,6 @@ __all__ = [
     "AlexaInfo",
     "AsAsset",
     "AsAssetResponse",
-    "AssetId",
     "AssetLabelRequest",
     "AssetResponse",
     "AssetSecurityPolicy",
@@ -121,6 +118,7 @@ __all__ = [
     "DiscoGroupRequest",
     "DiscoGroupResponse",
     "DiscoRunResponse",
+    "DiscoSource",
     "DiscoTemplateResponse",
     "DomainAsset",
     "DomainAssetResponse",
@@ -168,9 +166,6 @@ __all__ = [
     "SubResourceIntegrityCheck",
     "TaskResponse",
     "WebComponent",
-    "WorkspaceMode",
-    "WorkspaceResponse",
-    "AssetIdKind",
     "AssetLabelRequestTransfers",
     "AssetResponseKind",
     "AssetResponseState",
@@ -179,6 +174,7 @@ __all__ = [
     "DataConnectionRequestKind",
     "DataConnectionResponseKind",
     "DiscoRunResponseState",
+    "DiscoSourceKind",
     "ObservedPortStateValue",
     "PageAssetRedirectType",
     "SslCertAssetValidationType",
