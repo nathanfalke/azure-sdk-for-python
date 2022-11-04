@@ -1,6 +1,6 @@
 # Synchronize queries with saved filters
-Saved Filters are used to store a query within EASM, these saved queries can be used to syncronize exact queries across multiple scripts, or to ensure a team is looking at the same assets
-In this example, we'll go over how a saved filter could be used to syncronize the a query across multiple scripts
+Saved Filters are used to store a query within EASM, these saved queries can be used to synchronize exact queries across multiple scripts, or to ensure a team is looking at the same assets
+In this example, we'll go over how a saved filter could be used to synchronize the a query across multiple scripts
 
 ## Creating an `EasmClient`
 To create an `EasmClient`, you need your subscription ID, region, and some sort of credential. For the purposes of this demo, I've chosen the `InteractiveBrowserCredential` but any credential will work.
