@@ -1,16 +1,23 @@
 
-# EASM Control Plane Client client library for Python
+# EASM Control Plane Client library for Python
 <!-- write necessary description of service -->
+[Source Code][source_code] | [Package (pypi)][pypi] | [Api Reference Documentation][api_reference] | [Product Documentation][product_documentation]
 
 ## Getting started
 
-### Installating the package
+### Installing the package
 
+#### pip
 ```bash
 python -m pip install azure-mgmt-easm
 ```
 
-#### Prequisites
+#### from source
+```bash
+python setup.py intall
+```
+
+#### Prerequisites
 
 - Python 3.7 or later is required to use this package.
 - You need an [Azure subscription][azure_sub] to use this package.
@@ -31,25 +38,45 @@ Set the values of the client ID, tenant ID, and client secret of the AAD applica
 Use the returned token credential to authenticate the client:
 
 ```python
->>> from azure.mgmt.easm import EasmMgmtClient
->>> from azure.identity import DefaultAzureCredential
->>> client = EasmMgmtClient(endpoint='<endpoint>', credential=DefaultAzureCredential())
+from azure.mgmt.easm import EasmMgmtClient
+from azure.identity import DefaultAzureCredential
+client = EasmMgmtClient(subscription_id, credential=DefaultAzureCredential())
 ```
+## Key concepts
+
+### Workspaces
+
+### Labels
 
 ## Examples
+After authenticating as shown in the "Create with an Azure Active Directory Credential" section, you can get started by creating your workspace like this:
 
+### Create a workspace
 ```python
->>> from azure.mgmt.easm import EasmMgmtClient
->>> from azure.identity import DefaultAzureCredential
->>> from azure.core.exceptions import HttpResponseError
+from azure.mgmt.easm import EasmMgmtClient
+from azure.identity import DefaultAzureCredential
+client = EasmMgmtClient(subscription_id, credential=DefaultAzureCredential())
 
->>> client = EasmMgmtClient(endpoint='<endpoint>', credential=DefaultAzureCredential())
->>> try:
-        <!-- write test code here -->
-    except HttpResponseError as e:
-        print('service responds error: {}'.format(e.response.json()))
+resource_group = "example resource group"
+workspace_name = "example workspace"
 
+resource = WorkspaceResource(location="eastus")
+mgmt_client.workspaces.begin_create_and_update(
+	resource_group, workspace_name, workspace_resource=resource)
 ```
+
+### Create a label
+```python
+from azure.mgmt.easm.models import LabelResource, LabelResourceProperties
+
+label_resource = LabelResource()
+
+response = mgmt_client.labels.begin_create_and_update(
+	resource_group, workspace_name, 'example label', label_resource)
+```
+
+### More examples
+More examples can be viewed in the [samples][samples] of this repository
 
 ## Contributing
 
@@ -76,3 +103,9 @@ additional questions or comments.
 [default_azure_credential]: https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/identity/azure-identity#defaultazurecredential
 [pip]: https://pypi.org/project/pip/
 [azure_sub]: https://azure.microsoft.com/free/
+
+[samples]: https://github.com/nathanfalke/azure-sdk-for-python/tree/main/sdk/easm/azure-mgmt-easm/samples
+[source_code]: https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/easm/azure-easm/
+[pypi]: https://pypi.org/project/azure-easm/
+[api_reference]: https://review.learn.microsoft.com/en-us/rest/api/defenderforeasm/?branch=easm
+[product_documentation]:  https://learn.microsoft.com/en-us/azure/external-attack-surface-management/
