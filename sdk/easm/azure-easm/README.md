@@ -7,8 +7,14 @@
 ## Getting started
 ### Installing the package
 
+#### pip
 ```bash
 python -m pip install azure-easm
+```
+
+#### from source
+```bash
+python setup.py intall
 ```
 
 #### Prerequisites
