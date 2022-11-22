@@ -277,7 +277,7 @@ class AsAsset(_serialization.Model):  # pylint: disable=too-many-instance-attrib
 
 
 class AssetResponse(_serialization.Model):  # pylint: disable=too-many-instance-attributes
-    """AssetResponse.
+    """The items in the current page of results.
 
     You probably want to use the sub-classes and not this class directly. Known sub-classes are:
     AsAssetResponse, ContactAssetResponse, DomainAssetResponse, HostAssetResponse,
@@ -584,25 +584,26 @@ class AssetLabelRequest(_serialization.Model):
 class AssetPageResponse(_serialization.Model):
     """AssetPageResponse.
 
-    :ivar content:
+    :ivar content: The items in the current page of results.
     :vartype content: list[~azure.easm.models.AssetResponse]
-    :ivar first:
+    :ivar first: Whether or not this is the first page of results.
     :vartype first: bool
-    :ivar last:
+    :ivar last: Whether or not this is the last page of results.
     :vartype last: bool
-    :ivar mark:
+    :ivar mark: The cursor mark to be used on the next request.  Not set if using paging.
     :vartype mark: str
-    :ivar next_link:
+    :ivar next_link: The link to access the next page of results.  Not set if at the end of the
+     result set.
     :vartype next_link: str
-    :ivar number:
+    :ivar number: The page number requested.  Set to -1 if using a cursor.
     :vartype number: int
-    :ivar number_of_elements:
+    :ivar number_of_elements: The number of items in the current page of results.
     :vartype number_of_elements: int
-    :ivar size:
+    :ivar size: The page size requested.
     :vartype size: int
-    :ivar total_elements:
+    :ivar total_elements: The total number of items available in the full result set.
     :vartype total_elements: int
-    :ivar total_pages:
+    :ivar total_pages: The total number of pages available in the full result set.
     :vartype total_pages: int
     """
 
@@ -635,25 +636,26 @@ class AssetPageResponse(_serialization.Model):
         **kwargs
     ):
         """
-        :keyword content:
+        :keyword content: The items in the current page of results.
         :paramtype content: list[~azure.easm.models.AssetResponse]
-        :keyword first:
+        :keyword first: Whether or not this is the first page of results.
         :paramtype first: bool
-        :keyword last:
+        :keyword last: Whether or not this is the last page of results.
         :paramtype last: bool
-        :keyword mark:
+        :keyword mark: The cursor mark to be used on the next request.  Not set if using paging.
         :paramtype mark: str
-        :keyword next_link:
+        :keyword next_link: The link to access the next page of results.  Not set if at the end of the
+         result set.
         :paramtype next_link: str
-        :keyword number:
+        :keyword number: The page number requested.  Set to -1 if using a cursor.
         :paramtype number: int
-        :keyword number_of_elements:
+        :keyword number_of_elements: The number of items in the current page of results.
         :paramtype number_of_elements: int
-        :keyword size:
+        :keyword size: The page size requested.
         :paramtype size: int
-        :keyword total_elements:
+        :keyword total_elements: The total number of items available in the full result set.
         :paramtype total_elements: int
-        :keyword total_pages:
+        :keyword total_pages: The total number of pages available in the full result set.
         :paramtype total_pages: int
         """
         super().__init__(**kwargs)
@@ -1612,7 +1614,10 @@ class DataConnectionRequest(_serialization.Model):
 
     :ivar connection_string: The connection string for the data connection.
     :vartype connection_string: str
-    :ivar kind: The kind of data connection. "sentinel"
+    :ivar content: The type of data the data connection will transfer. Known values are: "assets"
+     and "asi".
+    :vartype content: str or ~azure.easm.models.DataConnectionRequestContent
+    :ivar kind: The kind of data connection. Known values are: "sentinel" and "kusto".
     :vartype kind: str or ~azure.easm.models.DataConnectionRequestKind
     :ivar options: Any connection specific options.
     :vartype options: str
@@ -1620,6 +1625,7 @@ class DataConnectionRequest(_serialization.Model):
 
     _attribute_map = {
         "connection_string": {"key": "connectionString", "type": "str"},
+        "content": {"key": "content", "type": "str"},
         "kind": {"key": "kind", "type": "str"},
         "options": {"key": "options", "type": "str"},
     }
@@ -1628,6 +1634,7 @@ class DataConnectionRequest(_serialization.Model):
         self,
         *,
         connection_string: Optional[str] = None,
+        content: Optional[Union[str, "_models.DataConnectionRequestContent"]] = None,
         kind: Optional[Union[str, "_models.DataConnectionRequestKind"]] = None,
         options: Optional[str] = None,
         **kwargs
@@ -1635,13 +1642,17 @@ class DataConnectionRequest(_serialization.Model):
         """
         :keyword connection_string: The connection string for the data connection.
         :paramtype connection_string: str
-        :keyword kind: The kind of data connection. "sentinel"
+        :keyword content: The type of data the data connection will transfer. Known values are:
+         "assets" and "asi".
+        :paramtype content: str or ~azure.easm.models.DataConnectionRequestContent
+        :keyword kind: The kind of data connection. Known values are: "sentinel" and "kusto".
         :paramtype kind: str or ~azure.easm.models.DataConnectionRequestKind
         :keyword options: Any connection specific options.
         :paramtype options: str
         """
         super().__init__(**kwargs)
         self.connection_string = connection_string
+        self.content = content
         self.kind = kind
         self.options = options
 
@@ -1651,13 +1662,16 @@ class DataConnectionResponse(_serialization.Model):
 
     :ivar connection_string: The connection string for the data connection.
     :vartype connection_string: str
+    :ivar content: The type of data the data connection will transfer. Known values are: "assets"
+     and "asi".
+    :vartype content: str or ~azure.easm.models.DataConnectionResponseContent
     :ivar created_date: The date the data connection was created.
     :vartype created_date: ~datetime.datetime
     :ivar display_name: The name that can be used for display purposes.
     :vartype display_name: str
     :ivar id: The system generated unique id for the resource.
     :vartype id: str
-    :ivar kind: The kind of data connection. "sentinel"
+    :ivar kind: The kind of data connection. Known values are: "sentinel" and "kusto".
     :vartype kind: str or ~azure.easm.models.DataConnectionResponseKind
     :ivar name: The caller provided unique name for the resource.
     :vartype name: str
@@ -1669,6 +1683,7 @@ class DataConnectionResponse(_serialization.Model):
 
     _attribute_map = {
         "connection_string": {"key": "connectionString", "type": "str"},
+        "content": {"key": "content", "type": "str"},
         "created_date": {"key": "createdDate", "type": "iso-8601"},
         "display_name": {"key": "displayName", "type": "str"},
         "id": {"key": "id", "type": "str"},
@@ -1682,6 +1697,7 @@ class DataConnectionResponse(_serialization.Model):
         self,
         *,
         connection_string: Optional[str] = None,
+        content: Optional[Union[str, "_models.DataConnectionResponseContent"]] = None,
         created_date: Optional[datetime.datetime] = None,
         display_name: Optional[str] = None,
         id: Optional[str] = None,  # pylint: disable=redefined-builtin
@@ -1694,13 +1710,16 @@ class DataConnectionResponse(_serialization.Model):
         """
         :keyword connection_string: The connection string for the data connection.
         :paramtype connection_string: str
+        :keyword content: The type of data the data connection will transfer. Known values are:
+         "assets" and "asi".
+        :paramtype content: str or ~azure.easm.models.DataConnectionResponseContent
         :keyword created_date: The date the data connection was created.
         :paramtype created_date: ~datetime.datetime
         :keyword display_name: The name that can be used for display purposes.
         :paramtype display_name: str
         :keyword id: The system generated unique id for the resource.
         :paramtype id: str
-        :keyword kind: The kind of data connection. "sentinel"
+        :keyword kind: The kind of data connection. Known values are: "sentinel" and "kusto".
         :paramtype kind: str or ~azure.easm.models.DataConnectionResponseKind
         :keyword name: The caller provided unique name for the resource.
         :paramtype name: str
@@ -1711,6 +1730,7 @@ class DataConnectionResponse(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.connection_string = connection_string
+        self.content = content
         self.created_date = created_date
         self.display_name = display_name
         self.id = id
@@ -5918,6 +5938,99 @@ class ReportAssetSummaryResponse(_serialization.Model):
         """
         :keyword asset_summaries:
         :paramtype asset_summaries: list[~azure.easm.models.AssetSummaryResponse]
+        """
+        super().__init__(**kwargs)
+        self.asset_summaries = asset_summaries
+
+
+class ReportBillableAssetBreakdown(_serialization.Model):
+    """ReportBillableAssetBreakdown.
+
+    :ivar count:
+    :vartype count: int
+    :ivar kind: The kind of billable asset. Known values are: "domain", "host", and "ipAddress".
+    :vartype kind: str or ~azure.easm.models.ReportBillableAssetBreakdownKind
+    """
+
+    _attribute_map = {
+        "count": {"key": "count", "type": "int"},
+        "kind": {"key": "kind", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        count: Optional[int] = None,
+        kind: Optional[Union[str, "_models.ReportBillableAssetBreakdownKind"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword count:
+        :paramtype count: int
+        :keyword kind: The kind of billable asset. Known values are: "domain", "host", and "ipAddress".
+        :paramtype kind: str or ~azure.easm.models.ReportBillableAssetBreakdownKind
+        """
+        super().__init__(**kwargs)
+        self.count = count
+        self.kind = kind
+
+
+class ReportBillableAssetSnapshotResponse(_serialization.Model):
+    """ReportBillableAssetSnapshotResponse.
+
+    :ivar asset_breakdown:
+    :vartype asset_breakdown: list[~azure.easm.models.ReportBillableAssetBreakdown]
+    :ivar date:
+    :vartype date: ~datetime.datetime
+    :ivar total:
+    :vartype total: int
+    """
+
+    _attribute_map = {
+        "asset_breakdown": {"key": "assetBreakdown", "type": "[ReportBillableAssetBreakdown]"},
+        "date": {"key": "date", "type": "iso-8601"},
+        "total": {"key": "total", "type": "int"},
+    }
+
+    def __init__(
+        self,
+        *,
+        asset_breakdown: Optional[List["_models.ReportBillableAssetBreakdown"]] = None,
+        date: Optional[datetime.datetime] = None,
+        total: Optional[int] = None,
+        **kwargs
+    ):
+        """
+        :keyword asset_breakdown:
+        :paramtype asset_breakdown: list[~azure.easm.models.ReportBillableAssetBreakdown]
+        :keyword date:
+        :paramtype date: ~datetime.datetime
+        :keyword total:
+        :paramtype total: int
+        """
+        super().__init__(**kwargs)
+        self.asset_breakdown = asset_breakdown
+        self.date = date
+        self.total = total
+
+
+class ReportBillableAssetSummaryResponse(_serialization.Model):
+    """ReportBillableAssetSummaryResponse.
+
+    :ivar asset_summaries:
+    :vartype asset_summaries: list[~azure.easm.models.ReportBillableAssetSnapshotResponse]
+    """
+
+    _attribute_map = {
+        "asset_summaries": {"key": "assetSummaries", "type": "[ReportBillableAssetSnapshotResponse]"},
+    }
+
+    def __init__(
+        self, *, asset_summaries: Optional[List["_models.ReportBillableAssetSnapshotResponse"]] = None, **kwargs
+    ):
+        """
+        :keyword asset_summaries:
+        :paramtype asset_summaries: list[~azure.easm.models.ReportBillableAssetSnapshotResponse]
         """
         super().__init__(**kwargs)
         self.asset_summaries = asset_summaries

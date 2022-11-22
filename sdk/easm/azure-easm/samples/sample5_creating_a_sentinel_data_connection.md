@@ -19,14 +19,16 @@ client = EasmClient(sub_id, browser_credential, region=region)
 To create a data connection, we need to build the request body for one to be created. For this, we'll need the Sentinel workspace ID, as well as the Sentinel API key, both of which are available from the azure portal, in the "Agents management" section of the Sentinel Workspace
 
 ```python
-from azure.easm.models import DataConnectionRequest, DataConnectionRequestKind
+from azure.easm.models import DataConnectionRequest, DataConnectionRequestKind, DataConnectionRequestContent
 
 sentinel_ws_id='<your Sentinel workspace ID here>'
 sentinel_api_key='<your Sentinel API key here>'
 
 request = DataConnectionRequest(
-	connection_string=f'WorkspaceId={sentinel_ws_id};ApiKey={sentinel_api_key}',
-	kind=DataConnectionRequestKind.SENTINEL)
+    connection_string=f'WorkspaceId={sentinel_ws_id};ApiKey={sentinel_api_key}',
+    kind=DataConnectionRequestKind.SENTINEL,
+    content=DataConnectionRequestContent.ASSETS
+)
 ```
 
 ## Validate the data connection request

@@ -62,6 +62,9 @@ from ._models import ReportAssetSnapshotRequest
 from ._models import ReportAssetSnapshotResponse
 from ._models import ReportAssetSummaryRequest
 from ._models import ReportAssetSummaryResponse
+from ._models import ReportBillableAssetBreakdown
+from ._models import ReportBillableAssetSnapshotResponse
+from ._models import ReportBillableAssetSummaryResponse
 from ._models import Reputation
 from ._models import ResourceUrl
 from ._models import SavedFilterRequest
@@ -82,12 +85,15 @@ from ._enums import AssetResponseKind
 from ._enums import AssetResponseState
 from ._enums import AssetUpdateRequestState
 from ._enums import AuditTrailItemKind
+from ._enums import DataConnectionRequestContent
 from ._enums import DataConnectionRequestKind
+from ._enums import DataConnectionResponseContent
 from ._enums import DataConnectionResponseKind
 from ._enums import DiscoRunResponseState
 from ._enums import DiscoSourceKind
 from ._enums import ObservedPortStateValue
 from ._enums import PageAssetRedirectType
+from ._enums import ReportBillableAssetBreakdownKind
 from ._enums import SslCertAssetValidationType
 from ._enums import TaskResponsePhase
 from ._enums import TaskResponseState
@@ -152,6 +158,9 @@ __all__ = [
     "ReportAssetSnapshotResponse",
     "ReportAssetSummaryRequest",
     "ReportAssetSummaryResponse",
+    "ReportBillableAssetBreakdown",
+    "ReportBillableAssetSnapshotResponse",
+    "ReportBillableAssetSummaryResponse",
     "Reputation",
     "ResourceUrl",
     "SavedFilterRequest",
@@ -171,12 +180,15 @@ __all__ = [
     "AssetResponseState",
     "AssetUpdateRequestState",
     "AuditTrailItemKind",
+    "DataConnectionRequestContent",
     "DataConnectionRequestKind",
+    "DataConnectionResponseContent",
     "DataConnectionResponseKind",
     "DiscoRunResponseState",
     "DiscoSourceKind",
     "ObservedPortStateValue",
     "PageAssetRedirectType",
+    "ReportBillableAssetBreakdownKind",
     "SslCertAssetValidationType",
     "TaskResponsePhase",
     "TaskResponseState",

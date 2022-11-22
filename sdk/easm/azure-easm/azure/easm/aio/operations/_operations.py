@@ -44,6 +44,7 @@ from ...operations._operations import (
     build_disco_groups_validate_request,
     build_disco_templates_get_request,
     build_disco_templates_list_request,
+    build_reports_billable_assets_request,
     build_reports_snapshot_request,
     build_reports_summarize_request,
     build_saved_filters_get_request,
@@ -105,11 +106,11 @@ class AssetsOperations:
         :keyword orderby: A list of expressions that specify the order of the returned resources.
          Default value is None.
         :paramtype orderby: str
-        :keyword skip: An offset into the collection of the first resource to be returned. Default
-         value is 0.
+        :keyword skip: An offset into the collection of the first item to be returned. Default value is
+         0.
         :paramtype skip: int
-        :keyword mark: Specify this value in subsequent requests to identify where search left off -
-         initial mark should be '*'. Default value is None.
+        :keyword mark: Specify this value instead of 'skip' to use cursor-based searching. Initial
+         value is '*' and subsequent values are returned in the response. Default value is None.
         :paramtype mark: str
         :return: An iterator like instance of AssetResponse
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.easm.models.AssetResponse]
@@ -447,8 +448,8 @@ class DataConnectionsOperations:
         :type resource_group_name: str
         :param workspace_name: The name of the Workspace. Required.
         :type workspace_name: str
-        :keyword skip: An offset into the collection of the first resource to be returned. Default
-         value is 0.
+        :keyword skip: An offset into the collection of the first item to be returned. Default value is
+         0.
         :paramtype skip: int
         :return: An iterator like instance of DataConnectionResponse
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.easm.models.DataConnectionResponse]
@@ -996,8 +997,8 @@ class DiscoGroupsOperations:
         :keyword filter: An expression on the resource type that selects the resources to be returned.
          Default value is None.
         :paramtype filter: str
-        :keyword skip: An offset into the collection of the first resource to be returned. Default
-         value is 0.
+        :keyword skip: An offset into the collection of the first item to be returned. Default value is
+         0.
         :paramtype skip: int
         :return: An iterator like instance of DiscoGroupResponse
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.easm.models.DiscoGroupResponse]
@@ -1379,8 +1380,8 @@ class DiscoGroupsOperations:
         :keyword filter: An expression on the resource type that selects the resources to be returned.
          Default value is None.
         :paramtype filter: str
-        :keyword skip: An offset into the collection of the first resource to be returned. Default
-         value is 0.
+        :keyword skip: An offset into the collection of the first item to be returned. Default value is
+         0.
         :paramtype skip: int
         :return: An iterator like instance of DiscoRunResponse
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.easm.models.DiscoRunResponse]
@@ -1716,8 +1717,8 @@ class DiscoTemplatesOperations:
         :keyword filter: An expression on the resource type that selects the resources to be returned.
          Default value is None.
         :paramtype filter: str
-        :keyword skip: An offset into the collection of the first resource to be returned. Default
-         value is 0.
+        :keyword skip: An offset into the collection of the first item to be returned. Default value is
+         0.
         :paramtype skip: int
         :return: An iterator like instance of DiscoTemplateResponse
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.easm.models.DiscoTemplateResponse]
@@ -1883,6 +1884,67 @@ class ReportsOperations:
         self._config = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
+
+    @distributed_trace_async
+    async def billable_assets(
+        self, resource_group_name: str, workspace_name: str, **kwargs: Any
+    ) -> _models.ReportBillableAssetSummaryResponse:
+        """Retrieve billable assets summary for the workspace.
+
+        Retrieve billable assets summary for the workspace.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param workspace_name: The name of the Workspace. Required.
+        :type workspace_name: str
+        :return: ReportBillableAssetSummaryResponse
+        :rtype: ~azure.easm.models.ReportBillableAssetSummaryResponse
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ReportBillableAssetSummaryResponse]
+
+        request = build_reports_billable_assets_request(
+            resource_group_name=resource_group_name,
+            workspace_name=workspace_name,
+            subscription_id=self._config.subscription_id,
+            api_version=self._config.api_version,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+        }
+        request.url = self._client.format_url(request.url, **path_format_arguments)  # type: ignore
+
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error)
+
+        deserialized = self._deserialize("ReportBillableAssetSummaryResponse", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
 
     @overload
     async def snapshot(
@@ -2206,8 +2268,8 @@ class SavedFiltersOperations:
         :keyword filter: An expression on the resource type that selects the resources to be returned.
          Default value is None.
         :paramtype filter: str
-        :keyword skip: An offset into the collection of the first resource to be returned. Default
-         value is 0.
+        :keyword skip: An offset into the collection of the first item to be returned. Default value is
+         0.
         :paramtype skip: int
         :return: An iterator like instance of SavedFilterResponse
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.easm.models.SavedFilterResponse]
@@ -2606,8 +2668,8 @@ class TasksOperations:
         :keyword filter: An expression on the resource type that selects the resources to be returned.
          Default value is None.
         :paramtype filter: str
-        :keyword skip: An offset into the collection of the first resource to be returned. Default
-         value is 0.
+        :keyword skip: An offset into the collection of the first item to be returned. Default value is
+         0.
         :paramtype skip: int
         :return: An iterator like instance of TaskResponse
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.easm.models.TaskResponse]

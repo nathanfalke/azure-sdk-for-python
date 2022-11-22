@@ -72,16 +72,32 @@ class AuditTrailItemKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SSL_CERT = "sslCert"
 
 
+class DataConnectionRequestContent(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The type of data the data connection will transfer."""
+
+    ASSETS = "assets"
+    ASI = "asi"
+
+
 class DataConnectionRequestKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The kind of data connection."""
 
     SENTINEL = "sentinel"
+    KUSTO = "kusto"
+
+
+class DataConnectionResponseContent(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The type of data the data connection will transfer."""
+
+    ASSETS = "assets"
+    ASI = "asi"
 
 
 class DataConnectionResponseKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The kind of data connection."""
 
     SENTINEL = "sentinel"
+    KUSTO = "kusto"
 
 
 class DiscoRunResponseState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -119,6 +135,14 @@ class PageAssetRedirectType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     META_REFRESH = "metaRefresh"
     JAVASCRIPT = "javascript"
     FINAL = "final"
+
+
+class ReportBillableAssetBreakdownKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The kind of billable asset."""
+
+    DOMAIN = "domain"
+    HOST = "host"
+    IP_ADDRESS = "ipAddress"
 
 
 class SslCertAssetValidationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
