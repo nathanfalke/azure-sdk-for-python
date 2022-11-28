@@ -14,12 +14,11 @@ from azure.core.rest import HttpRequest, HttpResponse
 
 from ._configuration import EasmClientConfiguration
 from ._serialization import Deserializer, Serializer
-from .models import _models as models
 from .operations import (
     AssetsOperations,
     DataConnectionsOperations,
-    DiscoGroupsOperations,
-    DiscoTemplatesOperations,
+    DiscoveryGroupsOperations,
+    DiscoveryTemplatesOperations,
     ReportsOperations,
     SavedFiltersOperations,
     TasksOperations,
@@ -31,20 +30,20 @@ if TYPE_CHECKING:
 
 
 class EasmClient:  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
-    """EASM discovers and maps your digital attack surface to provide an "outside-in" perspective
-    using probes to discover assets. The assets are provided with detailed metadata associated,
-    including vulnerabilities, configurations and web components, allowing customers to view and
-    prioritize external risk. The EASM REST API enables you to develop clients that integrate with
-    your application.
+    """Defender EASM discovers and maps your digital attack surface to provide an "outside-in"
+    perspective using probes to discover assets. The assets are provided with detailed metadata
+    associated, including vulnerabilities, configurations and web components, allowing customers to
+    view and prioritize external risk. The EASM REST API enables you to develop clients that
+    integrate with your application.
 
     :ivar assets: AssetsOperations operations
     :vartype assets: azure.easm.operations.AssetsOperations
     :ivar data_connections: DataConnectionsOperations operations
     :vartype data_connections: azure.easm.operations.DataConnectionsOperations
-    :ivar disco_groups: DiscoGroupsOperations operations
-    :vartype disco_groups: azure.easm.operations.DiscoGroupsOperations
-    :ivar disco_templates: DiscoTemplatesOperations operations
-    :vartype disco_templates: azure.easm.operations.DiscoTemplatesOperations
+    :ivar discovery_groups: DiscoveryGroupsOperations operations
+    :vartype discovery_groups: azure.easm.operations.DiscoveryGroupsOperations
+    :ivar discovery_templates: DiscoveryTemplatesOperations operations
+    :vartype discovery_templates: azure.easm.operations.DiscoveryTemplatesOperations
     :ivar reports: ReportsOperations operations
     :vartype reports: azure.easm.operations.ReportsOperations
     :ivar saved_filters: SavedFiltersOperations operations
@@ -69,16 +68,19 @@ class EasmClient:  # pylint: disable=client-accepts-api-version-keyword,too-many
         )
         self._client = PipelineClient(base_url=_endpoint, config=self._config, **kwargs)
 
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self._serialize = Serializer(client_models)
-        self._deserialize = Deserializer(client_models)
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
         self._serialize.client_side_validation = False
         self.assets = AssetsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.data_connections = DataConnectionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.disco_groups = DiscoGroupsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.disco_templates = DiscoTemplatesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.discovery_groups = DiscoveryGroupsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.discovery_templates = DiscoveryTemplatesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.reports = ReportsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.saved_filters = SavedFiltersOperations(self._client, self._config, self._serialize, self._deserialize)
         self.tasks = TasksOperations(self._client, self._config, self._serialize, self._deserialize)
@@ -109,15 +111,12 @@ class EasmClient:  # pylint: disable=client-accepts-api-version-keyword,too-many
         request_copy.url = self._client.format_url(request_copy.url, **path_format_arguments)
         return self._client.send_request(request_copy, **kwargs)
 
-    def close(self):
-        # type: () -> None
+    def close(self) -> None:
         self._client.close()
 
-    def __enter__(self):
-        # type: () -> EasmClient
+    def __enter__(self) -> "EasmClient":
         self._client.__enter__()
         return self
 
-    def __exit__(self, *exc_details):
-        # type: (Any) -> None
+    def __exit__(self, *exc_details) -> None:
         self._client.__exit__(*exc_details)

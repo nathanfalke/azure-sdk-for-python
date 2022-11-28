@@ -8,21 +8,21 @@
 
 from ._operations import AssetsOperations
 from ._operations import DataConnectionsOperations
-from ._operations import DiscoGroupsOperations
-from ._operations import DiscoTemplatesOperations
+from ._operations import DiscoveryGroupsOperations
+from ._operations import DiscoveryTemplatesOperations
 from ._operations import ReportsOperations
 from ._operations import SavedFiltersOperations
 from ._operations import TasksOperations
 
 from ._patch import __all__ as _patch_all
-from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
     "AssetsOperations",
     "DataConnectionsOperations",
-    "DiscoGroupsOperations",
-    "DiscoTemplatesOperations",
+    "DiscoveryGroupsOperations",
+    "DiscoveryTemplatesOperations",
     "ReportsOperations",
     "SavedFiltersOperations",
     "TasksOperations",

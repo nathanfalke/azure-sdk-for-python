@@ -21,16 +21,14 @@ client = EasmClient(sub_id, browser_credential, region=region)
 To create a Saved Filter, we need to send a filter, name, and description to the `saved_filters.put` endpoint
 
 ```python
-from azure.easm.models import SavedFilterRequest
-
 workspace_name = '<your workspace name here>'
 resource_group = '<your resource group here>'
 
 saved_filter_name = "<your saved filter name here>"
-request = SavedFilterRequest(
-	filter="IP Address = 151.101.192.67",
-	description="Monitored Addresses",
-)
+request = {
+	'filter': 'IP Address = 151.101.192.67',
+	'description': 'Monitored Addresses',
+}
 client.saved_filters.put(saved_filter_name, resource_group, workspace_name, body=request)
 ```
 
@@ -51,13 +49,11 @@ for asset in client.assets.list(resource_group, workspace_name, filter=monitor_f
 
 A sample asset update call, which could be used to update the monitored assets:
 ```python
-from azure.easm.models import AssetUpdateRequest
-
 monitor_filter = client.saved_filters.get(saved_filter_name, resource_group, workspace_name).filter
 
-body = AssetUpdateRequest(
+body = {
 	#your asset update request body here
-)
+}
 
 client.assets.update(resource_group, workspace_name, body, filter=asset_filter)
 ```
@@ -67,6 +63,6 @@ Should your needs change, the filter can be updated with no need to update the s
 Simply submit a new `saved_filters.put` request to replace the old description and filter with a new set
 
 ```python
-request = SavedFilterRequest(filter="IP Address = 0.0.0.0", description="Monitored Addresses")
+request = {'filter': 'IP Address = 0.0.0.0', 'description': 'Monitored Addresses'}
 client.saved_filters.put(saved_filter_name, resource_group, workspace_name, body=request)
 ```

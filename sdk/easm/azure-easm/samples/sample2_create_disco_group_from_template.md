@@ -51,11 +51,9 @@ for seed in template.seeds:
 The discovery template can be used to create a discovery group with using a `DiscoGroupRequest` and the `EasmClient`'s `disco_groups.put` method. Don't forget to run your new disco group with `disco_groups.run`
 
 ```python
-from azure.easm.models import DiscoGroupRequest
-
 group_name = '<your group name here>'
 
-request = DiscoGroupRequest(template_id=template_id)
+request = {'template_id': template_id}
 response = client.disco_groups.put(
 	group_name, resource_group, workspace_name, body=request)
 

@@ -46,15 +46,13 @@ external_id_mapping = [
 Using the `assets` client, we can update each asset and append the tracking id of the update to our update ID list, so that we can keep track of the progress on each update later
 
 ```python
-from azure.easm.models import AssetUpdateRequest
-
 resource_group = "<your resource group here>"
 workspace_name = "<your workspace name here>"
 
 update_ids = []
 
 for asset in external_id_mapping:
-    update_request = AssetUpdateRequest(external_id=asset['external_id'])
+    update_request = {'external_id': asset['external_id']}
     asset_filter = f"kind = {asset['kind']} AND name = {asset['name']}"
     update = client.assets.update(resource_group, workspace_name, body=update_request, filter=asset_filter)
     update_ids.append(update.id)

@@ -6,12 +6,18 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+import sys
 from typing import Any, TYPE_CHECKING
 
 from azure.core.configuration import Configuration
 from azure.core.pipeline import policies
 
 from ._version import VERSION
+
+if sys.version_info >= (3, 8):
+    from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
+else:
+    from typing_extensions import Literal  # type: ignore  # pylint: disable=ungrouped-imports
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
@@ -37,7 +43,7 @@ class EasmClientConfiguration(Configuration):  # pylint: disable=too-many-instan
 
     def __init__(self, subscription_id: str, credential: "TokenCredential", region: str = "api", **kwargs: Any) -> None:
         super(EasmClientConfiguration, self).__init__(**kwargs)
-        api_version = kwargs.pop("api_version", "2022-09-01-preview")  # type: str
+        api_version: Literal["2022-09-01-preview"] = kwargs.pop("api_version", "2022-09-01-preview")
 
         if subscription_id is None:
             raise ValueError("Parameter 'subscription_id' must not be None.")
@@ -54,10 +60,7 @@ class EasmClientConfiguration(Configuration):  # pylint: disable=too-many-instan
         kwargs.setdefault("sdk_moniker", "easm/{}".format(VERSION))
         self._configure(**kwargs)
 
-    def _configure(
-        self, **kwargs  # type: Any
-    ):
-        # type: (...) -> None
+    def _configure(self, **kwargs: Any) -> None:
         self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
         self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
         self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)

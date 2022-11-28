@@ -21,20 +21,18 @@ client = EasmClient(sub_id, browser_credential, region=region)
 
 in order to start discovery runs, we must first create a discovery group, which is a collection of known assets that we can pivot off of. these are created using the `disco_groups.put` method
 ```python
-from azure.easm.models import AssetId, DiscoGroupRequest
-
 workspace_name = '<your workspace name here>'
 resource_group = '<your resource group here>'
 
 name = '<your discovery group name here>'
 assets = [
-    AssetId(kind='domain', name='<a domain you want to run discovery against>'),
-    AssetId(kind='host', name='<a host you want to run discovery against>')
+    {'kind': 'domain', 'name': '<a domain you want to run discovery against>'},
+    {'kind': 'host', 'name': '<a host you want to run discovery against>')
 ]
-request = DiscoGroupRequest(
-	description='<a description for your discovery group>', 
-	seeds=assets
-)
+request = {
+	'description': '<a description for your discovery group>', 
+	'seeds': assets
+}
 response = client.disco_groups.put(name, resource_group, workspace_name, request)
 ```
 
