@@ -71,19 +71,19 @@ After authenticating as shown in the "Create with an Azure Active Directory Cred
 
 ### Create a discovery group
 ```python
-from azure.easm.models import (AssetId, DiscoGroupRequest)
 from azure.easm import EasmClient
 from azure.identity import DefaultAzureCredential
 
+resource_group = '<Resource Group Name>'
+workspace_name = '<Workspace Name>'
+
 client = EasmClient('<Azure Subscription ID>', credential=DefaultAzureCredential(), region='<Azure Region>')
 
-client.disco_groups.put("example group", resource_group, workspace_name, 
-	DiscoGroupRequest(
-		seeds=[
-		    AssetId(kind="host", name="example.org")
-		]
-	)
-)
+client.disco_groups.put("example group", resource_group, workspace_name, {
+	'seeds': [
+	    {'kind': 'host', 'name': 'example.org'}
+	]
+})
 client.disco_groups.run("example group")
 ```
 
@@ -92,9 +92,12 @@ client.disco_groups.run("example group")
 from azure.easm import EasmClient
 from azure.identity import DefaultAzureCredential
 
+resource_group = '<Resource Group Name>'
+workspace_name = '<Workspace Name>'
+
 client = EasmClient('<Azure Subscription ID>', credential=DefaultAzureCredential(), region='<Azure Region>')
 
-assets = client.assets.list(rg, ws)
+assets = client.assets.list(resource_group, workspace_name)
 for asset in assets:
 	print(f'{asset.kind}: {asset.name}')
 ```
