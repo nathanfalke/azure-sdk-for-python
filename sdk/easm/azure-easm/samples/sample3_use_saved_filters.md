@@ -41,7 +41,7 @@ A sample asset list call that could be used to monitor the assets:
 def monitor(asset):
 	pass #your monitor logic here
 	
-monitor_filter = client.saved_filters.get(saved_filter_name, resource_group, workspace_name).filter
+monitor_filter = client.saved_filters.get(saved_filter_name, resource_group, workspace_name)['filter']
 
 for asset in client.assets.list(resource_group, workspace_name, filter=monitor_filter):
 	monitor(asset)
@@ -49,7 +49,7 @@ for asset in client.assets.list(resource_group, workspace_name, filter=monitor_f
 
 A sample asset update call, which could be used to update the monitored assets:
 ```python
-monitor_filter = client.saved_filters.get(saved_filter_name, resource_group, workspace_name).filter
+monitor_filter = client.saved_filters.get(saved_filter_name, resource_group, workspace_name)['filter']
 
 body = {
 	#your asset update request body here

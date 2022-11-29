@@ -1,6 +1,6 @@
 # Managing discovery runs
 
-This sample shows you how to create and manage discovery runs in your workspace using the `disco_groups` module of the `EasmClient` 
+This sample shows you how to create and manage discovery runs in your workspace using the `discovery_groups` module of the `EasmClient` 
 
 ## Creating an `EasmClient`
 
@@ -19,7 +19,7 @@ client = EasmClient(sub_id, browser_credential, region=region)
 
 ## Creating new discovery groups
 
-in order to start discovery runs, we must first create a discovery group, which is a collection of known assets that we can pivot off of. these are created using the `disco_groups.put` method
+in order to start discovery runs, we must first create a discovery group, which is a collection of known assets that we can pivot off of. these are created using the `discovery_groups.put` method
 ```python
 workspace_name = '<your workspace name here>'
 resource_group = '<your resource group here>'
@@ -33,7 +33,7 @@ request = {
 	'description': '<a description for your discovery group>', 
 	'seeds': assets
 }
-response = client.disco_groups.put(name, resource_group, workspace_name, request)
+response = client.discovery_groups.put(name, resource_group, workspace_name, request)
 ```
 
 ## Start a discovery run
@@ -41,22 +41,22 @@ response = client.disco_groups.put(name, resource_group, workspace_name, request
 Discovery groups created through the API's `put` method don't get run automatically, so we need to start the run ourselves.
 
 ```python
-client.disco_groups.run(name)
+client.discovery_groups.run(name)
 ```
 
 ## Iterating over discovery groups and runs
 
-We can list the disco groups using the `disco_groups.list` method, and then list the runs using the `disco_groups.list_runs` method. runs are returned as `ItemPaged`, so we can use `itertools.islice` to take the top 5 most recent runs.
+We can list the disco groups using the `discovery_groups.list` method, and then list the runs using the `discovery_groups.list_runs` method. runs are returned as `ItemPaged`, so we can use `itertools.islice` to take the top 5 most recent runs.
 
 Runs show up immediately after they've started, so if you don't see your run in the list, that means it hasn't been started
 
 ``` python
 import itertools
 
-for group in client.disco_groups.list(resource_group, workspace_name):
-    print(group.name)
-    runs = client.disco_groups.list_runs(group.name, resource_group, workspace_name)
+for group in client.discovery_groups.list(resource_group, workspace_name):
+    print(group['name'])
+    runs = client.discovery_groups.list_runs(group['name'], resource_group, workspace_name)
     for run in itertools.islice(runs, 5):
-        print(f' - started: {run.started_date}, finished: {run.completed_date}, assets found: {run.total_assets_found_count}')
+        print(f" - started: {run['startedDate']}, finished: {run['completedDate']}, assets found: {run['totalAssetsFoundCount']}")
 ```
 

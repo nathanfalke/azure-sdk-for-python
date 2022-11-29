@@ -55,7 +55,7 @@ for asset in external_id_mapping:
     update_request = {'external_id': asset['external_id']}
     asset_filter = f"kind = {asset['kind']} AND name = {asset['name']}"
     update = client.assets.update(resource_group, workspace_name, body=update_request, filter=asset_filter)
-    update_ids.append(update.id)
+    update_ids.append(update['id'])
 ```
 
 ## View update progress
@@ -63,7 +63,7 @@ Using the `tasks` client, we can view the progress of each update using the `get
 ```python
 for update_id in update_ids:
     update = client.tasks.get(update_id, resource_group, workspace_name)
-    print(f'{update.id}: {update.state}')
+    print(f'{update["id"]}: {update["state"]}')
 ```
 
 looking at the responses, we can see that each update has completed
@@ -79,6 +79,6 @@ The updates can be viewed using the `assets.list` method by creating a filter th
 asset_filter = f"External ID in ({', '.join([asset['external_id'] for asset in external_id_mapping])})"
 
 for asset in client.assets.list(resource_group, workspace_name, filter=asset_filter):
-    print(f"{asset.external_id}, {asset.name}")
+    print(f'{asset["externalId"]}, {asset["name"]}')
 ```
 
