@@ -30,33 +30,50 @@ class EasmClientConfiguration(Configuration):  # pylint: disable=too-many-instan
     Note that all parameters used to create this instance are saved as instance
     attributes.
 
+    :param endpoint: The endpoint hosting the requested resource. For example,
+     {region}.easm.defender.microsoft.com. Required.
+    :type endpoint: str
+    :param resource_group_name: The name of the Resource Group. Required.
+    :type resource_group_name: str
     :param subscription_id: The ID of the target subscription. Required.
     :type subscription_id: str
+    :param workspace_name: The name of the Workspace. Required.
+    :type workspace_name: str
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
-    :param region: The region hosting the requested resource. Default value is "api".
-    :type region: str
-    :keyword api_version: Api Version. Default value is "2022-09-01-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2022-11-01-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     """
 
     def __init__(
-        self, subscription_id: str, credential: "AsyncTokenCredential", region: str = "api", **kwargs: Any
+        self,
+        endpoint: str,
+        resource_group_name: str,
+        subscription_id: str,
+        workspace_name: str,
+        credential: "AsyncTokenCredential",
+        **kwargs: Any
     ) -> None:
         super(EasmClientConfiguration, self).__init__(**kwargs)
-        api_version: Literal["2022-09-01-preview"] = kwargs.pop("api_version", "2022-09-01-preview")
+        api_version: Literal["2022-11-01-preview"] = kwargs.pop("api_version", "2022-11-01-preview")
 
+        if endpoint is None:
+            raise ValueError("Parameter 'endpoint' must not be None.")
+        if resource_group_name is None:
+            raise ValueError("Parameter 'resource_group_name' must not be None.")
         if subscription_id is None:
             raise ValueError("Parameter 'subscription_id' must not be None.")
+        if workspace_name is None:
+            raise ValueError("Parameter 'workspace_name' must not be None.")
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")
-        if region is None:
-            raise ValueError("Parameter 'region' must not be None.")
 
+        self.endpoint = endpoint
+        self.resource_group_name = resource_group_name
         self.subscription_id = subscription_id
+        self.workspace_name = workspace_name
         self.credential = credential
-        self.region = region
         self.api_version = api_version
         self.credential_scopes = kwargs.pop("credential_scopes", ["https://easm.defender.microsoft.com/.default"])
         kwargs.setdefault("sdk_moniker", "easm/{}".format(VERSION))

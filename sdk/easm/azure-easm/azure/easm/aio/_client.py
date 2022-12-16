@@ -50,23 +50,39 @@ class EasmClient:  # pylint: disable=client-accepts-api-version-keyword,too-many
     :vartype saved_filters: azure.easm.aio.operations.SavedFiltersOperations
     :ivar tasks: TasksOperations operations
     :vartype tasks: azure.easm.aio.operations.TasksOperations
+    :param endpoint: The endpoint hosting the requested resource. For example,
+     {region}.easm.defender.microsoft.com. Required.
+    :type endpoint: str
+    :param resource_group_name: The name of the Resource Group. Required.
+    :type resource_group_name: str
     :param subscription_id: The ID of the target subscription. Required.
     :type subscription_id: str
+    :param workspace_name: The name of the Workspace. Required.
+    :type workspace_name: str
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
-    :param region: The region hosting the requested resource. Default value is "api".
-    :type region: str
-    :keyword api_version: Api Version. Default value is "2022-09-01-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2022-11-01-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     """
 
     def __init__(
-        self, subscription_id: str, credential: "AsyncTokenCredential", region: str = "api", **kwargs: Any
+        self,
+        endpoint: str,
+        resource_group_name: str,
+        subscription_id: str,
+        workspace_name: str,
+        credential: "AsyncTokenCredential",
+        **kwargs: Any
     ) -> None:
-        _endpoint = "https://{region}.easm.defender.microsoft.com"
+        _endpoint = "https://{endpoint}"
         self._config = EasmClientConfiguration(
-            subscription_id=subscription_id, credential=credential, region=region, **kwargs
+            endpoint=endpoint,
+            resource_group_name=resource_group_name,
+            subscription_id=subscription_id,
+            workspace_name=workspace_name,
+            credential=credential,
+            **kwargs
         )
         self._client = AsyncPipelineClient(base_url=_endpoint, config=self._config, **kwargs)
 
@@ -107,7 +123,7 @@ class EasmClient:  # pylint: disable=client-accepts-api-version-keyword,too-many
 
         request_copy = deepcopy(request)
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
 
         request_copy.url = self._client.format_url(request_copy.url, **path_format_arguments)

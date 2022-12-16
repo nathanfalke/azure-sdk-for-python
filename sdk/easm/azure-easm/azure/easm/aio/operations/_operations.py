@@ -30,27 +30,27 @@ from ...operations._operations import (
     build_assets_get_request,
     build_assets_list_request,
     build_assets_update_request,
+    build_data_connections_delete_request,
     build_data_connections_get_request,
     build_data_connections_list_request,
     build_data_connections_put_request,
-    build_data_connections_remove_request,
     build_data_connections_validate_request,
+    build_discovery_groups_delete_request,
     build_discovery_groups_get_request,
     build_discovery_groups_list_request,
     build_discovery_groups_list_runs_request,
     build_discovery_groups_put_request,
-    build_discovery_groups_remove_request,
     build_discovery_groups_run_request,
     build_discovery_groups_validate_request,
     build_discovery_templates_get_request,
     build_discovery_templates_list_request,
-    build_reports_billable_assets_request,
+    build_reports_billable_request,
     build_reports_snapshot_request,
     build_reports_summarize_request,
+    build_saved_filters_delete_request,
     build_saved_filters_get_request,
     build_saved_filters_list_request,
     build_saved_filters_put_request,
-    build_saved_filters_remove_request,
     build_tasks_cancel_request,
     build_tasks_get_request,
     build_tasks_list_request,
@@ -85,8 +85,6 @@ class AssetsOperations:
     @distributed_trace
     def list(
         self,
-        resource_group_name: str,
-        workspace_name: str,
         *,
         filter: Optional[str] = None,
         orderby: Optional[str] = None,
@@ -98,11 +96,6 @@ class AssetsOperations:
 
         Retrieve a list of assets for the provided search parameters.
 
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :keyword filter: An expression on the resource type that selects the resources to be returned.
          Default value is None.
         :paramtype filter: str
@@ -622,14 +615,7 @@ class AssetsOperations:
                     "externalId": "str",  # Optional.
                     "id": "str",  # Optional. The system generated unique id for the resource.
                     "labels": [
-                        {
-                            "color": "str",  # Optional.
-                            "displayName": "str",  # Optional.
-                            "id": "str",  # Optional.
-                            "name": "str",  # Optional.
-                            "type": "str",  # Optional.
-                            "uuid": "str"  # Optional.
-                        }
+                        "str"  # Optional.
                     ],
                     "name": "str",  # Optional. The caller provided unique name for the resource.
                     "reason": "str",  # Optional.
@@ -730,14 +716,7 @@ class AssetsOperations:
                     "externalId": "str",  # Optional.
                     "id": "str",  # Optional. The system generated unique id for the resource.
                     "labels": [
-                        {
-                            "color": "str",  # Optional.
-                            "displayName": "str",  # Optional.
-                            "id": "str",  # Optional.
-                            "name": "str",  # Optional.
-                            "type": "str",  # Optional.
-                            "uuid": "str"  # Optional.
-                        }
+                        "str"  # Optional.
                     ],
                     "name": "str",  # Optional. The caller provided unique name for the resource.
                     "reason": "str",  # Optional.
@@ -1345,14 +1324,7 @@ class AssetsOperations:
                     "externalId": "str",  # Optional.
                     "id": "str",  # Optional. The system generated unique id for the resource.
                     "labels": [
-                        {
-                            "color": "str",  # Optional.
-                            "displayName": "str",  # Optional.
-                            "id": "str",  # Optional.
-                            "name": "str",  # Optional.
-                            "type": "str",  # Optional.
-                            "uuid": "str"  # Optional.
-                        }
+                        "str"  # Optional.
                     ],
                     "name": "str",  # Optional. The caller provided unique name for the resource.
                     "reason": "str",  # Optional.
@@ -3021,14 +2993,7 @@ class AssetsOperations:
                     "externalId": "str",  # Optional.
                     "id": "str",  # Optional. The system generated unique id for the resource.
                     "labels": [
-                        {
-                            "color": "str",  # Optional.
-                            "displayName": "str",  # Optional.
-                            "id": "str",  # Optional.
-                            "name": "str",  # Optional.
-                            "type": "str",  # Optional.
-                            "uuid": "str"  # Optional.
-                        }
+                        "str"  # Optional.
                     ],
                     "name": "str",  # Optional. The caller provided unique name for the resource.
                     "reason": "str",  # Optional.
@@ -3824,14 +3789,7 @@ class AssetsOperations:
                     "externalId": "str",  # Optional.
                     "id": "str",  # Optional. The system generated unique id for the resource.
                     "labels": [
-                        {
-                            "color": "str",  # Optional.
-                            "displayName": "str",  # Optional.
-                            "id": "str",  # Optional.
-                            "name": "str",  # Optional.
-                            "type": "str",  # Optional.
-                            "uuid": "str"  # Optional.
-                        }
+                        "str"  # Optional.
                     ],
                     "name": "str",  # Optional. The caller provided unique name for the resource.
                     "reason": "str",  # Optional.
@@ -3863,9 +3821,9 @@ class AssetsOperations:
             if not next_link:
 
                 request = build_assets_list_request(
-                    resource_group_name=resource_group_name,
-                    workspace_name=workspace_name,
                     subscription_id=self._config.subscription_id,
+                    resource_group_name=self._config.resource_group_name,
+                    workspace_name=self._config.workspace_name,
                     filter=filter,
                     orderby=orderby,
                     skip=skip,
@@ -3875,7 +3833,7 @@ class AssetsOperations:
                     params=_params,
                 )
                 path_format_arguments = {
-                    "region": self._serialize.url("self._config.region", self._config.region, "str"),
+                    "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
                 }
                 request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -3893,7 +3851,7 @@ class AssetsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 path_format_arguments = {
-                    "region": self._serialize.url("self._config.region", self._config.region, "str"),
+                    "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
                 }
                 request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -3924,24 +3882,12 @@ class AssetsOperations:
 
     @overload
     async def update(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        body: JSON,
-        *,
-        filter: Optional[str] = None,
-        content_type: str = "application/json",
-        **kwargs: Any
+        self, body: JSON, *, filter: Optional[str] = None, content_type: str = "application/json", **kwargs: Any
     ) -> JSON:
         """Update labels on assets matching the provided filter.
 
         Update labels on assets matching the provided filter.
 
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Required.
         :type body: JSON
         :keyword filter: An expression on the resource type that selects the resources to be returned.
@@ -3988,24 +3934,12 @@ class AssetsOperations:
 
     @overload
     async def update(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        body: IO,
-        *,
-        filter: Optional[str] = None,
-        content_type: str = "application/json",
-        **kwargs: Any
+        self, body: IO, *, filter: Optional[str] = None, content_type: str = "application/json", **kwargs: Any
     ) -> JSON:
         """Update labels on assets matching the provided filter.
 
         Update labels on assets matching the provided filter.
 
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Required.
         :type body: IO
         :keyword filter: An expression on the resource type that selects the resources to be returned.
@@ -4036,24 +3970,11 @@ class AssetsOperations:
         """
 
     @distributed_trace_async
-    async def update(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        body: Union[JSON, IO],
-        *,
-        filter: Optional[str] = None,
-        **kwargs: Any
-    ) -> JSON:
+    async def update(self, body: Union[JSON, IO], *, filter: Optional[str] = None, **kwargs: Any) -> JSON:
         """Update labels on assets matching the provided filter.
 
         Update labels on assets matching the provided filter.
 
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Is either a model type or a IO type. Required.
         :type body: JSON or IO
         :keyword filter: An expression on the resource type that selects the resources to be returned.
@@ -4105,9 +4026,9 @@ class AssetsOperations:
             _json = body
 
         request = build_assets_update_request(
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
             subscription_id=self._config.subscription_id,
+            resource_group_name=self._config.resource_group_name,
+            workspace_name=self._config.workspace_name,
             filter=filter,
             content_type=content_type,
             api_version=self._config.api_version,
@@ -4117,7 +4038,7 @@ class AssetsOperations:
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -4142,7 +4063,7 @@ class AssetsOperations:
         return cast(JSON, deserialized)
 
     @distributed_trace_async
-    async def get(self, asset_id: str, resource_group_name: str, workspace_name: str, **kwargs: Any) -> JSON:
+    async def get(self, asset_id: str, **kwargs: Any) -> JSON:
         """Retrieve an asset by assetId.
 
         Retrieve an asset by assetId.
@@ -4151,11 +4072,6 @@ class AssetsOperations:
          ':code:`<kind>`$$:code:`<name>`' and can optionally be Base64 encoded if they contain special
          characters. Required.
         :type asset_id: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :return: JSON object
         :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -4663,14 +4579,7 @@ class AssetsOperations:
                     "externalId": "str",  # Optional.
                     "id": "str",  # Optional. The system generated unique id for the resource.
                     "labels": [
-                        {
-                            "color": "str",  # Optional.
-                            "displayName": "str",  # Optional.
-                            "id": "str",  # Optional.
-                            "name": "str",  # Optional.
-                            "type": "str",  # Optional.
-                            "uuid": "str"  # Optional.
-                        }
+                        "str"  # Optional.
                     ],
                     "name": "str",  # Optional. The caller provided unique name for the resource.
                     "reason": "str",  # Optional.
@@ -4771,14 +4680,7 @@ class AssetsOperations:
                     "externalId": "str",  # Optional.
                     "id": "str",  # Optional. The system generated unique id for the resource.
                     "labels": [
-                        {
-                            "color": "str",  # Optional.
-                            "displayName": "str",  # Optional.
-                            "id": "str",  # Optional.
-                            "name": "str",  # Optional.
-                            "type": "str",  # Optional.
-                            "uuid": "str"  # Optional.
-                        }
+                        "str"  # Optional.
                     ],
                     "name": "str",  # Optional. The caller provided unique name for the resource.
                     "reason": "str",  # Optional.
@@ -5386,14 +5288,7 @@ class AssetsOperations:
                     "externalId": "str",  # Optional.
                     "id": "str",  # Optional. The system generated unique id for the resource.
                     "labels": [
-                        {
-                            "color": "str",  # Optional.
-                            "displayName": "str",  # Optional.
-                            "id": "str",  # Optional.
-                            "name": "str",  # Optional.
-                            "type": "str",  # Optional.
-                            "uuid": "str"  # Optional.
-                        }
+                        "str"  # Optional.
                     ],
                     "name": "str",  # Optional. The caller provided unique name for the resource.
                     "reason": "str",  # Optional.
@@ -7062,14 +6957,7 @@ class AssetsOperations:
                     "externalId": "str",  # Optional.
                     "id": "str",  # Optional. The system generated unique id for the resource.
                     "labels": [
-                        {
-                            "color": "str",  # Optional.
-                            "displayName": "str",  # Optional.
-                            "id": "str",  # Optional.
-                            "name": "str",  # Optional.
-                            "type": "str",  # Optional.
-                            "uuid": "str"  # Optional.
-                        }
+                        "str"  # Optional.
                     ],
                     "name": "str",  # Optional. The caller provided unique name for the resource.
                     "reason": "str",  # Optional.
@@ -7865,14 +7753,7 @@ class AssetsOperations:
                     "externalId": "str",  # Optional.
                     "id": "str",  # Optional. The system generated unique id for the resource.
                     "labels": [
-                        {
-                            "color": "str",  # Optional.
-                            "displayName": "str",  # Optional.
-                            "id": "str",  # Optional.
-                            "name": "str",  # Optional.
-                            "type": "str",  # Optional.
-                            "uuid": "str"  # Optional.
-                        }
+                        "str"  # Optional.
                     ],
                     "name": "str",  # Optional. The caller provided unique name for the resource.
                     "reason": "str",  # Optional.
@@ -7902,15 +7783,15 @@ class AssetsOperations:
 
         request = build_assets_get_request(
             asset_id=asset_id,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
             subscription_id=self._config.subscription_id,
+            resource_group_name=self._config.resource_group_name,
+            workspace_name=self._config.workspace_name,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -7953,18 +7834,11 @@ class DataConnectionsOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list(
-        self, resource_group_name: str, workspace_name: str, *, skip: int = 0, **kwargs: Any
-    ) -> AsyncIterable[JSON]:
+    def list(self, *, skip: int = 0, **kwargs: Any) -> AsyncIterable[JSON]:
         """Retrieve a list of data connections.
 
         Retrieve a list of data connections.
 
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :keyword skip: An offset into the collection of the first item to be returned. Default value is
          0.
         :paramtype skip: int
@@ -8011,16 +7885,16 @@ class DataConnectionsOperations:
             if not next_link:
 
                 request = build_data_connections_list_request(
-                    resource_group_name=resource_group_name,
-                    workspace_name=workspace_name,
                     subscription_id=self._config.subscription_id,
+                    resource_group_name=self._config.resource_group_name,
+                    workspace_name=self._config.workspace_name,
                     skip=skip,
                     api_version=self._config.api_version,
                     headers=_headers,
                     params=_params,
                 )
                 path_format_arguments = {
-                    "region": self._serialize.url("self._config.region", self._config.region, "str"),
+                    "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
                 }
                 request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -8038,7 +7912,7 @@ class DataConnectionsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 path_format_arguments = {
-                    "region": self._serialize.url("self._config.region", self._config.region, "str"),
+                    "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
                 }
                 request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -8068,20 +7942,15 @@ class DataConnectionsOperations:
         return AsyncItemPaged(get_next, extract_data)
 
     @distributed_trace_async
-    async def remove(  # pylint: disable=inconsistent-return-statements
-        self, data_connection_name: str, resource_group_name: str, workspace_name: str, **kwargs: Any
+    async def delete(  # pylint: disable=inconsistent-return-statements
+        self, data_connection_name: str, **kwargs: Any
     ) -> None:
-        """Remove a data connection with a given dataConnectionName.
+        """Delete a data connection with a given dataConnectionName.
 
-        Remove a data connection with a given dataConnectionName.
+        Delete a data connection with a given dataConnectionName.
 
         :param data_connection_name: The unique identifier for the data connection. Required.
         :type data_connection_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :return: None
         :rtype: None
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -8099,17 +7968,17 @@ class DataConnectionsOperations:
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        request = build_data_connections_remove_request(
+        request = build_data_connections_delete_request(
             data_connection_name=data_connection_name,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
             subscription_id=self._config.subscription_id,
+            resource_group_name=self._config.resource_group_name,
+            workspace_name=self._config.workspace_name,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -8127,20 +7996,13 @@ class DataConnectionsOperations:
             return cls(pipeline_response, None, {})
 
     @distributed_trace_async
-    async def get(
-        self, data_connection_name: str, resource_group_name: str, workspace_name: str, **kwargs: Any
-    ) -> JSON:
+    async def get(self, data_connection_name: str, **kwargs: Any) -> JSON:
         """Retrieve a data connection with a given dataConnectionName.
 
         Retrieve a data connection with a given dataConnectionName.
 
         :param data_connection_name: The unique identifier for the data connection. Required.
         :type data_connection_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :return: JSON object
         :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -8182,15 +8044,15 @@ class DataConnectionsOperations:
 
         request = build_data_connections_get_request(
             data_connection_name=data_connection_name,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
             subscription_id=self._config.subscription_id,
+            resource_group_name=self._config.resource_group_name,
+            workspace_name=self._config.workspace_name,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -8216,14 +8078,7 @@ class DataConnectionsOperations:
 
     @overload
     async def put(
-        self,
-        data_connection_name: str,
-        resource_group_name: str,
-        workspace_name: str,
-        body: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
+        self, data_connection_name: str, body: JSON, *, content_type: str = "application/json", **kwargs: Any
     ) -> JSON:
         """Create or update a data connection with a given dataConnectionName.
 
@@ -8231,11 +8086,6 @@ class DataConnectionsOperations:
 
         :param data_connection_name: The unique identifier for the data connection. Required.
         :type data_connection_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Required.
         :type body: JSON
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
@@ -8281,14 +8131,7 @@ class DataConnectionsOperations:
 
     @overload
     async def put(
-        self,
-        data_connection_name: str,
-        resource_group_name: str,
-        workspace_name: str,
-        body: IO,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
+        self, data_connection_name: str, body: IO, *, content_type: str = "application/json", **kwargs: Any
     ) -> JSON:
         """Create or update a data connection with a given dataConnectionName.
 
@@ -8296,11 +8139,6 @@ class DataConnectionsOperations:
 
         :param data_connection_name: The unique identifier for the data connection. Required.
         :type data_connection_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Required.
         :type body: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
@@ -8334,25 +8172,13 @@ class DataConnectionsOperations:
         """
 
     @distributed_trace_async
-    async def put(
-        self,
-        data_connection_name: str,
-        resource_group_name: str,
-        workspace_name: str,
-        body: Union[JSON, IO],
-        **kwargs: Any
-    ) -> JSON:
+    async def put(self, data_connection_name: str, body: Union[JSON, IO], **kwargs: Any) -> JSON:
         """Create or update a data connection with a given dataConnectionName.
 
         Create or update a data connection with a given dataConnectionName.
 
         :param data_connection_name: The unique identifier for the data connection. Required.
         :type data_connection_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Is either a model type or a IO type. Required.
         :type body: JSON or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -8408,9 +8234,9 @@ class DataConnectionsOperations:
 
         request = build_data_connections_put_request(
             data_connection_name=data_connection_name,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
             subscription_id=self._config.subscription_id,
+            resource_group_name=self._config.resource_group_name,
+            workspace_name=self._config.workspace_name,
             content_type=content_type,
             api_version=self._config.api_version,
             json=_json,
@@ -8419,7 +8245,7 @@ class DataConnectionsOperations:
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -8445,14 +8271,7 @@ class DataConnectionsOperations:
 
     @overload
     async def validate(
-        self,
-        data_connection_name: str,
-        resource_group_name: str,
-        workspace_name: str,
-        body: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
+        self, data_connection_name: str, body: JSON, *, content_type: str = "application/json", **kwargs: Any
     ) -> JSON:
         """Validate a data connection with a given dataConnectionName.
 
@@ -8460,11 +8279,6 @@ class DataConnectionsOperations:
 
         :param data_connection_name: The unique identifier for the data connection. Required.
         :type data_connection_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Required.
         :type body: JSON
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
@@ -8511,14 +8325,7 @@ class DataConnectionsOperations:
 
     @overload
     async def validate(
-        self,
-        data_connection_name: str,
-        resource_group_name: str,
-        workspace_name: str,
-        body: IO,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
+        self, data_connection_name: str, body: IO, *, content_type: str = "application/json", **kwargs: Any
     ) -> JSON:
         """Validate a data connection with a given dataConnectionName.
 
@@ -8526,11 +8333,6 @@ class DataConnectionsOperations:
 
         :param data_connection_name: The unique identifier for the data connection. Required.
         :type data_connection_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Required.
         :type body: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
@@ -8565,25 +8367,13 @@ class DataConnectionsOperations:
         """
 
     @distributed_trace_async
-    async def validate(
-        self,
-        data_connection_name: str,
-        resource_group_name: str,
-        workspace_name: str,
-        body: Union[JSON, IO],
-        **kwargs: Any
-    ) -> JSON:
+    async def validate(self, data_connection_name: str, body: Union[JSON, IO], **kwargs: Any) -> JSON:
         """Validate a data connection with a given dataConnectionName.
 
         Validate a data connection with a given dataConnectionName.
 
         :param data_connection_name: The unique identifier for the data connection. Required.
         :type data_connection_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Is either a model type or a IO type. Required.
         :type body: JSON or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -8640,9 +8430,9 @@ class DataConnectionsOperations:
 
         request = build_data_connections_validate_request(
             data_connection_name=data_connection_name,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
             subscription_id=self._config.subscription_id,
+            resource_group_name=self._config.resource_group_name,
+            workspace_name=self._config.workspace_name,
             content_type=content_type,
             api_version=self._config.api_version,
             json=_json,
@@ -8651,7 +8441,7 @@ class DataConnectionsOperations:
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -8694,24 +8484,11 @@ class DiscoveryGroupsOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        *,
-        filter: Optional[str] = None,
-        skip: int = 0,
-        **kwargs: Any
-    ) -> AsyncIterable[JSON]:
-        """Retrieve a list of disco group for the provided search parameters.
+    def list(self, *, filter: Optional[str] = None, skip: int = 0, **kwargs: Any) -> AsyncIterable[JSON]:
+        """Retrieve a list of discovery group for the provided search parameters.
 
-        Retrieve a list of disco group for the provided search parameters.
+        Retrieve a list of discovery group for the provided search parameters.
 
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :keyword filter: An expression on the resource type that selects the resources to be returned.
          Default value is None.
         :paramtype filter: str
@@ -8813,9 +8590,9 @@ class DiscoveryGroupsOperations:
             if not next_link:
 
                 request = build_discovery_groups_list_request(
-                    resource_group_name=resource_group_name,
-                    workspace_name=workspace_name,
                     subscription_id=self._config.subscription_id,
+                    resource_group_name=self._config.resource_group_name,
+                    workspace_name=self._config.workspace_name,
                     filter=filter,
                     skip=skip,
                     api_version=self._config.api_version,
@@ -8823,7 +8600,7 @@ class DiscoveryGroupsOperations:
                     params=_params,
                 )
                 path_format_arguments = {
-                    "region": self._serialize.url("self._config.region", self._config.region, "str"),
+                    "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
                 }
                 request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -8841,7 +8618,7 @@ class DiscoveryGroupsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 path_format_arguments = {
-                    "region": self._serialize.url("self._config.region", self._config.region, "str"),
+                    "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
                 }
                 request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -8871,20 +8648,15 @@ class DiscoveryGroupsOperations:
         return AsyncItemPaged(get_next, extract_data)
 
     @distributed_trace_async
-    async def remove(  # pylint: disable=inconsistent-return-statements
-        self, disco_group_name: str, resource_group_name: str, workspace_name: str, **kwargs: Any
+    async def delete(  # pylint: disable=inconsistent-return-statements
+        self, disco_group_name: str, **kwargs: Any
     ) -> None:
-        """Remove a disco group with a given discoGroupName.
+        """Delete a discovery group with a given discoveryGroupName.
 
-        Remove a disco group with a given discoGroupName.
+        Delete a discovery group with a given discoveryGroupName.
 
-        :param disco_group_name: The unique identifier for the disco group. Required.
+        :param disco_group_name: The unique identifier for the discovery group. Required.
         :type disco_group_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :return: None
         :rtype: None
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -8902,17 +8674,17 @@ class DiscoveryGroupsOperations:
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        request = build_discovery_groups_remove_request(
+        request = build_discovery_groups_delete_request(
             disco_group_name=disco_group_name,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
             subscription_id=self._config.subscription_id,
+            resource_group_name=self._config.resource_group_name,
+            workspace_name=self._config.workspace_name,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -8930,18 +8702,13 @@ class DiscoveryGroupsOperations:
             return cls(pipeline_response, None, {})
 
     @distributed_trace_async
-    async def get(self, disco_group_name: str, resource_group_name: str, workspace_name: str, **kwargs: Any) -> JSON:
-        """Retrieve a disco group with a given discoGroupName.
+    async def get(self, disco_group_name: str, **kwargs: Any) -> JSON:
+        """Retrieve a discovery group with a given discoveryGroupName.
 
-        Retrieve a disco group with a given discoGroupName.
+        Retrieve a discovery group with a given discoveryGroupName.
 
-        :param disco_group_name: The unique identifier for the disco group. Required.
+        :param disco_group_name: The unique identifier for the discovery group. Required.
         :type disco_group_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :return: JSON object
         :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -9035,15 +8802,15 @@ class DiscoveryGroupsOperations:
 
         request = build_discovery_groups_get_request(
             disco_group_name=disco_group_name,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
             subscription_id=self._config.subscription_id,
+            resource_group_name=self._config.resource_group_name,
+            workspace_name=self._config.workspace_name,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -9069,26 +8836,14 @@ class DiscoveryGroupsOperations:
 
     @overload
     async def put(
-        self,
-        disco_group_name: str,
-        resource_group_name: str,
-        workspace_name: str,
-        body: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
+        self, disco_group_name: str, body: JSON, *, content_type: str = "application/json", **kwargs: Any
     ) -> JSON:
-        """Create a disco group with a given discoGroupName.
+        """Create a discovery group with a given discoveryGroupName.
 
-        Create a disco group with a given discoGroupName.
+        Create a discovery group with a given discoveryGroupName.
 
-        :param disco_group_name: The unique identifier for the disco group. Required.
+        :param disco_group_name: The unique identifier for the discovery group. Required.
         :type disco_group_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Required.
         :type body: JSON
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
@@ -9205,26 +8960,14 @@ class DiscoveryGroupsOperations:
 
     @overload
     async def put(
-        self,
-        disco_group_name: str,
-        resource_group_name: str,
-        workspace_name: str,
-        body: IO,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
+        self, disco_group_name: str, body: IO, *, content_type: str = "application/json", **kwargs: Any
     ) -> JSON:
-        """Create a disco group with a given discoGroupName.
+        """Create a discovery group with a given discoveryGroupName.
 
-        Create a disco group with a given discoGroupName.
+        Create a discovery group with a given discoveryGroupName.
 
-        :param disco_group_name: The unique identifier for the disco group. Required.
+        :param disco_group_name: The unique identifier for the discovery group. Required.
         :type disco_group_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Required.
         :type body: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
@@ -9310,20 +9053,13 @@ class DiscoveryGroupsOperations:
         """
 
     @distributed_trace_async
-    async def put(
-        self, disco_group_name: str, resource_group_name: str, workspace_name: str, body: Union[JSON, IO], **kwargs: Any
-    ) -> JSON:
-        """Create a disco group with a given discoGroupName.
+    async def put(self, disco_group_name: str, body: Union[JSON, IO], **kwargs: Any) -> JSON:
+        """Create a discovery group with a given discoveryGroupName.
 
-        Create a disco group with a given discoGroupName.
+        Create a discovery group with a given discoveryGroupName.
 
-        :param disco_group_name: The unique identifier for the disco group. Required.
+        :param disco_group_name: The unique identifier for the discovery group. Required.
         :type disco_group_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Is either a model type or a IO type. Required.
         :type body: JSON or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -9431,9 +9167,9 @@ class DiscoveryGroupsOperations:
 
         request = build_discovery_groups_put_request(
             disco_group_name=disco_group_name,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
             subscription_id=self._config.subscription_id,
+            resource_group_name=self._config.resource_group_name,
+            workspace_name=self._config.workspace_name,
             content_type=content_type,
             api_version=self._config.api_version,
             json=_json,
@@ -9442,7 +9178,7 @@ class DiscoveryGroupsOperations:
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -9468,26 +9204,16 @@ class DiscoveryGroupsOperations:
 
     @distributed_trace
     def list_runs(
-        self,
-        disco_group_name: str,
-        resource_group_name: str,
-        workspace_name: str,
-        *,
-        filter: Optional[str] = None,
-        skip: int = 0,
-        **kwargs: Any
+        self, disco_group_name: str, *, filter: Optional[str] = None, skip: int = 0, **kwargs: Any
     ) -> AsyncIterable[JSON]:
-        """Retrieve a collection of disco run results for a disco group with a given discoGroupName.
+        """Retrieve a collection of discovery run results for a discovery group with a given
+        discoveryGroupName.
 
-        Retrieve a collection of disco run results for a disco group with a given discoGroupName.
+        Retrieve a collection of discovery run results for a discovery group with a given
+        discoveryGroupName.
 
-        :param disco_group_name: The unique identifier for the disco group. Required.
+        :param disco_group_name: The unique identifier for the discovery group. Required.
         :type disco_group_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :keyword filter: An expression on the resource type that selects the resources to be returned.
          Default value is None.
         :paramtype filter: str
@@ -9554,9 +9280,9 @@ class DiscoveryGroupsOperations:
 
                 request = build_discovery_groups_list_runs_request(
                     disco_group_name=disco_group_name,
-                    resource_group_name=resource_group_name,
-                    workspace_name=workspace_name,
                     subscription_id=self._config.subscription_id,
+                    resource_group_name=self._config.resource_group_name,
+                    workspace_name=self._config.workspace_name,
                     filter=filter,
                     skip=skip,
                     api_version=self._config.api_version,
@@ -9564,7 +9290,7 @@ class DiscoveryGroupsOperations:
                     params=_params,
                 )
                 path_format_arguments = {
-                    "region": self._serialize.url("self._config.region", self._config.region, "str"),
+                    "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
                 }
                 request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -9582,7 +9308,7 @@ class DiscoveryGroupsOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 path_format_arguments = {
-                    "region": self._serialize.url("self._config.region", self._config.region, "str"),
+                    "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
                 }
                 request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -9612,20 +9338,13 @@ class DiscoveryGroupsOperations:
         return AsyncItemPaged(get_next, extract_data)
 
     @distributed_trace_async
-    async def run(  # pylint: disable=inconsistent-return-statements
-        self, disco_group_name: str, resource_group_name: str, workspace_name: str, **kwargs: Any
-    ) -> None:
-        """Run a disco group with a given discoGroupName.
+    async def run(self, disco_group_name: str, **kwargs: Any) -> None:  # pylint: disable=inconsistent-return-statements
+        """Run a discovery group with a given discoveryGroupName.
 
-        Run a disco group with a given discoGroupName.
+        Run a discovery group with a given discoveryGroupName.
 
-        :param disco_group_name: The unique identifier for the disco group. Required.
+        :param disco_group_name: The unique identifier for the discovery group. Required.
         :type disco_group_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :return: None
         :rtype: None
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -9645,15 +9364,15 @@ class DiscoveryGroupsOperations:
 
         request = build_discovery_groups_run_request(
             disco_group_name=disco_group_name,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
             subscription_id=self._config.subscription_id,
+            resource_group_name=self._config.resource_group_name,
+            workspace_name=self._config.workspace_name,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -9672,26 +9391,14 @@ class DiscoveryGroupsOperations:
 
     @overload
     async def validate(
-        self,
-        disco_group_name: str,
-        resource_group_name: str,
-        workspace_name: str,
-        body: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
+        self, disco_group_name: str, body: JSON, *, content_type: str = "application/json", **kwargs: Any
     ) -> JSON:
-        """Validate a disco group with a given discoGroupName.
+        """Validate a discovery group with a given discoveryGroupName.
 
-        Validate a disco group with a given discoGroupName.
+        Validate a discovery group with a given discoveryGroupName.
 
-        :param disco_group_name: The unique identifier for the disco group. Required.
+        :param disco_group_name: The unique identifier for the discovery group. Required.
         :type disco_group_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Required.
         :type body: JSON
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
@@ -9757,26 +9464,14 @@ class DiscoveryGroupsOperations:
 
     @overload
     async def validate(
-        self,
-        disco_group_name: str,
-        resource_group_name: str,
-        workspace_name: str,
-        body: IO,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
+        self, disco_group_name: str, body: IO, *, content_type: str = "application/json", **kwargs: Any
     ) -> JSON:
-        """Validate a disco group with a given discoGroupName.
+        """Validate a discovery group with a given discoveryGroupName.
 
-        Validate a disco group with a given discoGroupName.
+        Validate a discovery group with a given discoveryGroupName.
 
-        :param disco_group_name: The unique identifier for the disco group. Required.
+        :param disco_group_name: The unique identifier for the discovery group. Required.
         :type disco_group_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Required.
         :type body: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
@@ -9811,20 +9506,13 @@ class DiscoveryGroupsOperations:
         """
 
     @distributed_trace_async
-    async def validate(
-        self, disco_group_name: str, resource_group_name: str, workspace_name: str, body: Union[JSON, IO], **kwargs: Any
-    ) -> JSON:
-        """Validate a disco group with a given discoGroupName.
+    async def validate(self, disco_group_name: str, body: Union[JSON, IO], **kwargs: Any) -> JSON:
+        """Validate a discovery group with a given discoveryGroupName.
 
-        Validate a disco group with a given discoGroupName.
+        Validate a discovery group with a given discoveryGroupName.
 
-        :param disco_group_name: The unique identifier for the disco group. Required.
+        :param disco_group_name: The unique identifier for the discovery group. Required.
         :type disco_group_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Is either a model type or a IO type. Required.
         :type body: JSON or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -9881,9 +9569,9 @@ class DiscoveryGroupsOperations:
 
         request = build_discovery_groups_validate_request(
             disco_group_name=disco_group_name,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
             subscription_id=self._config.subscription_id,
+            resource_group_name=self._config.resource_group_name,
+            workspace_name=self._config.workspace_name,
             content_type=content_type,
             api_version=self._config.api_version,
             json=_json,
@@ -9892,7 +9580,7 @@ class DiscoveryGroupsOperations:
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -9935,24 +9623,11 @@ class DiscoveryTemplatesOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        *,
-        filter: Optional[str] = None,
-        skip: int = 0,
-        **kwargs: Any
-    ) -> AsyncIterable[JSON]:
+    def list(self, *, filter: Optional[str] = None, skip: int = 0, **kwargs: Any) -> AsyncIterable[JSON]:
         """Retrieve a list of disco templates for the provided search parameters.
 
         Retrieve a list of disco templates for the provided search parameters.
 
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :keyword filter: An expression on the resource type that selects the resources to be returned.
          Default value is None.
         :paramtype filter: str
@@ -10007,9 +9682,9 @@ class DiscoveryTemplatesOperations:
             if not next_link:
 
                 request = build_discovery_templates_list_request(
-                    resource_group_name=resource_group_name,
-                    workspace_name=workspace_name,
                     subscription_id=self._config.subscription_id,
+                    resource_group_name=self._config.resource_group_name,
+                    workspace_name=self._config.workspace_name,
                     filter=filter,
                     skip=skip,
                     api_version=self._config.api_version,
@@ -10017,7 +9692,7 @@ class DiscoveryTemplatesOperations:
                     params=_params,
                 )
                 path_format_arguments = {
-                    "region": self._serialize.url("self._config.region", self._config.region, "str"),
+                    "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
                 }
                 request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -10035,7 +9710,7 @@ class DiscoveryTemplatesOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 path_format_arguments = {
-                    "region": self._serialize.url("self._config.region", self._config.region, "str"),
+                    "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
                 }
                 request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -10065,18 +9740,13 @@ class DiscoveryTemplatesOperations:
         return AsyncItemPaged(get_next, extract_data)
 
     @distributed_trace_async
-    async def get(self, disco_template_id: str, resource_group_name: str, workspace_name: str, **kwargs: Any) -> JSON:
+    async def get(self, disco_template_id: str, **kwargs: Any) -> JSON:
         """Retrieve a disco template with a given discoTemplateId.
 
         Retrieve a disco template with a given discoTemplateId.
 
         :param disco_template_id: The unique identifier for the disco template. Required.
         :type disco_template_id: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :return: JSON object
         :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -10123,15 +9793,15 @@ class DiscoveryTemplatesOperations:
 
         request = build_discovery_templates_get_request(
             disco_template_id=disco_template_id,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
             subscription_id=self._config.subscription_id,
+            resource_group_name=self._config.resource_group_name,
+            workspace_name=self._config.workspace_name,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -10174,16 +9844,11 @@ class ReportsOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace_async
-    async def billable_assets(self, resource_group_name: str, workspace_name: str, **kwargs: Any) -> JSON:
+    async def billable(self, **kwargs: Any) -> JSON:
         """Retrieve billable assets summary for the workspace.
 
         Retrieve billable assets summary for the workspace.
 
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :return: JSON object
         :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -10222,16 +9887,16 @@ class ReportsOperations:
 
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        request = build_reports_billable_assets_request(
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
+        request = build_reports_billable_request(
             subscription_id=self._config.subscription_id,
+            resource_group_name=self._config.resource_group_name,
+            workspace_name=self._config.workspace_name,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -10256,24 +9921,11 @@ class ReportsOperations:
         return cast(JSON, deserialized)
 
     @overload
-    async def snapshot(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        body: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> JSON:
+    async def snapshot(self, body: JSON, *, content_type: str = "application/json", **kwargs: Any) -> JSON:
         """Retrieve the most recent snapshot of asset summary values for the snapshot request.
 
         Retrieve the most recent snapshot of asset summary values for the snapshot request.
 
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Required.
         :type body: JSON
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
@@ -10328,24 +9980,11 @@ class ReportsOperations:
         """
 
     @overload
-    async def snapshot(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        body: IO,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> JSON:
+    async def snapshot(self, body: IO, *, content_type: str = "application/json", **kwargs: Any) -> JSON:
         """Retrieve the most recent snapshot of asset summary values for the snapshot request.
 
         Retrieve the most recent snapshot of asset summary values for the snapshot request.
 
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Required.
         :type body: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
@@ -10391,18 +10030,11 @@ class ReportsOperations:
         """
 
     @distributed_trace_async
-    async def snapshot(
-        self, resource_group_name: str, workspace_name: str, body: Union[JSON, IO], **kwargs: Any
-    ) -> JSON:
+    async def snapshot(self, body: Union[JSON, IO], **kwargs: Any) -> JSON:
         """Retrieve the most recent snapshot of asset summary values for the snapshot request.
 
         Retrieve the most recent snapshot of asset summary values for the snapshot request.
 
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Is either a model type or a IO type. Required.
         :type body: JSON or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -10469,9 +10101,9 @@ class ReportsOperations:
             _json = body
 
         request = build_reports_snapshot_request(
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
             subscription_id=self._config.subscription_id,
+            resource_group_name=self._config.resource_group_name,
+            workspace_name=self._config.workspace_name,
             content_type=content_type,
             api_version=self._config.api_version,
             json=_json,
@@ -10480,7 +10112,7 @@ class ReportsOperations:
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -10505,24 +10137,11 @@ class ReportsOperations:
         return cast(JSON, deserialized)
 
     @overload
-    async def summarize(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        body: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> JSON:
+    async def summarize(self, body: JSON, *, content_type: str = "application/json", **kwargs: Any) -> JSON:
         """Retrieve asset summary details for the summary request.
 
         Retrieve asset summary details for the summary request.
 
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Required.
         :type body: JSON
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
@@ -10572,24 +10191,11 @@ class ReportsOperations:
         """
 
     @overload
-    async def summarize(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        body: IO,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> JSON:
+    async def summarize(self, body: IO, *, content_type: str = "application/json", **kwargs: Any) -> JSON:
         """Retrieve asset summary details for the summary request.
 
         Retrieve asset summary details for the summary request.
 
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Required.
         :type body: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
@@ -10621,18 +10227,11 @@ class ReportsOperations:
         """
 
     @distributed_trace_async
-    async def summarize(
-        self, resource_group_name: str, workspace_name: str, body: Union[JSON, IO], **kwargs: Any
-    ) -> JSON:
+    async def summarize(self, body: Union[JSON, IO], **kwargs: Any) -> JSON:
         """Retrieve asset summary details for the summary request.
 
         Retrieve asset summary details for the summary request.
 
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Is either a model type or a IO type. Required.
         :type body: JSON or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -10685,9 +10284,9 @@ class ReportsOperations:
             _json = body
 
         request = build_reports_summarize_request(
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
             subscription_id=self._config.subscription_id,
+            resource_group_name=self._config.resource_group_name,
+            workspace_name=self._config.workspace_name,
             content_type=content_type,
             api_version=self._config.api_version,
             json=_json,
@@ -10696,7 +10295,7 @@ class ReportsOperations:
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -10739,24 +10338,11 @@ class SavedFiltersOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        *,
-        filter: Optional[str] = None,
-        skip: int = 0,
-        **kwargs: Any
-    ) -> AsyncIterable[JSON]:
+    def list(self, *, filter: Optional[str] = None, skip: int = 0, **kwargs: Any) -> AsyncIterable[JSON]:
         """Retrieve a list of saved filters for the provided search parameters.
 
         Retrieve a list of saved filters for the provided search parameters.
 
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :keyword filter: An expression on the resource type that selects the resources to be returned.
          Default value is None.
         :paramtype filter: str
@@ -10797,9 +10383,9 @@ class SavedFiltersOperations:
             if not next_link:
 
                 request = build_saved_filters_list_request(
-                    resource_group_name=resource_group_name,
-                    workspace_name=workspace_name,
                     subscription_id=self._config.subscription_id,
+                    resource_group_name=self._config.resource_group_name,
+                    workspace_name=self._config.workspace_name,
                     filter=filter,
                     skip=skip,
                     api_version=self._config.api_version,
@@ -10807,7 +10393,7 @@ class SavedFiltersOperations:
                     params=_params,
                 )
                 path_format_arguments = {
-                    "region": self._serialize.url("self._config.region", self._config.region, "str"),
+                    "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
                 }
                 request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -10825,7 +10411,7 @@ class SavedFiltersOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 path_format_arguments = {
-                    "region": self._serialize.url("self._config.region", self._config.region, "str"),
+                    "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
                 }
                 request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -10855,20 +10441,15 @@ class SavedFiltersOperations:
         return AsyncItemPaged(get_next, extract_data)
 
     @distributed_trace_async
-    async def remove(  # pylint: disable=inconsistent-return-statements
-        self, saved_filter_name: str, resource_group_name: str, workspace_name: str, **kwargs: Any
+    async def delete(  # pylint: disable=inconsistent-return-statements
+        self, saved_filter_name: str, **kwargs: Any
     ) -> None:
-        """Remove a saved filter with a given savedFilterName.
+        """Delete a saved filter with a given savedFilterName.
 
-        Remove a saved filter with a given savedFilterName.
+        Delete a saved filter with a given savedFilterName.
 
         :param saved_filter_name: The unique identifier for the saved filter. Required.
         :type saved_filter_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :return: None
         :rtype: None
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -10886,17 +10467,17 @@ class SavedFiltersOperations:
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        request = build_saved_filters_remove_request(
+        request = build_saved_filters_delete_request(
             saved_filter_name=saved_filter_name,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
             subscription_id=self._config.subscription_id,
+            resource_group_name=self._config.resource_group_name,
+            workspace_name=self._config.workspace_name,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -10914,18 +10495,13 @@ class SavedFiltersOperations:
             return cls(pipeline_response, None, {})
 
     @distributed_trace_async
-    async def get(self, saved_filter_name: str, resource_group_name: str, workspace_name: str, **kwargs: Any) -> JSON:
+    async def get(self, saved_filter_name: str, **kwargs: Any) -> JSON:
         """Retrieve a saved filter by savedFilterName.
 
         Retrieve a saved filter by savedFilterName.
 
         :param saved_filter_name: The unique identifier for the saved filter. Required.
         :type saved_filter_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :return: JSON object
         :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -10958,15 +10534,15 @@ class SavedFiltersOperations:
 
         request = build_saved_filters_get_request(
             saved_filter_name=saved_filter_name,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
             subscription_id=self._config.subscription_id,
+            resource_group_name=self._config.resource_group_name,
+            workspace_name=self._config.workspace_name,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -10992,14 +10568,7 @@ class SavedFiltersOperations:
 
     @overload
     async def put(
-        self,
-        saved_filter_name: str,
-        resource_group_name: str,
-        workspace_name: str,
-        body: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
+        self, saved_filter_name: str, body: JSON, *, content_type: str = "application/json", **kwargs: Any
     ) -> JSON:
         """Create or update a saved filter with a given savedFilterName.
 
@@ -11007,11 +10576,6 @@ class SavedFiltersOperations:
 
         :param saved_filter_name: The unique identifier for the saved filter. Required.
         :type saved_filter_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Required.
         :type body: JSON
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
@@ -11045,14 +10609,7 @@ class SavedFiltersOperations:
 
     @overload
     async def put(
-        self,
-        saved_filter_name: str,
-        resource_group_name: str,
-        workspace_name: str,
-        body: IO,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
+        self, saved_filter_name: str, body: IO, *, content_type: str = "application/json", **kwargs: Any
     ) -> JSON:
         """Create or update a saved filter with a given savedFilterName.
 
@@ -11060,11 +10617,6 @@ class SavedFiltersOperations:
 
         :param saved_filter_name: The unique identifier for the saved filter. Required.
         :type saved_filter_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Required.
         :type body: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
@@ -11089,25 +10641,13 @@ class SavedFiltersOperations:
         """
 
     @distributed_trace_async
-    async def put(
-        self,
-        saved_filter_name: str,
-        resource_group_name: str,
-        workspace_name: str,
-        body: Union[JSON, IO],
-        **kwargs: Any
-    ) -> JSON:
+    async def put(self, saved_filter_name: str, body: Union[JSON, IO], **kwargs: Any) -> JSON:
         """Create or update a saved filter with a given savedFilterName.
 
         Create or update a saved filter with a given savedFilterName.
 
         :param saved_filter_name: The unique identifier for the saved filter. Required.
         :type saved_filter_name: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :param body: Is either a model type or a IO type. Required.
         :type body: JSON or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
@@ -11154,9 +10694,9 @@ class SavedFiltersOperations:
 
         request = build_saved_filters_put_request(
             saved_filter_name=saved_filter_name,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
             subscription_id=self._config.subscription_id,
+            resource_group_name=self._config.resource_group_name,
+            workspace_name=self._config.workspace_name,
             content_type=content_type,
             api_version=self._config.api_version,
             json=_json,
@@ -11165,7 +10705,7 @@ class SavedFiltersOperations:
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -11208,24 +10748,11 @@ class TasksOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        *,
-        filter: Optional[str] = None,
-        skip: int = 0,
-        **kwargs: Any
-    ) -> AsyncIterable[JSON]:
+    def list(self, *, filter: Optional[str] = None, skip: int = 0, **kwargs: Any) -> AsyncIterable[JSON]:
         """Retrieve a list of tasks for the provided search parameters.
 
         Retrieve a list of tasks for the provided search parameters.
 
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :keyword filter: An expression on the resource type that selects the resources to be returned.
          Default value is None.
         :paramtype filter: str
@@ -11269,9 +10796,9 @@ class TasksOperations:
             if not next_link:
 
                 request = build_tasks_list_request(
-                    resource_group_name=resource_group_name,
-                    workspace_name=workspace_name,
                     subscription_id=self._config.subscription_id,
+                    resource_group_name=self._config.resource_group_name,
+                    workspace_name=self._config.workspace_name,
                     filter=filter,
                     skip=skip,
                     api_version=self._config.api_version,
@@ -11279,7 +10806,7 @@ class TasksOperations:
                     params=_params,
                 )
                 path_format_arguments = {
-                    "region": self._serialize.url("self._config.region", self._config.region, "str"),
+                    "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
                 }
                 request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -11297,7 +10824,7 @@ class TasksOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 path_format_arguments = {
-                    "region": self._serialize.url("self._config.region", self._config.region, "str"),
+                    "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
                 }
                 request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -11327,18 +10854,13 @@ class TasksOperations:
         return AsyncItemPaged(get_next, extract_data)
 
     @distributed_trace_async
-    async def get(self, task_id: str, resource_group_name: str, workspace_name: str, **kwargs: Any) -> JSON:
+    async def get(self, task_id: str, **kwargs: Any) -> JSON:
         """Retrieve a task by taskId.
 
         Retrieve a task by taskId.
 
         :param task_id: The unique identifier for the task. Required.
         :type task_id: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :return: JSON object
         :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -11374,15 +10896,15 @@ class TasksOperations:
 
         request = build_tasks_get_request(
             task_id=task_id,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
             subscription_id=self._config.subscription_id,
+            resource_group_name=self._config.resource_group_name,
+            workspace_name=self._config.workspace_name,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
@@ -11407,18 +10929,13 @@ class TasksOperations:
         return cast(JSON, deserialized)
 
     @distributed_trace_async
-    async def cancel(self, task_id: str, resource_group_name: str, workspace_name: str, **kwargs: Any) -> JSON:
+    async def cancel(self, task_id: str, **kwargs: Any) -> JSON:
         """Cancel a task by taskId.
 
         Cancel a task by taskId.
 
         :param task_id: The unique identifier for the task. Required.
         :type task_id: str
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the Workspace. Required.
-        :type workspace_name: str
         :return: JSON object
         :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -11454,15 +10971,15 @@ class TasksOperations:
 
         request = build_tasks_cancel_request(
             task_id=task_id,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
             subscription_id=self._config.subscription_id,
+            resource_group_name=self._config.resource_group_name,
+            workspace_name=self._config.workspace_name,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
         path_format_arguments = {
-            "region": self._serialize.url("self._config.region", self._config.region, "str"),
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
         }
         request.url = self._client.format_url(request.url, **path_format_arguments)
 
