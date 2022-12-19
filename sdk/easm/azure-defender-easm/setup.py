@@ -12,7 +12,7 @@ import re
 from setuptools import setup, find_packages
 
 
-PACKAGE_NAME = "azure-easm"
+PACKAGE_NAME = "azure-defender-easm"
 PACKAGE_PPRINT_NAME = "EASM Data Plane Client"
 
 # a-b-c => a/b/c
@@ -55,6 +55,7 @@ setup(
             "tests",
             # Exclude packages that will be covered by PEP420 or nspkg
             "azure",
+            "azure.defender",
         ]
     ),
     include_package_data=True,

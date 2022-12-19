@@ -5,7 +5,7 @@
 # license information.
 # --------------------------------------------------------------------------
 from devtools_testutils import AzureTestCase
-from azure.easm.aio import easmClient
+from azure.defender.easm.aio import easmClient
 
 
 class EasmAsyncTest(AzureTestCase):

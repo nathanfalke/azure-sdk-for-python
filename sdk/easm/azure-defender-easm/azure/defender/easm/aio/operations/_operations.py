@@ -71,7 +71,7 @@ class AssetsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.easm.aio.EasmClient`'s
+        :class:`~azure.defender.easm.aio.EasmClient`'s
         :attr:`assets` attribute.
     """
 
@@ -7822,7 +7822,7 @@ class DataConnectionsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.easm.aio.EasmClient`'s
+        :class:`~azure.defender.easm.aio.EasmClient`'s
         :attr:`data_connections` attribute.
     """
 
@@ -8472,7 +8472,7 @@ class DiscoveryGroupsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.easm.aio.EasmClient`'s
+        :class:`~azure.defender.easm.aio.EasmClient`'s
         :attr:`discovery_groups` attribute.
     """
 
@@ -9611,7 +9611,7 @@ class DiscoveryTemplatesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.easm.aio.EasmClient`'s
+        :class:`~azure.defender.easm.aio.EasmClient`'s
         :attr:`discovery_templates` attribute.
     """
 
@@ -9832,7 +9832,7 @@ class ReportsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.easm.aio.EasmClient`'s
+        :class:`~azure.defender.easm.aio.EasmClient`'s
         :attr:`reports` attribute.
     """
 
@@ -10326,7 +10326,7 @@ class SavedFiltersOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.easm.aio.EasmClient`'s
+        :class:`~azure.defender.easm.aio.EasmClient`'s
         :attr:`saved_filters` attribute.
     """
 
@@ -10736,7 +10736,7 @@ class TasksOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.easm.aio.EasmClient`'s
+        :class:`~azure.defender.easm.aio.EasmClient`'s
         :attr:`tasks` attribute.
     """
 

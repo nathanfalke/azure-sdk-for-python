@@ -6,7 +6,7 @@
 # --------------------------------------------------------------------------
 import functools
 from devtools_testutils import AzureTestCase, PowerShellPreparer
-from azure.easm import easmClient
+from azure.defender.easm import easmClient
 
 
 class EasmTest(AzureTestCase):

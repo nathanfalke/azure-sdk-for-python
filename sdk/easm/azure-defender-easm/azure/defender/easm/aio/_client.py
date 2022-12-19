@@ -37,19 +37,19 @@ class EasmClient:  # pylint: disable=client-accepts-api-version-keyword,too-many
     integrate with your application.
 
     :ivar assets: AssetsOperations operations
-    :vartype assets: azure.easm.aio.operations.AssetsOperations
+    :vartype assets: azure.defender.easm.aio.operations.AssetsOperations
     :ivar data_connections: DataConnectionsOperations operations
-    :vartype data_connections: azure.easm.aio.operations.DataConnectionsOperations
+    :vartype data_connections: azure.defender.easm.aio.operations.DataConnectionsOperations
     :ivar discovery_groups: DiscoveryGroupsOperations operations
-    :vartype discovery_groups: azure.easm.aio.operations.DiscoveryGroupsOperations
+    :vartype discovery_groups: azure.defender.easm.aio.operations.DiscoveryGroupsOperations
     :ivar discovery_templates: DiscoveryTemplatesOperations operations
-    :vartype discovery_templates: azure.easm.aio.operations.DiscoveryTemplatesOperations
+    :vartype discovery_templates: azure.defender.easm.aio.operations.DiscoveryTemplatesOperations
     :ivar reports: ReportsOperations operations
-    :vartype reports: azure.easm.aio.operations.ReportsOperations
+    :vartype reports: azure.defender.easm.aio.operations.ReportsOperations
     :ivar saved_filters: SavedFiltersOperations operations
-    :vartype saved_filters: azure.easm.aio.operations.SavedFiltersOperations
+    :vartype saved_filters: azure.defender.easm.aio.operations.SavedFiltersOperations
     :ivar tasks: TasksOperations operations
-    :vartype tasks: azure.easm.aio.operations.TasksOperations
+    :vartype tasks: azure.defender.easm.aio.operations.TasksOperations
     :param endpoint: The endpoint hosting the requested resource. For example,
      {region}.easm.defender.microsoft.com. Required.
     :type endpoint: str

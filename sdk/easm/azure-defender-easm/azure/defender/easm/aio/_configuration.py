@@ -76,7 +76,7 @@ class EasmClientConfiguration(Configuration):  # pylint: disable=too-many-instan
         self.credential = credential
         self.api_version = api_version
         self.credential_scopes = kwargs.pop("credential_scopes", ["https://easm.defender.microsoft.com/.default"])
-        kwargs.setdefault("sdk_moniker", "easm/{}".format(VERSION))
+        kwargs.setdefault("sdk_moniker", "defender-easm/{}".format(VERSION))
         self._configure(**kwargs)
 
     def _configure(self, **kwargs: Any) -> None:

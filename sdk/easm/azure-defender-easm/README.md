@@ -9,7 +9,7 @@
 
 #### pip
 ```bash
-python -m pip install azure-easm
+python -m pip install azure-defender-easm
 ```
 
 #### from source
@@ -129,11 +129,11 @@ additional questions or comments.
 [default_azure_credential]: https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/identity/azure-identity#defaultazurecredential
 [pip]: https://pypi.org/project/pip/
 [azure_sub]: https://azure.microsoft.com/free/
-[samples]: https://github.com/nathanfalke/azure-sdk-for-python/tree/main/sdk/easm/azure-easm/samples
+[samples]: https://github.com/nathanfalke/azure-sdk-for-python/tree/main/sdk/easm/azure-defender-easm/samples
 [assets_documentation]: https://learn.microsoft.com/en-us/azure/external-attack-surface-management/understanding-inventory-assets
 [discovery_documentation]: https://learn.microsoft.com/en-us/azure/external-attack-surface-management/what-is-discovery
 [discovery_groups_documentation]: https://learn.microsoft.com/en-us/azure/external-attack-surface-management/using-and-managing-discovery#discovery-groups
-[source_code]: https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/easm/azure-easm/
-[pypi]: https://pypi.org/project/azure-easm/
+[source_code]: https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/easm/azure-defender-easm/
+[pypi]: https://pypi.org/project/azure-defender-easm/
 [api_reference]: https://review.learn.microsoft.com/en-us/rest/api/defenderforeasm/?branch=easm
 [product_documentation]:  https://learn.microsoft.com/en-us/azure/external-attack-surface-management/
