@@ -8,32 +8,34 @@ To create an `EasmClient`, you need your subscription ID, region, and some sort 
 
 ```python 
 from azure.identity import InteractiveBrowserCredential
-from azure.easm import EasmClient
+from azure.defender.easm import EasmClient
 
 sub_id = '<your subscription ID here>'
+workspace_name = '<your workspace name here>'
+resource_group = '<your resource group here>'
 region = '<your region here>'
 
+endpoint = f'{region}.easm.defender.microsoft.com'
+
 browser_credential = InteractiveBrowserCredential()
-client = EasmClient(sub_id, browser_credential, region=region)
+client = EasmClient(endpoint, resource_group, sub_id, workspace_name, browser_credential)
 ```
 
 ## Creating new discovery groups
 
 in order to start discovery runs, we must first create a discovery group, which is a collection of known assets that we can pivot off of. these are created using the `discovery_groups.put` method
 ```python
-workspace_name = '<your workspace name here>'
-resource_group = '<your resource group here>'
 
 name = '<your discovery group name here>'
 assets = [
     {'kind': 'domain', 'name': '<a domain you want to run discovery against>'},
-    {'kind': 'host', 'name': '<a host you want to run discovery against>')
+    {'kind': 'host', 'name': '<a host you want to run discovery against>'}
 ]
 request = {
 	'description': '<a description for your discovery group>', 
 	'seeds': assets
 }
-response = client.discovery_groups.put(name, resource_group, workspace_name, request)
+response = client.discovery_groups.put(name, request)
 ```
 
 ## Start a discovery run
@@ -53,9 +55,9 @@ Runs show up immediately after they've started, so if you don't see your run in 
 ``` python
 import itertools
 
-for group in client.discovery_groups.list(resource_group, workspace_name):
+for group in client.discovery_groups.list():
     print(group['name'])
-    runs = client.discovery_groups.list_runs(group['name'], resource_group, workspace_name)
+    runs = client.discovery_groups.list_runs(group['name'])
     for run in itertools.islice(runs, 5):
         print(f" - started: {run['startedDate']}, finished: {run['completedDate']}, assets found: {run['totalAssetsFoundCount']}")
 ```

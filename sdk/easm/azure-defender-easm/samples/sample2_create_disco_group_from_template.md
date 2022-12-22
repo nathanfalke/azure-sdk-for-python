@@ -6,13 +6,17 @@ To create an `EasmClient`, you need your subscription ID, region, and some sort 
 
 ```python 
 from azure.identity import InteractiveBrowserCredential
-from azure.easm import EasmClient
+from azure.defender.easm import EasmClient
 
 sub_id = '<your subscription ID here>'
+workspace_name = '<your workspace name here>'
+resource_group = '<your resource group here>'
 region = '<your region here>'
 
+endpoint = f'{region}.easm.defender.microsoft.com'
+
 browser_credential = InteractiveBrowserCredential()
-client = EasmClient(sub_id, browser_credential, region=region)
+client = EasmClient(endpoint, resource_group, sub_id, workspace_name, browser_credential)
 ```
 
 ## Find a disco template
@@ -20,12 +24,8 @@ The `discovery_templates.list` method can be used to find a discovery template u
 The endpoint will return templates based on a partial match on the `name` field.
 
 ```python
-workspace_name = '<your workspace name here>'
-resource_group = '<your resource group here>'
-
 partial_name = 'taco'
-templates = client.discovery_templates.list(
-	resource_group, workspace_name, filter=partial_name)
+templates = client.discovery_templates.list(filter=partial_name)
 
 for template in templates:
     print(f'{template["id"]}: {template["displayName"]}')
@@ -37,8 +37,7 @@ From here, we can see the names and seeds which would be used in a discovery run
 
 ```python
 template_id = '<your chosen template id>'
-template = client.discovery_templates.get(
-	template_id, resource_group, workspace_name)
+template = client.discovery_templates.get(template_id)
 
 for name in template['names']:
     print(name)
@@ -53,9 +52,8 @@ The discovery template can be used to create a discovery group with using a `Dis
 ```python
 group_name = '<your group name here>'
 
-request = {'template_id': template_id}
-response = client.discovery_groups.put(
-	group_name, resource_group, workspace_name, body=request)
+request = {'templateId': template_id}
+response = client.discovery_groups.put(group_name, body=request)
 
-client.discovery_groups.run(group_name, resource_group, workspace_name)
+client.discovery_groups.run(group_name)
 ```

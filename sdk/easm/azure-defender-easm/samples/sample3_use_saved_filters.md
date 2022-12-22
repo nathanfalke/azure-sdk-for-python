@@ -7,13 +7,17 @@ To create an `EasmClient`, you need your subscription ID, region, and some sort 
 
 ```python 
 from azure.identity import InteractiveBrowserCredential
-from azure.easm import EasmClient
+from azure.defender.easm import EasmClient
 
-sub_id = "<your subscription ID here>"
-region = "<your region here>"
+sub_id = '<your subscription ID here>'
+workspace_name = '<your workspace name here>'
+resource_group = '<your resource group here>'
+region = '<your region here>'
+
+endpoint = f'{region}.easm.defender.microsoft.com'
 
 browser_credential = InteractiveBrowserCredential()
-client = EasmClient(sub_id, browser_credential, region=region)
+client = EasmClient(endpoint, resource_group, sub_id, workspace_name, browser_credential)
 ```
 
 
@@ -21,15 +25,12 @@ client = EasmClient(sub_id, browser_credential, region=region)
 To create a Saved Filter, we need to send a filter, name, and description to the `saved_filters.put` endpoint
 
 ```python
-workspace_name = '<your workspace name here>'
-resource_group = '<your resource group here>'
-
-saved_filter_name = "<your saved filter name here>"
+saved_filter_name = '<your saved filter name here>'
 request = {
 	'filter': 'IP Address = 151.101.192.67',
 	'description': 'Monitored Addresses',
 }
-client.saved_filters.put(saved_filter_name, resource_group, workspace_name, body=request)
+client.saved_filters.put(saved_filter_name, body=request)
 ```
 
 ## Using the saved filter
@@ -41,21 +42,21 @@ A sample asset list call that could be used to monitor the assets:
 def monitor(asset):
 	pass #your monitor logic here
 	
-monitor_filter = client.saved_filters.get(saved_filter_name, resource_group, workspace_name)['filter']
+monitor_filter = client.saved_filters.get(saved_filter_name)['filter']
 
-for asset in client.assets.list(resource_group, workspace_name, filter=monitor_filter):
+for asset in client.assets.list(filter=monitor_filter):
 	monitor(asset)
 ```
 
 A sample asset update call, which could be used to update the monitored assets:
 ```python
-monitor_filter = client.saved_filters.get(saved_filter_name, resource_group, workspace_name)['filter']
+monitor_filter = client.saved_filters.get(saved_filter_name)['filter']
 
 body = {
 	#your asset update request body here
 }
 
-client.assets.update(resource_group, workspace_name, body, filter=asset_filter)
+client.assets.update(body, filter=asset_filter)
 ```
 
 ## Updating the filter
@@ -64,5 +65,5 @@ Simply submit a new `saved_filters.put` request to replace the old description a
 
 ```python
 request = {'filter': 'IP Address = 0.0.0.0', 'description': 'Monitored Addresses'}
-client.saved_filters.put(saved_filter_name, resource_group, workspace_name, body=request)
+client.saved_filters.put(saved_filter_name, body=request)
 ```

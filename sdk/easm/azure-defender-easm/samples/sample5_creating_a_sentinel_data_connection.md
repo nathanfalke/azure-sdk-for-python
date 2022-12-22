@@ -6,13 +6,17 @@ To create an `EasmClient`, you need your subscription ID, region, and some sort 
 
 ```python 
 from azure.identity import InteractiveBrowserCredential
-from azure.easm import EasmClient
+from azure.defender.easm import EasmClient
 
-sub_id = "<your subscription ID here>"
-region = "<your region here>"
+sub_id = '<your subscription ID here>'
+workspace_name = '<your workspace name here>'
+resource_group = '<your resource group here>'
+region = '<your region here>'
+
+endpoint = f'{region}.easm.defender.microsoft.com'
 
 browser_credential = InteractiveBrowserCredential()
-client = EasmClient(sub_id, browser_credential, region=region)
+client = EasmClient(endpoint, resource_group, sub_id, workspace_name, browser_credential)
 ```
 
 ## Creating a data connection request
@@ -23,9 +27,9 @@ sentinel_ws_id='<your Sentinel workspace ID here>'
 sentinel_api_key='<your Sentinel API key here>'
 
 request = {
-    connection_string=f'WorkspaceId={sentinel_ws_id};ApiKey={sentinel_api_key}',
-    kind='sentinel',
-    content='assets'
+    'connectionString': f'WorkspaceId={sentinel_ws_id};ApiKey={sentinel_api_key}',
+    'kind': 'sentinel',
+    'content': 'assets'
 }
 ```
 
@@ -33,26 +37,24 @@ request = {
 Using the `data_connections.validate` method, we can ensure we're making a valid data connection request, and receive a readable error if we aren't.
 
 ```python
-workspace_name = '<your workspace name here>'
-resource_group = '<your resource group here>'
 data_connection_name = '<your data connection name here>'
 
-client.data_connections.validate(data_connection_name, resource_group, workspace_name, request)
+client.data_connections.validate(data_connection_name, request)
 ```
 
 ## Create the data connection
 Once the request has been validated, it can be used in the `data_connections.put` method to create the requested data connection
 
 ```python
-client.data_connections.put(data_connection_name, resource_group, workspace_name, request)
+client.data_connections.put(data_connection_name, request)
 ```
 ## View the data connection
 A single data connection can be viewed using the `data_connections.get` endpoint
 ```python
-client.data_connections.get(data_connection_name, resource_group, workspace_name)
+client.data_connections.get(data_connection_name)
 ```
 
 alternatively, all of the data connections in a workspace can be listed out with the `data_connections.list` method
 ```python
-client.data_connections.list(resource_group, workspace_name)
+client.data_connections.list()
 ```
