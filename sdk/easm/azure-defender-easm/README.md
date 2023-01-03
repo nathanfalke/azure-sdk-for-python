@@ -39,9 +39,17 @@ Set the values of the client ID, tenant ID, and client secret of the AAD applica
 Use the returned token credential to authenticate the client:
 
 ```python
-from azure.easm import EasmClient
+from azure.defender.easm import EasmClient
 from azure.identity import DefaultAzureCredential
-client = EasmClient('<Azure Subscription ID>', credential=DefaultAzureCredential(), region='<Azure Region>')
+
+sub_id = '<your subscription ID here>'
+workspace_name = '<your workspace name here>'
+resource_group = '<your resource group here>'
+region = '<your region here>'
+
+endpoint = f'{region}.easm.defender.microsoft.com'
+
+client = EasmClient(endpoint, resource_group, sub_id, workspace_name, credential=DefaultAzureCredential())
 ```
 
 ## Key concepts
@@ -71,15 +79,19 @@ After authenticating as shown in the "Create with an Azure Active Directory Cred
 
 ### Create a discovery group
 ```python
-from azure.easm import EasmClient
+from azure.defender.easm import EasmClient
 from azure.identity import DefaultAzureCredential
 
-resource_group = '<Resource Group Name>'
-workspace_name = '<Workspace Name>'
+sub_id = '<your subscription ID here>'
+workspace_name = '<your workspace name here>'
+resource_group = '<your resource group here>'
+region = '<your region here>'
 
-client = EasmClient('<Azure Subscription ID>', credential=DefaultAzureCredential(), region='<Azure Region>')
+endpoint = f'{region}.easm.defender.microsoft.com'
 
-client.disco_groups.put("example group", resource_group, workspace_name, {
+client = EasmClient(endpoint, resource_group, sub_id, workspace_name, credential=DefaultAzureCredential())
+
+client.disco_groups.put("example group", {
 	'seeds': [
 	    {'kind': 'host', 'name': 'example.org'}
 	]
@@ -89,16 +101,19 @@ client.disco_groups.run("example group")
 
 ### View assets
 ```python
-from azure.easm import EasmClient
+from azure.defender.easm import EasmClient
 from azure.identity import DefaultAzureCredential
 
-resource_group = '<Resource Group Name>'
-workspace_name = '<Workspace Name>'
+sub_id = '<your subscription ID here>'
+workspace_name = '<your workspace name here>'
+resource_group = '<your resource group here>'
+region = '<your region here>'
 
-client = EasmClient('<Azure Subscription ID>', credential=DefaultAzureCredential(), region='<Azure Region>')
+endpoint = f'{region}.easm.defender.microsoft.com'
 
-assets = client.assets.list(resource_group, workspace_name)
-for asset in assets:
+client = EasmClient(endpoint, resource_group, sub_id, workspace_name, credential=DefaultAzureCredential())
+
+for asset in client.assets.list():
 	print(f'{asset.kind}: {asset.name}')
 ```
 
