@@ -7,7 +7,6 @@
 # --------------------------------------------------------------------------
 
 from ._operations import AssetsOperations
-from ._operations import DataConnectionsOperations
 from ._operations import DiscoveryGroupsOperations
 from ._operations import DiscoveryTemplatesOperations
 from ._operations import ReportsOperations
@@ -20,7 +19,6 @@ from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
     "AssetsOperations",
-    "DataConnectionsOperations",
     "DiscoveryGroupsOperations",
     "DiscoveryTemplatesOperations",
     "ReportsOperations",

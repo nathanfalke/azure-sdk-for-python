@@ -30,11 +30,6 @@ from ...operations._operations import (
     build_assets_get_request,
     build_assets_list_request,
     build_assets_update_request,
-    build_data_connections_delete_request,
-    build_data_connections_get_request,
-    build_data_connections_list_request,
-    build_data_connections_put_request,
-    build_data_connections_validate_request,
     build_discovery_groups_delete_request,
     build_discovery_groups_get_request,
     build_discovery_groups_list_request,
@@ -605,26 +600,32 @@ class AssetsOperations:
                               and "sslCert".
                             "name": "str",  # Optional. The caller provided unique name
                               for the resource.
-                            "reason": "str"  # Optional.
+                            "reason": "str"  # Optional. An explanation of why this audit
+                              trail node was discovered from the previous node.
                         }
                     ],
-                    "createdDate": "2020-02-20 00:00:00",  # Optional.
-                    "discoGroupName": "str",  # Optional.
+                    "createdDate": "2020-02-20 00:00:00",  # Optional. The date this asset was
+                      first added to this workspace.
+                    "discoGroupName": "str",  # Optional. The name of the DiscoveryGroup that
+                      brought added this asset to the workspace.
                     "displayName": "str",  # Optional. The name that can be used for display
                       purposes.
-                    "externalId": "str",  # Optional.
+                    "externalId": "str",  # Optional. An optional customer provided identifier
+                      for this asset.
                     "id": "str",  # Optional. The system generated unique id for the resource.
                     "labels": [
-                        "str"  # Optional.
+                        "str"  # Optional. Customer labels assigned to this asset.
                     ],
                     "name": "str",  # Optional. The caller provided unique name for the resource.
                     "reason": "str",  # Optional.
                     "state": "str",  # Optional. Known values are: "candidate", "confirmed",
                       "dismissed", "candidateInvestigate", "associatedPartner", "associatedThirdparty",
                       and "archived".
-                    "updatedDate": "2020-02-20 00:00:00",  # Optional.
-                    "uuid": "str",  # Optional.
-                    "wildcard": bool  # Optional.
+                    "updatedDate": "2020-02-20 00:00:00",  # Optional. The date this asset was
+                      last updated for this workspace.
+                    "uuid": "str",  # Optional. Global UUID for the asset.
+                    "wildcard": bool  # Optional. An indicator of whether this asset represents a
+                      wildcard rollup of assets on this domain.
                 }
 
                 # JSON input template for discriminator value "contact":
@@ -706,26 +707,32 @@ class AssetsOperations:
                               and "sslCert".
                             "name": "str",  # Optional. The caller provided unique name
                               for the resource.
-                            "reason": "str"  # Optional.
+                            "reason": "str"  # Optional. An explanation of why this audit
+                              trail node was discovered from the previous node.
                         }
                     ],
-                    "createdDate": "2020-02-20 00:00:00",  # Optional.
-                    "discoGroupName": "str",  # Optional.
+                    "createdDate": "2020-02-20 00:00:00",  # Optional. The date this asset was
+                      first added to this workspace.
+                    "discoGroupName": "str",  # Optional. The name of the DiscoveryGroup that
+                      brought added this asset to the workspace.
                     "displayName": "str",  # Optional. The name that can be used for display
                       purposes.
-                    "externalId": "str",  # Optional.
+                    "externalId": "str",  # Optional. An optional customer provided identifier
+                      for this asset.
                     "id": "str",  # Optional. The system generated unique id for the resource.
                     "labels": [
-                        "str"  # Optional.
+                        "str"  # Optional. Customer labels assigned to this asset.
                     ],
                     "name": "str",  # Optional. The caller provided unique name for the resource.
                     "reason": "str",  # Optional.
                     "state": "str",  # Optional. Known values are: "candidate", "confirmed",
                       "dismissed", "candidateInvestigate", "associatedPartner", "associatedThirdparty",
                       and "archived".
-                    "updatedDate": "2020-02-20 00:00:00",  # Optional.
-                    "uuid": "str",  # Optional.
-                    "wildcard": bool  # Optional.
+                    "updatedDate": "2020-02-20 00:00:00",  # Optional. The date this asset was
+                      last updated for this workspace.
+                    "uuid": "str",  # Optional. Global UUID for the asset.
+                    "wildcard": bool  # Optional. An indicator of whether this asset represents a
+                      wildcard rollup of assets on this domain.
                 }
 
                 # JSON input template for discriminator value "domain":
@@ -1314,26 +1321,32 @@ class AssetsOperations:
                               and "sslCert".
                             "name": "str",  # Optional. The caller provided unique name
                               for the resource.
-                            "reason": "str"  # Optional.
+                            "reason": "str"  # Optional. An explanation of why this audit
+                              trail node was discovered from the previous node.
                         }
                     ],
-                    "createdDate": "2020-02-20 00:00:00",  # Optional.
-                    "discoGroupName": "str",  # Optional.
+                    "createdDate": "2020-02-20 00:00:00",  # Optional. The date this asset was
+                      first added to this workspace.
+                    "discoGroupName": "str",  # Optional. The name of the DiscoveryGroup that
+                      brought added this asset to the workspace.
                     "displayName": "str",  # Optional. The name that can be used for display
                       purposes.
-                    "externalId": "str",  # Optional.
+                    "externalId": "str",  # Optional. An optional customer provided identifier
+                      for this asset.
                     "id": "str",  # Optional. The system generated unique id for the resource.
                     "labels": [
-                        "str"  # Optional.
+                        "str"  # Optional. Customer labels assigned to this asset.
                     ],
                     "name": "str",  # Optional. The caller provided unique name for the resource.
                     "reason": "str",  # Optional.
                     "state": "str",  # Optional. Known values are: "candidate", "confirmed",
                       "dismissed", "candidateInvestigate", "associatedPartner", "associatedThirdparty",
                       and "archived".
-                    "updatedDate": "2020-02-20 00:00:00",  # Optional.
-                    "uuid": "str",  # Optional.
-                    "wildcard": bool  # Optional.
+                    "updatedDate": "2020-02-20 00:00:00",  # Optional. The date this asset was
+                      last updated for this workspace.
+                    "uuid": "str",  # Optional. Global UUID for the asset.
+                    "wildcard": bool  # Optional. An indicator of whether this asset represents a
+                      wildcard rollup of assets on this domain.
                 }
 
                 # JSON input template for discriminator value "host":
@@ -2983,26 +2996,32 @@ class AssetsOperations:
                               and "sslCert".
                             "name": "str",  # Optional. The caller provided unique name
                               for the resource.
-                            "reason": "str"  # Optional.
+                            "reason": "str"  # Optional. An explanation of why this audit
+                              trail node was discovered from the previous node.
                         }
                     ],
-                    "createdDate": "2020-02-20 00:00:00",  # Optional.
-                    "discoGroupName": "str",  # Optional.
+                    "createdDate": "2020-02-20 00:00:00",  # Optional. The date this asset was
+                      first added to this workspace.
+                    "discoGroupName": "str",  # Optional. The name of the DiscoveryGroup that
+                      brought added this asset to the workspace.
                     "displayName": "str",  # Optional. The name that can be used for display
                       purposes.
-                    "externalId": "str",  # Optional.
+                    "externalId": "str",  # Optional. An optional customer provided identifier
+                      for this asset.
                     "id": "str",  # Optional. The system generated unique id for the resource.
                     "labels": [
-                        "str"  # Optional.
+                        "str"  # Optional. Customer labels assigned to this asset.
                     ],
                     "name": "str",  # Optional. The caller provided unique name for the resource.
                     "reason": "str",  # Optional.
                     "state": "str",  # Optional. Known values are: "candidate", "confirmed",
                       "dismissed", "candidateInvestigate", "associatedPartner", "associatedThirdparty",
                       and "archived".
-                    "updatedDate": "2020-02-20 00:00:00",  # Optional.
-                    "uuid": "str",  # Optional.
-                    "wildcard": bool  # Optional.
+                    "updatedDate": "2020-02-20 00:00:00",  # Optional. The date this asset was
+                      last updated for this workspace.
+                    "uuid": "str",  # Optional. Global UUID for the asset.
+                    "wildcard": bool  # Optional. An indicator of whether this asset represents a
+                      wildcard rollup of assets on this domain.
                 }
 
                 # JSON input template for discriminator value "ipAddress":
@@ -3779,26 +3798,32 @@ class AssetsOperations:
                               and "sslCert".
                             "name": "str",  # Optional. The caller provided unique name
                               for the resource.
-                            "reason": "str"  # Optional.
+                            "reason": "str"  # Optional. An explanation of why this audit
+                              trail node was discovered from the previous node.
                         }
                     ],
-                    "createdDate": "2020-02-20 00:00:00",  # Optional.
-                    "discoGroupName": "str",  # Optional.
+                    "createdDate": "2020-02-20 00:00:00",  # Optional. The date this asset was
+                      first added to this workspace.
+                    "discoGroupName": "str",  # Optional. The name of the DiscoveryGroup that
+                      brought added this asset to the workspace.
                     "displayName": "str",  # Optional. The name that can be used for display
                       purposes.
-                    "externalId": "str",  # Optional.
+                    "externalId": "str",  # Optional. An optional customer provided identifier
+                      for this asset.
                     "id": "str",  # Optional. The system generated unique id for the resource.
                     "labels": [
-                        "str"  # Optional.
+                        "str"  # Optional. Customer labels assigned to this asset.
                     ],
                     "name": "str",  # Optional. The caller provided unique name for the resource.
                     "reason": "str",  # Optional.
                     "state": "str",  # Optional. Known values are: "candidate", "confirmed",
                       "dismissed", "candidateInvestigate", "associatedPartner", "associatedThirdparty",
                       and "archived".
-                    "updatedDate": "2020-02-20 00:00:00",  # Optional.
-                    "uuid": "str",  # Optional.
-                    "wildcard": bool  # Optional.
+                    "updatedDate": "2020-02-20 00:00:00",  # Optional. The date this asset was
+                      last updated for this workspace.
+                    "uuid": "str",  # Optional. Global UUID for the asset.
+                    "wildcard": bool  # Optional. An indicator of whether this asset represents a
+                      wildcard rollup of assets on this domain.
                 }
 
                 # response body for status code(s): 200
@@ -3946,7 +3971,8 @@ class AssetsOperations:
          Default value is None.
         :paramtype filter: str
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
+         Known values are: 'application/json', 'application/merge-patch+json'. Default value is
+         "application/json".
         :paramtype content_type: str
         :return: JSON object
         :rtype: JSON
@@ -3980,8 +4006,8 @@ class AssetsOperations:
         :keyword filter: An expression on the resource type that selects the resources to be returned.
          Default value is None.
         :paramtype filter: str
-        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
-         Default value is None.
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json',
+         'application/merge-patch+json'. Default value is None.
         :paramtype content_type: str
         :return: JSON object
         :rtype: JSON
@@ -4569,26 +4595,32 @@ class AssetsOperations:
                               and "sslCert".
                             "name": "str",  # Optional. The caller provided unique name
                               for the resource.
-                            "reason": "str"  # Optional.
+                            "reason": "str"  # Optional. An explanation of why this audit
+                              trail node was discovered from the previous node.
                         }
                     ],
-                    "createdDate": "2020-02-20 00:00:00",  # Optional.
-                    "discoGroupName": "str",  # Optional.
+                    "createdDate": "2020-02-20 00:00:00",  # Optional. The date this asset was
+                      first added to this workspace.
+                    "discoGroupName": "str",  # Optional. The name of the DiscoveryGroup that
+                      brought added this asset to the workspace.
                     "displayName": "str",  # Optional. The name that can be used for display
                       purposes.
-                    "externalId": "str",  # Optional.
+                    "externalId": "str",  # Optional. An optional customer provided identifier
+                      for this asset.
                     "id": "str",  # Optional. The system generated unique id for the resource.
                     "labels": [
-                        "str"  # Optional.
+                        "str"  # Optional. Customer labels assigned to this asset.
                     ],
                     "name": "str",  # Optional. The caller provided unique name for the resource.
                     "reason": "str",  # Optional.
                     "state": "str",  # Optional. Known values are: "candidate", "confirmed",
                       "dismissed", "candidateInvestigate", "associatedPartner", "associatedThirdparty",
                       and "archived".
-                    "updatedDate": "2020-02-20 00:00:00",  # Optional.
-                    "uuid": "str",  # Optional.
-                    "wildcard": bool  # Optional.
+                    "updatedDate": "2020-02-20 00:00:00",  # Optional. The date this asset was
+                      last updated for this workspace.
+                    "uuid": "str",  # Optional. Global UUID for the asset.
+                    "wildcard": bool  # Optional. An indicator of whether this asset represents a
+                      wildcard rollup of assets on this domain.
                 }
 
                 # JSON input template for discriminator value "contact":
@@ -4670,26 +4702,32 @@ class AssetsOperations:
                               and "sslCert".
                             "name": "str",  # Optional. The caller provided unique name
                               for the resource.
-                            "reason": "str"  # Optional.
+                            "reason": "str"  # Optional. An explanation of why this audit
+                              trail node was discovered from the previous node.
                         }
                     ],
-                    "createdDate": "2020-02-20 00:00:00",  # Optional.
-                    "discoGroupName": "str",  # Optional.
+                    "createdDate": "2020-02-20 00:00:00",  # Optional. The date this asset was
+                      first added to this workspace.
+                    "discoGroupName": "str",  # Optional. The name of the DiscoveryGroup that
+                      brought added this asset to the workspace.
                     "displayName": "str",  # Optional. The name that can be used for display
                       purposes.
-                    "externalId": "str",  # Optional.
+                    "externalId": "str",  # Optional. An optional customer provided identifier
+                      for this asset.
                     "id": "str",  # Optional. The system generated unique id for the resource.
                     "labels": [
-                        "str"  # Optional.
+                        "str"  # Optional. Customer labels assigned to this asset.
                     ],
                     "name": "str",  # Optional. The caller provided unique name for the resource.
                     "reason": "str",  # Optional.
                     "state": "str",  # Optional. Known values are: "candidate", "confirmed",
                       "dismissed", "candidateInvestigate", "associatedPartner", "associatedThirdparty",
                       and "archived".
-                    "updatedDate": "2020-02-20 00:00:00",  # Optional.
-                    "uuid": "str",  # Optional.
-                    "wildcard": bool  # Optional.
+                    "updatedDate": "2020-02-20 00:00:00",  # Optional. The date this asset was
+                      last updated for this workspace.
+                    "uuid": "str",  # Optional. Global UUID for the asset.
+                    "wildcard": bool  # Optional. An indicator of whether this asset represents a
+                      wildcard rollup of assets on this domain.
                 }
 
                 # JSON input template for discriminator value "domain":
@@ -5278,26 +5316,32 @@ class AssetsOperations:
                               and "sslCert".
                             "name": "str",  # Optional. The caller provided unique name
                               for the resource.
-                            "reason": "str"  # Optional.
+                            "reason": "str"  # Optional. An explanation of why this audit
+                              trail node was discovered from the previous node.
                         }
                     ],
-                    "createdDate": "2020-02-20 00:00:00",  # Optional.
-                    "discoGroupName": "str",  # Optional.
+                    "createdDate": "2020-02-20 00:00:00",  # Optional. The date this asset was
+                      first added to this workspace.
+                    "discoGroupName": "str",  # Optional. The name of the DiscoveryGroup that
+                      brought added this asset to the workspace.
                     "displayName": "str",  # Optional. The name that can be used for display
                       purposes.
-                    "externalId": "str",  # Optional.
+                    "externalId": "str",  # Optional. An optional customer provided identifier
+                      for this asset.
                     "id": "str",  # Optional. The system generated unique id for the resource.
                     "labels": [
-                        "str"  # Optional.
+                        "str"  # Optional. Customer labels assigned to this asset.
                     ],
                     "name": "str",  # Optional. The caller provided unique name for the resource.
                     "reason": "str",  # Optional.
                     "state": "str",  # Optional. Known values are: "candidate", "confirmed",
                       "dismissed", "candidateInvestigate", "associatedPartner", "associatedThirdparty",
                       and "archived".
-                    "updatedDate": "2020-02-20 00:00:00",  # Optional.
-                    "uuid": "str",  # Optional.
-                    "wildcard": bool  # Optional.
+                    "updatedDate": "2020-02-20 00:00:00",  # Optional. The date this asset was
+                      last updated for this workspace.
+                    "uuid": "str",  # Optional. Global UUID for the asset.
+                    "wildcard": bool  # Optional. An indicator of whether this asset represents a
+                      wildcard rollup of assets on this domain.
                 }
 
                 # JSON input template for discriminator value "host":
@@ -6947,26 +6991,32 @@ class AssetsOperations:
                               and "sslCert".
                             "name": "str",  # Optional. The caller provided unique name
                               for the resource.
-                            "reason": "str"  # Optional.
+                            "reason": "str"  # Optional. An explanation of why this audit
+                              trail node was discovered from the previous node.
                         }
                     ],
-                    "createdDate": "2020-02-20 00:00:00",  # Optional.
-                    "discoGroupName": "str",  # Optional.
+                    "createdDate": "2020-02-20 00:00:00",  # Optional. The date this asset was
+                      first added to this workspace.
+                    "discoGroupName": "str",  # Optional. The name of the DiscoveryGroup that
+                      brought added this asset to the workspace.
                     "displayName": "str",  # Optional. The name that can be used for display
                       purposes.
-                    "externalId": "str",  # Optional.
+                    "externalId": "str",  # Optional. An optional customer provided identifier
+                      for this asset.
                     "id": "str",  # Optional. The system generated unique id for the resource.
                     "labels": [
-                        "str"  # Optional.
+                        "str"  # Optional. Customer labels assigned to this asset.
                     ],
                     "name": "str",  # Optional. The caller provided unique name for the resource.
                     "reason": "str",  # Optional.
                     "state": "str",  # Optional. Known values are: "candidate", "confirmed",
                       "dismissed", "candidateInvestigate", "associatedPartner", "associatedThirdparty",
                       and "archived".
-                    "updatedDate": "2020-02-20 00:00:00",  # Optional.
-                    "uuid": "str",  # Optional.
-                    "wildcard": bool  # Optional.
+                    "updatedDate": "2020-02-20 00:00:00",  # Optional. The date this asset was
+                      last updated for this workspace.
+                    "uuid": "str",  # Optional. Global UUID for the asset.
+                    "wildcard": bool  # Optional. An indicator of whether this asset represents a
+                      wildcard rollup of assets on this domain.
                 }
 
                 # JSON input template for discriminator value "ipAddress":
@@ -7743,26 +7793,32 @@ class AssetsOperations:
                               and "sslCert".
                             "name": "str",  # Optional. The caller provided unique name
                               for the resource.
-                            "reason": "str"  # Optional.
+                            "reason": "str"  # Optional. An explanation of why this audit
+                              trail node was discovered from the previous node.
                         }
                     ],
-                    "createdDate": "2020-02-20 00:00:00",  # Optional.
-                    "discoGroupName": "str",  # Optional.
+                    "createdDate": "2020-02-20 00:00:00",  # Optional. The date this asset was
+                      first added to this workspace.
+                    "discoGroupName": "str",  # Optional. The name of the DiscoveryGroup that
+                      brought added this asset to the workspace.
                     "displayName": "str",  # Optional. The name that can be used for display
                       purposes.
-                    "externalId": "str",  # Optional.
+                    "externalId": "str",  # Optional. An optional customer provided identifier
+                      for this asset.
                     "id": "str",  # Optional. The system generated unique id for the resource.
                     "labels": [
-                        "str"  # Optional.
+                        "str"  # Optional. Customer labels assigned to this asset.
                     ],
                     "name": "str",  # Optional. The caller provided unique name for the resource.
                     "reason": "str",  # Optional.
                     "state": "str",  # Optional. Known values are: "candidate", "confirmed",
                       "dismissed", "candidateInvestigate", "associatedPartner", "associatedThirdparty",
                       and "archived".
-                    "updatedDate": "2020-02-20 00:00:00",  # Optional.
-                    "uuid": "str",  # Optional.
-                    "wildcard": bool  # Optional.
+                    "updatedDate": "2020-02-20 00:00:00",  # Optional. The date this asset was
+                      last updated for this workspace.
+                    "uuid": "str",  # Optional. Global UUID for the asset.
+                    "wildcard": bool  # Optional. An indicator of whether this asset represents a
+                      wildcard rollup of assets on this domain.
                 }
 
                 # response body for status code(s): 200
@@ -7787,656 +7843,6 @@ class AssetsOperations:
             resource_group_name=self._config.resource_group_name,
             workspace_name=self._config.workspace_name,
             api_version=self._config.api_version,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
-        }
-        request.url = self._client.format_url(request.url, **path_format_arguments)
-
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response)
-
-        if response.content:
-            deserialized = response.json()
-        else:
-            deserialized = None
-
-        if cls:
-            return cls(pipeline_response, cast(JSON, deserialized), {})
-
-        return cast(JSON, deserialized)
-
-
-class DataConnectionsOperations:
-    """
-    .. warning::
-        **DO NOT** instantiate this class directly.
-
-        Instead, you should access the following operations through
-        :class:`~azure.defender.easm.aio.EasmClient`'s
-        :attr:`data_connections` attribute.
-    """
-
-    def __init__(self, *args, **kwargs) -> None:
-        input_args = list(args)
-        self._client = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config = input_args.pop(0) if input_args else kwargs.pop("config")
-        self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
-        self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
-
-    @distributed_trace
-    def list(self, *, skip: int = 0, **kwargs: Any) -> AsyncIterable[JSON]:
-        """Retrieve a list of data connections.
-
-        Retrieve a list of data connections.
-
-        :keyword skip: An offset into the collection of the first item to be returned. Default value is
-         0.
-        :paramtype skip: int
-        :return: An iterator like instance of JSON object
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[JSON]
-        :raises ~azure.core.exceptions.HttpResponseError:
-
-        Example:
-            .. code-block:: python
-
-                # response body for status code(s): 200
-                response == {
-                    "connectionString": "str",  # Optional. The connection string for the data
-                      connection.
-                    "content": "str",  # Optional. The type of data the data connection will
-                      transfer. Known values are: "assets" and "asi".
-                    "createdDate": "2020-02-20 00:00:00",  # Optional. The date the data
-                      connection was created.
-                    "displayName": "str",  # Optional. The name that can be used for display
-                      purposes.
-                    "id": "str",  # Optional. The system generated unique id for the resource.
-                    "kind": "str",  # Optional. The kind of data connection. Known values are:
-                      "sentinel" and "kusto".
-                    "name": "str",  # Optional. The caller provided unique name for the resource.
-                    "options": "str",  # Optional. Any connection specific options.
-                    "updatedDate": "2020-02-20 00:00:00"  # Optional. The date the data
-                      connection was last updated.
-                }
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[JSON] = kwargs.pop("cls", None)
-
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                request = build_data_connections_list_request(
-                    subscription_id=self._config.subscription_id,
-                    resource_group_name=self._config.resource_group_name,
-                    workspace_name=self._config.workspace_name,
-                    skip=skip,
-                    api_version=self._config.api_version,
-                    headers=_headers,
-                    params=_params,
-                )
-                path_format_arguments = {
-                    "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
-                }
-                request.url = self._client.format_url(request.url, **path_format_arguments)
-
-            else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
-                path_format_arguments = {
-                    "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
-                }
-                request.url = self._client.format_url(request.url, **path_format_arguments)
-
-            return request
-
-        async def extract_data(pipeline_response):
-            deserialized = pipeline_response.http_response.json()
-            list_of_elem = deserialized["content"]
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.get("nextLink") or None, AsyncList(list_of_elem)
-
-        async def get_next(next_link=None):
-            request = prepare_request(next_link)
-
-            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                raise HttpResponseError(response=response)
-
-            return pipeline_response
-
-        return AsyncItemPaged(get_next, extract_data)
-
-    @distributed_trace_async
-    async def delete(  # pylint: disable=inconsistent-return-statements
-        self, data_connection_name: str, **kwargs: Any
-    ) -> None:
-        """Delete a data connection with a given dataConnectionName.
-
-        Delete a data connection with a given dataConnectionName.
-
-        :param data_connection_name: The unique identifier for the data connection. Required.
-        :type data_connection_name: str
-        :return: None
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[None] = kwargs.pop("cls", None)
-
-        request = build_data_connections_delete_request(
-            data_connection_name=data_connection_name,
-            subscription_id=self._config.subscription_id,
-            resource_group_name=self._config.resource_group_name,
-            workspace_name=self._config.workspace_name,
-            api_version=self._config.api_version,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
-        }
-        request.url = self._client.format_url(request.url, **path_format_arguments)
-
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [204]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response)
-
-        if cls:
-            return cls(pipeline_response, None, {})
-
-    @distributed_trace_async
-    async def get(self, data_connection_name: str, **kwargs: Any) -> JSON:
-        """Retrieve a data connection with a given dataConnectionName.
-
-        Retrieve a data connection with a given dataConnectionName.
-
-        :param data_connection_name: The unique identifier for the data connection. Required.
-        :type data_connection_name: str
-        :return: JSON object
-        :rtype: JSON
-        :raises ~azure.core.exceptions.HttpResponseError:
-
-        Example:
-            .. code-block:: python
-
-                # response body for status code(s): 200
-                response == {
-                    "connectionString": "str",  # Optional. The connection string for the data
-                      connection.
-                    "content": "str",  # Optional. The type of data the data connection will
-                      transfer. Known values are: "assets" and "asi".
-                    "createdDate": "2020-02-20 00:00:00",  # Optional. The date the data
-                      connection was created.
-                    "displayName": "str",  # Optional. The name that can be used for display
-                      purposes.
-                    "id": "str",  # Optional. The system generated unique id for the resource.
-                    "kind": "str",  # Optional. The kind of data connection. Known values are:
-                      "sentinel" and "kusto".
-                    "name": "str",  # Optional. The caller provided unique name for the resource.
-                    "options": "str",  # Optional. Any connection specific options.
-                    "updatedDate": "2020-02-20 00:00:00"  # Optional. The date the data
-                      connection was last updated.
-                }
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[JSON] = kwargs.pop("cls", None)
-
-        request = build_data_connections_get_request(
-            data_connection_name=data_connection_name,
-            subscription_id=self._config.subscription_id,
-            resource_group_name=self._config.resource_group_name,
-            workspace_name=self._config.workspace_name,
-            api_version=self._config.api_version,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
-        }
-        request.url = self._client.format_url(request.url, **path_format_arguments)
-
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response)
-
-        if response.content:
-            deserialized = response.json()
-        else:
-            deserialized = None
-
-        if cls:
-            return cls(pipeline_response, cast(JSON, deserialized), {})
-
-        return cast(JSON, deserialized)
-
-    @overload
-    async def put(
-        self, data_connection_name: str, body: JSON, *, content_type: str = "application/json", **kwargs: Any
-    ) -> JSON:
-        """Create or update a data connection with a given dataConnectionName.
-
-        Create or update a data connection with a given dataConnectionName.
-
-        :param data_connection_name: The unique identifier for the data connection. Required.
-        :type data_connection_name: str
-        :param body: Required.
-        :type body: JSON
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: JSON object
-        :rtype: JSON
-        :raises ~azure.core.exceptions.HttpResponseError:
-
-        Example:
-            .. code-block:: python
-
-                # JSON input template you can fill out and use as your body input.
-                body = {
-                    "connectionString": "str",  # Optional. The connection string for the data
-                      connection.
-                    "content": "str",  # Optional. The type of data the data connection will
-                      transfer. Known values are: "assets" and "asi".
-                    "kind": "str",  # Optional. The kind of data connection. Known values are:
-                      "sentinel" and "kusto".
-                    "options": "str"  # Optional. Any connection specific options.
-                }
-
-                # response body for status code(s): 200
-                response == {
-                    "connectionString": "str",  # Optional. The connection string for the data
-                      connection.
-                    "content": "str",  # Optional. The type of data the data connection will
-                      transfer. Known values are: "assets" and "asi".
-                    "createdDate": "2020-02-20 00:00:00",  # Optional. The date the data
-                      connection was created.
-                    "displayName": "str",  # Optional. The name that can be used for display
-                      purposes.
-                    "id": "str",  # Optional. The system generated unique id for the resource.
-                    "kind": "str",  # Optional. The kind of data connection. Known values are:
-                      "sentinel" and "kusto".
-                    "name": "str",  # Optional. The caller provided unique name for the resource.
-                    "options": "str",  # Optional. Any connection specific options.
-                    "updatedDate": "2020-02-20 00:00:00"  # Optional. The date the data
-                      connection was last updated.
-                }
-        """
-
-    @overload
-    async def put(
-        self, data_connection_name: str, body: IO, *, content_type: str = "application/json", **kwargs: Any
-    ) -> JSON:
-        """Create or update a data connection with a given dataConnectionName.
-
-        Create or update a data connection with a given dataConnectionName.
-
-        :param data_connection_name: The unique identifier for the data connection. Required.
-        :type data_connection_name: str
-        :param body: Required.
-        :type body: IO
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: JSON object
-        :rtype: JSON
-        :raises ~azure.core.exceptions.HttpResponseError:
-
-        Example:
-            .. code-block:: python
-
-                # response body for status code(s): 200
-                response == {
-                    "connectionString": "str",  # Optional. The connection string for the data
-                      connection.
-                    "content": "str",  # Optional. The type of data the data connection will
-                      transfer. Known values are: "assets" and "asi".
-                    "createdDate": "2020-02-20 00:00:00",  # Optional. The date the data
-                      connection was created.
-                    "displayName": "str",  # Optional. The name that can be used for display
-                      purposes.
-                    "id": "str",  # Optional. The system generated unique id for the resource.
-                    "kind": "str",  # Optional. The kind of data connection. Known values are:
-                      "sentinel" and "kusto".
-                    "name": "str",  # Optional. The caller provided unique name for the resource.
-                    "options": "str",  # Optional. Any connection specific options.
-                    "updatedDate": "2020-02-20 00:00:00"  # Optional. The date the data
-                      connection was last updated.
-                }
-        """
-
-    @distributed_trace_async
-    async def put(self, data_connection_name: str, body: Union[JSON, IO], **kwargs: Any) -> JSON:
-        """Create or update a data connection with a given dataConnectionName.
-
-        Create or update a data connection with a given dataConnectionName.
-
-        :param data_connection_name: The unique identifier for the data connection. Required.
-        :type data_connection_name: str
-        :param body: Is either a model type or a IO type. Required.
-        :type body: JSON or IO
-        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
-         Default value is None.
-        :paramtype content_type: str
-        :return: JSON object
-        :rtype: JSON
-        :raises ~azure.core.exceptions.HttpResponseError:
-
-        Example:
-            .. code-block:: python
-
-                # response body for status code(s): 200
-                response == {
-                    "connectionString": "str",  # Optional. The connection string for the data
-                      connection.
-                    "content": "str",  # Optional. The type of data the data connection will
-                      transfer. Known values are: "assets" and "asi".
-                    "createdDate": "2020-02-20 00:00:00",  # Optional. The date the data
-                      connection was created.
-                    "displayName": "str",  # Optional. The name that can be used for display
-                      purposes.
-                    "id": "str",  # Optional. The system generated unique id for the resource.
-                    "kind": "str",  # Optional. The kind of data connection. Known values are:
-                      "sentinel" and "kusto".
-                    "name": "str",  # Optional. The caller provided unique name for the resource.
-                    "options": "str",  # Optional. Any connection specific options.
-                    "updatedDate": "2020-02-20 00:00:00"  # Optional. The date the data
-                      connection was last updated.
-                }
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = kwargs.pop("params", {}) or {}
-
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[JSON] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _json = None
-        _content = None
-        if isinstance(body, (IO, bytes)):
-            _content = body
-        else:
-            _json = body
-
-        request = build_data_connections_put_request(
-            data_connection_name=data_connection_name,
-            subscription_id=self._config.subscription_id,
-            resource_group_name=self._config.resource_group_name,
-            workspace_name=self._config.workspace_name,
-            content_type=content_type,
-            api_version=self._config.api_version,
-            json=_json,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str"),
-        }
-        request.url = self._client.format_url(request.url, **path_format_arguments)
-
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response)
-
-        if response.content:
-            deserialized = response.json()
-        else:
-            deserialized = None
-
-        if cls:
-            return cls(pipeline_response, cast(JSON, deserialized), {})
-
-        return cast(JSON, deserialized)
-
-    @overload
-    async def validate(
-        self, data_connection_name: str, body: JSON, *, content_type: str = "application/json", **kwargs: Any
-    ) -> JSON:
-        """Validate a data connection with a given dataConnectionName.
-
-        Validate a data connection with a given dataConnectionName.
-
-        :param data_connection_name: The unique identifier for the data connection. Required.
-        :type data_connection_name: str
-        :param body: Required.
-        :type body: JSON
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: JSON object
-        :rtype: JSON
-        :raises ~azure.core.exceptions.HttpResponseError:
-
-        Example:
-            .. code-block:: python
-
-                # JSON input template you can fill out and use as your body input.
-                body = {
-                    "connectionString": "str",  # Optional. The connection string for the data
-                      connection.
-                    "content": "str",  # Optional. The type of data the data connection will
-                      transfer. Known values are: "assets" and "asi".
-                    "kind": "str",  # Optional. The kind of data connection. Known values are:
-                      "sentinel" and "kusto".
-                    "options": "str"  # Optional. Any connection specific options.
-                }
-
-                # response body for status code(s): 200
-                response == {
-                    "error": {
-                        "code": "str",  # This is one of a server-defined set of error codes.
-                          Required.
-                        "message": "str",  # This is a human-readable representation of the
-                          error. Required.
-                        "details": [
-                            ...
-                        ],
-                        "innererror": {
-                            "code": "str",  # Optional. This is a more specific error
-                              code than was provided by the containing error.
-                            "value": {}  # Optional. This is an additional field
-                              representing the value that caused the error to help with debugging.
-                        },
-                        "target": "str"  # Optional. This is the error target.
-                    }
-                }
-        """
-
-    @overload
-    async def validate(
-        self, data_connection_name: str, body: IO, *, content_type: str = "application/json", **kwargs: Any
-    ) -> JSON:
-        """Validate a data connection with a given dataConnectionName.
-
-        Validate a data connection with a given dataConnectionName.
-
-        :param data_connection_name: The unique identifier for the data connection. Required.
-        :type data_connection_name: str
-        :param body: Required.
-        :type body: IO
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: JSON object
-        :rtype: JSON
-        :raises ~azure.core.exceptions.HttpResponseError:
-
-        Example:
-            .. code-block:: python
-
-                # response body for status code(s): 200
-                response == {
-                    "error": {
-                        "code": "str",  # This is one of a server-defined set of error codes.
-                          Required.
-                        "message": "str",  # This is a human-readable representation of the
-                          error. Required.
-                        "details": [
-                            ...
-                        ],
-                        "innererror": {
-                            "code": "str",  # Optional. This is a more specific error
-                              code than was provided by the containing error.
-                            "value": {}  # Optional. This is an additional field
-                              representing the value that caused the error to help with debugging.
-                        },
-                        "target": "str"  # Optional. This is the error target.
-                    }
-                }
-        """
-
-    @distributed_trace_async
-    async def validate(self, data_connection_name: str, body: Union[JSON, IO], **kwargs: Any) -> JSON:
-        """Validate a data connection with a given dataConnectionName.
-
-        Validate a data connection with a given dataConnectionName.
-
-        :param data_connection_name: The unique identifier for the data connection. Required.
-        :type data_connection_name: str
-        :param body: Is either a model type or a IO type. Required.
-        :type body: JSON or IO
-        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
-         Default value is None.
-        :paramtype content_type: str
-        :return: JSON object
-        :rtype: JSON
-        :raises ~azure.core.exceptions.HttpResponseError:
-
-        Example:
-            .. code-block:: python
-
-                # response body for status code(s): 200
-                response == {
-                    "error": {
-                        "code": "str",  # This is one of a server-defined set of error codes.
-                          Required.
-                        "message": "str",  # This is a human-readable representation of the
-                          error. Required.
-                        "details": [
-                            ...
-                        ],
-                        "innererror": {
-                            "code": "str",  # Optional. This is a more specific error
-                              code than was provided by the containing error.
-                            "value": {}  # Optional. This is an additional field
-                              representing the value that caused the error to help with debugging.
-                        },
-                        "target": "str"  # Optional. This is the error target.
-                    }
-                }
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = kwargs.pop("params", {}) or {}
-
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[JSON] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _json = None
-        _content = None
-        if isinstance(body, (IO, bytes)):
-            _content = body
-        else:
-            _json = body
-
-        request = build_data_connections_validate_request(
-            data_connection_name=data_connection_name,
-            subscription_id=self._config.subscription_id,
-            resource_group_name=self._config.resource_group_name,
-            workspace_name=self._config.workspace_name,
-            content_type=content_type,
-            api_version=self._config.api_version,
-            json=_json,
-            content=_content,
             headers=_headers,
             params=_params,
         )
@@ -9862,14 +9268,17 @@ class ReportsOperations:
                         {
                             "assetBreakdown": [
                                 {
-                                    "count": 0,  # Optional.
+                                    "count": 0,  # Optional. The number of assets
+                                      of this type.
                                     "kind": "str"  # Optional. The kind of
                                       billable asset. Known values are: "domain", "host", and
                                       "ipAddress".
                                 }
                             ],
-                            "date": "2020-02-20 00:00:00",  # Optional.
-                            "total": 0  # Optional.
+                            "date": "2020-02-20 00:00:00",  # Optional. The date these
+                              assets were billed on.
+                            "total": 0  # Optional. The total number of billable assets
+                              for this date.
                         }
                     ]
                 }
@@ -9971,11 +9380,14 @@ class ReportsOperations:
                         "totalPages": 0  # Optional. The total number of pages available in
                           the full result set.
                     },
-                    "description": "str",  # Optional.
-                    "displayName": "str",  # Optional.
-                    "labelName": "str",  # Optional.
-                    "metric": "str",  # Optional.
-                    "updatedAt": "2020-02-20 00:00:00"  # Optional.
+                    "description": "str",  # Optional. A description of what the metric
+                      represents.
+                    "displayName": "str",  # Optional. The name of the metric.
+                    "labelName": "str",  # Optional. The customer label that was filtered on, if
+                      one was provided.
+                    "metric": "str",  # Optional. The unique metric name.
+                    "updatedAt": "2020-02-20 00:00:00"  # Optional. The last time this asset data
+                      was updated on this metric.
                 }
         """
 
@@ -10021,11 +9433,14 @@ class ReportsOperations:
                         "totalPages": 0  # Optional. The total number of pages available in
                           the full result set.
                     },
-                    "description": "str",  # Optional.
-                    "displayName": "str",  # Optional.
-                    "labelName": "str",  # Optional.
-                    "metric": "str",  # Optional.
-                    "updatedAt": "2020-02-20 00:00:00"  # Optional.
+                    "description": "str",  # Optional. A description of what the metric
+                      represents.
+                    "displayName": "str",  # Optional. The name of the metric.
+                    "labelName": "str",  # Optional. The customer label that was filtered on, if
+                      one was provided.
+                    "metric": "str",  # Optional. The unique metric name.
+                    "updatedAt": "2020-02-20 00:00:00"  # Optional. The last time this asset data
+                      was updated on this metric.
                 }
         """
 
@@ -10071,11 +9486,14 @@ class ReportsOperations:
                         "totalPages": 0  # Optional. The total number of pages available in
                           the full result set.
                     },
-                    "description": "str",  # Optional.
-                    "displayName": "str",  # Optional.
-                    "labelName": "str",  # Optional.
-                    "metric": "str",  # Optional.
-                    "updatedAt": "2020-02-20 00:00:00"  # Optional.
+                    "description": "str",  # Optional. A description of what the metric
+                      represents.
+                    "displayName": "str",  # Optional. The name of the metric.
+                    "labelName": "str",  # Optional. The customer label that was filtered on, if
+                      one was provided.
+                    "metric": "str",  # Optional. The unique metric name.
+                    "updatedAt": "2020-02-20 00:00:00"  # Optional. The last time this asset data
+                      was updated on this metric.
                 }
         """
         error_map = {
@@ -10176,15 +9594,29 @@ class ReportsOperations:
                 response == {
                     "assetSummaries": [
                         {
-                            "count": 0,  # Optional.
-                            "description": "str",  # Optional.
-                            "displayName": "str",  # Optional.
-                            "filter": "str",  # Optional.
-                            "labelName": "str",  # Optional.
-                            "link": "str",  # Optional.
-                            "metric": "str",  # Optional.
-                            "metricCategory": "str",  # Optional.
-                            "updatedAt": "2020-02-20 00:00:00"  # Optional.
+                            "children": [
+                                ...
+                            ],
+                            "count": 0,  # Optional. The count of assets matching the
+                              request parameters.
+                            "description": "str",  # Optional. The description of the
+                              summary response.  Filters don't have a description.
+                            "displayName": "str",  # Optional. The name of the summary
+                              response.  Depending on the request time this will either be the asset
+                              filter, risk category, or risk metric.
+                            "filter": "str",  # Optional. If the request is for an asset
+                              filter, this will contain the corresponding filter.
+                            "labelName": "str",  # Optional. An optional label used to
+                              filter requests results.
+                            "link": "str",  # Optional. The link to the corresponding
+                              asset details.
+                            "metric": "str",  # Optional. If the request is for a metric,
+                              this will contain the requested unique metric name.
+                            "metricCategory": "str",  # Optional. If the request is for a
+                              metric category, this will contain the requested unique category name.
+                            "updatedAt": "2020-02-20 00:00:00"  # Optional. The last time
+                              risk categories or risk metrics were captured. Set to the current time
+                              for asset filter requests, which always pull the live asset data.
                         }
                     ]
                 }
@@ -10212,15 +9644,29 @@ class ReportsOperations:
                 response == {
                     "assetSummaries": [
                         {
-                            "count": 0,  # Optional.
-                            "description": "str",  # Optional.
-                            "displayName": "str",  # Optional.
-                            "filter": "str",  # Optional.
-                            "labelName": "str",  # Optional.
-                            "link": "str",  # Optional.
-                            "metric": "str",  # Optional.
-                            "metricCategory": "str",  # Optional.
-                            "updatedAt": "2020-02-20 00:00:00"  # Optional.
+                            "children": [
+                                ...
+                            ],
+                            "count": 0,  # Optional. The count of assets matching the
+                              request parameters.
+                            "description": "str",  # Optional. The description of the
+                              summary response.  Filters don't have a description.
+                            "displayName": "str",  # Optional. The name of the summary
+                              response.  Depending on the request time this will either be the asset
+                              filter, risk category, or risk metric.
+                            "filter": "str",  # Optional. If the request is for an asset
+                              filter, this will contain the corresponding filter.
+                            "labelName": "str",  # Optional. An optional label used to
+                              filter requests results.
+                            "link": "str",  # Optional. The link to the corresponding
+                              asset details.
+                            "metric": "str",  # Optional. If the request is for a metric,
+                              this will contain the requested unique metric name.
+                            "metricCategory": "str",  # Optional. If the request is for a
+                              metric category, this will contain the requested unique category name.
+                            "updatedAt": "2020-02-20 00:00:00"  # Optional. The last time
+                              risk categories or risk metrics were captured. Set to the current time
+                              for asset filter requests, which always pull the live asset data.
                         }
                     ]
                 }
@@ -10248,15 +9694,29 @@ class ReportsOperations:
                 response == {
                     "assetSummaries": [
                         {
-                            "count": 0,  # Optional.
-                            "description": "str",  # Optional.
-                            "displayName": "str",  # Optional.
-                            "filter": "str",  # Optional.
-                            "labelName": "str",  # Optional.
-                            "link": "str",  # Optional.
-                            "metric": "str",  # Optional.
-                            "metricCategory": "str",  # Optional.
-                            "updatedAt": "2020-02-20 00:00:00"  # Optional.
+                            "children": [
+                                ...
+                            ],
+                            "count": 0,  # Optional. The count of assets matching the
+                              request parameters.
+                            "description": "str",  # Optional. The description of the
+                              summary response.  Filters don't have a description.
+                            "displayName": "str",  # Optional. The name of the summary
+                              response.  Depending on the request time this will either be the asset
+                              filter, risk category, or risk metric.
+                            "filter": "str",  # Optional. If the request is for an asset
+                              filter, this will contain the corresponding filter.
+                            "labelName": "str",  # Optional. An optional label used to
+                              filter requests results.
+                            "link": "str",  # Optional. The link to the corresponding
+                              asset details.
+                            "metric": "str",  # Optional. If the request is for a metric,
+                              this will contain the requested unique metric name.
+                            "metricCategory": "str",  # Optional. If the request is for a
+                              metric category, this will contain the requested unique category name.
+                            "updatedAt": "2020-02-20 00:00:00"  # Optional. The last time
+                              risk categories or risk metrics were captured. Set to the current time
+                              for asset filter requests, which always pull the live asset data.
                         }
                     ]
                 }

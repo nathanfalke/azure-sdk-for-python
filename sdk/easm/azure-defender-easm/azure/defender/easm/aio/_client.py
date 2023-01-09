@@ -16,7 +16,6 @@ from .._serialization import Deserializer, Serializer
 from ._configuration import EasmClientConfiguration
 from .operations import (
     AssetsOperations,
-    DataConnectionsOperations,
     DiscoveryGroupsOperations,
     DiscoveryTemplatesOperations,
     ReportsOperations,
@@ -29,7 +28,7 @@ if TYPE_CHECKING:
     from azure.core.credentials_async import AsyncTokenCredential
 
 
-class EasmClient:  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
+class EasmClient:  # pylint: disable=client-accepts-api-version-keyword
     """Defender EASM discovers and maps your digital attack surface to provide an "outside-in"
     perspective using probes to discover assets. The assets are provided with detailed metadata
     associated, including vulnerabilities, configurations and web components, allowing customers to
@@ -38,8 +37,6 @@ class EasmClient:  # pylint: disable=client-accepts-api-version-keyword,too-many
 
     :ivar assets: AssetsOperations operations
     :vartype assets: azure.defender.easm.aio.operations.AssetsOperations
-    :ivar data_connections: DataConnectionsOperations operations
-    :vartype data_connections: azure.defender.easm.aio.operations.DataConnectionsOperations
     :ivar discovery_groups: DiscoveryGroupsOperations operations
     :vartype discovery_groups: azure.defender.easm.aio.operations.DiscoveryGroupsOperations
     :ivar discovery_templates: DiscoveryTemplatesOperations operations
@@ -90,9 +87,6 @@ class EasmClient:  # pylint: disable=client-accepts-api-version-keyword,too-many
         self._deserialize = Deserializer()
         self._serialize.client_side_validation = False
         self.assets = AssetsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.data_connections = DataConnectionsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
         self.discovery_groups = DiscoveryGroupsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
