@@ -4657,7 +4657,12 @@ class AssetsOperations:
 
     @overload
     def update(
-        self, body: JSON, *, filter: Optional[str] = None, content_type: str = "application/json", **kwargs: Any
+        self,
+        body: JSON,
+        *,
+        filter: Optional[str] = None,
+        content_type: str = "application/merge-patch+json",
+        **kwargs: Any
     ) -> JSON:
         """Update labels on assets matching the provided filter.
 
@@ -4669,7 +4674,7 @@ class AssetsOperations:
          Default value is None.
         :paramtype filter: str
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
+         Default value is "application/merge-patch+json".
         :paramtype content_type: str
         :return: JSON object
         :rtype: JSON
@@ -4709,7 +4714,12 @@ class AssetsOperations:
 
     @overload
     def update(
-        self, body: IO, *, filter: Optional[str] = None, content_type: str = "application/json", **kwargs: Any
+        self,
+        body: IO,
+        *,
+        filter: Optional[str] = None,
+        content_type: str = "application/merge-patch+json",
+        **kwargs: Any
     ) -> JSON:
         """Update labels on assets matching the provided filter.
 
@@ -4721,8 +4731,7 @@ class AssetsOperations:
          Default value is None.
         :paramtype filter: str
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Known values are: 'application/json', 'application/merge-patch+json'. Default value is
-         "application/json".
+         Default value is "application/merge-patch+json".
         :paramtype content_type: str
         :return: JSON object
         :rtype: JSON
@@ -4756,7 +4765,7 @@ class AssetsOperations:
         :keyword filter: An expression on the resource type that selects the resources to be returned.
          Default value is None.
         :paramtype filter: str
-        :keyword content_type: Body Parameter content-type. Known values are: 'application/json',
+        :keyword content_type: Body Parameter content-type. Known values are:
          'application/merge-patch+json'. Default value is None.
         :paramtype content_type: str
         :return: JSON object
@@ -4793,7 +4802,7 @@ class AssetsOperations:
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[JSON] = kwargs.pop("cls", None)
 
-        content_type = content_type or "application/json"
+        content_type = content_type or "application/merge-patch+json"
         _json = None
         _content = None
         if isinstance(body, (IO, bytes)):
