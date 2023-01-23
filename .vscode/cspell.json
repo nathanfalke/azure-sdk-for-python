@@ -26,9 +26,10 @@
     "sdk/**/azure-cognitiveservices**",
     "sdk/**/_generated/**",
     "**/*requirement*.txt",
-
+    "**/assets.json",
+    "**/pyproject.toml",
+    "sdk/anomalydetector/**",
     "sdk/applicationinsights/azure-applicationinsights/**",
-    "sdk/appconfiguration/azure-appconfiguration/**",
     "sdk/batch/azure-batch/**",
     "sdk/cognitiveservices/azure-cognitiveservices-search-autosuggest/**",
     "sdk/cognitiveservices/azure-cognitiveservices-search-customimagesearch/**",
@@ -50,16 +51,17 @@
     "sdk/communication/azure-communication-sms/**",
     "sdk/core/azure/**",
     "sdk/core/azure-common/**",
+    "sdk/core/azure-core-tracing-opencensus/**",
     "sdk/core/azure-core-tracing-opentelemetry/**",
     "sdk/core/azure-servicemanagement-legacy/**",
     "sdk/digitaltwins/azure-digitaltwins-core/**",
     "sdk/eventhub/azure-eventhub-checkpointstoretable/**",
-    "sdk/eventgrid/azure-eventgrid/**",
     "sdk/eventhub/azure-eventhub-checkpointstoreblob-aio/**",
     "sdk/eventhub/azure-eventhub/**",
     "sdk/graphrbac/azure-graphrbac/**",
     "sdk/formrecognizer/azure-ai-formrecognizer/samples/sample_forms/**",
     "sdk/formrecognizer/azure-ai-formrecognizer/tests/sample_forms/**",
+    "sdk/personalizer/azure-ai-personalizer/azure/ai/personalizer/**",
     "sdk/identity/azure-identity/images/**",
     "sdk/identity/azure-identity/tests/pod-identity/**",
     "sdk/identity/azure-identity/tests/managed-identity-live/service-fabric/**",
@@ -91,10 +93,18 @@
     "eng/common/docgeneration/Generate-DocIndex.ps1",
     "eng/**/*.py",
     ".gitignore",
+    "tools/azure-sdk-tools/devtools_testutils/fake_credentials.py",
     "tools/azure-sdk-tools/packaging_tools/**",
-    "tools/azure-sdk-tools/setup.py"
+    "tools/azure-sdk-tools/setup.py",
+    "tools/azure-sdk-tools/tests/test_servicemetadata.py"
   ],
   "words": [
+    "pyprojecttoml",
+    "tomli",
+    "sdkrel",
+    "qnamaker",
+    "mindependency",
+    "automl",
     "pyyaml",
     "CONLL",
     "pyjwt",
@@ -132,6 +142,7 @@
     "cname",
     "conda",
     "connectedvmware",
+    "consts",
     "contoso",
     "contosodataset",
     "centralus",
@@ -159,6 +170,7 @@
     "dtlksd",
     "DWORD",
     "eastus",
+    "euap",
     "eckey",
     "ekus",
     "encryptor",
@@ -200,6 +212,7 @@
     "iscsi",
     "iterrows",
     "ivar",
+    "ivars",
     "jwks",
     "keybak",
     "kube",
@@ -274,6 +287,8 @@
     "pyfuncitem",
     "pygobject",
     "pyodide",
+    "pyright",
+    "pyrightconfig",
     "parameterizing",
     "pytyped",
     "pytz",
@@ -409,6 +424,12 @@
       ]
     },
     {
+      "filename": "sdk/tables/test-resources.json",
+      "words": [
+        "mmspecial"
+      ]
+    },
+    {
       "filename": "sdk/translation/azure-ai-translation-document/tests/*.py",
       "words": [
         "essai"
@@ -456,12 +477,18 @@
         "verfasst",
         "engelska",
         "fhir",
-        "FHIR"
+        "FHIR",
+        "naam",
+        "aenter"
       ]
     },
     {
+      "filename": "sdk/core/azure-core-tracing-opentelemetry/**",
+      "words": ["ctxt", "somethingstuid"]
+    },
+    {
       "filename": "sdk/cognitivelanguage/azure-ai-language-conversations/**",
-      "words": ["conv"],
+      "words": ["conv", "summ"],
       "caseSensitive": false
     },
     {
@@ -514,6 +541,14 @@
       ]
     },
     {
+      "filename": "sdk/eventgrid/**/*",
+      "words": [
+        "cncf",
+        "CNCF",
+        "Cncf"
+      ]
+    },
+    {
       "filename": "sdk/eventhub/test-resources.json",
       "words": [
         "mmspecial"
@@ -550,6 +585,12 @@
         "mymodel",
         "heif",
         "racwd"
+      ]
+    },
+    {
+      "filename": "sdk/keyvault/**",
+      "words": [
+        "eddsa"
       ]
     },
     {
@@ -611,6 +652,57 @@
       ]
     },
     {
+      "filename": "sdk/synapse/azure-synapse-artifacts/azure/synapse/artifacts/aio/operations/*.py",
+      "words": [
+        "Syms",
+        "MetastoreUpdation"
+      ]
+    },
+    {
+      "filename": "sdk/synapse/azure-synapse-artifacts/azure/synapse/artifacts/models/*.py",
+      "words": [
+        "USQL",
+        "Eloqua",
+        "Hdfs",
+        "Informix",
+        "Magento",
+        "MetastoreUpdation",
+        "Netezza",
+        "Odbc",
+        "Responsys",
+        "Sybase",
+        "Twilio",
+        "Vertica",
+        "Xero",
+        "SASL",
+        "SSISDB",
+        "WTGCTBG",
+        "ilearner",
+        "DBFS",
+        "eloqua",
+        "byoa",
+        "cacerts",
+        "HDFS",
+        "hcatalog",
+        "ondemand",
+        "oozie",
+        "magento",
+        "mktorest",
+        "nbformat",
+        "paramref",
+        "myshopify",
+        "mysquare",
+        "xero"
+      ]
+    },
+    {
+      "filename": "sdk/synapse/azure-synapse-artifacts/azure/synapse/artifacts/operations/*.py",
+      "words": [
+        "Syms",
+        "Updation",
+      ]
+    },
+    {
       "filename": "sdk/storage/azure-storage-file-datalake/**",
       "words": [
         "dlake",
@@ -668,7 +760,7 @@
       ]
     },
     {
-      "filename": "sdk/ml/tests.yml",
+      "filename": "sdk/ml/*tests.yml",
       "words": [
         "euap"
       ]
@@ -794,7 +886,16 @@
         "segs",
         "fnmatch",
         "posixpath",
-        "SEPS"
+        "SEPS",
+        "wargs",
+        "pycache",
+        "ruamel"
+      ]
+    },
+    {
+      "filename": "sdk/attestation/azure-security-attestation/tests/conftest.py",
+      "words":[
+        "sharedwus"
       ]
     },
     {
@@ -833,7 +934,12 @@
         "myaccount",
         "testid",
         "filea",
-        "fileb"
+        "fileb",
+        "FFFE",
+        "Fdirectory",
+        "Ffile",
+        "Fsubdir",
+        "Fdir"
       ]
     },
     {
@@ -980,7 +1086,9 @@
         "mybytes",
         "myid",
         "jsonify",
-        "ints"
+        "ints",
+        "inirudebwoy",
+	"mghextreme"
       ]
     },
     {
@@ -1097,6 +1205,38 @@
         "seqno",
         "mrenclave",
         "infile"
+      ]
+    },
+    {
+      "filename": "sdk/devcenter/azure-developer-devcenter/azure/developer/devcenter/*.py",
+      "words": [
+        "Nify",
+        "ctxt",
+        "unflattened",
+	      "deseralize",
+	      "wday"
+      ]
+    },
+    {
+      "filename": "sdk/appconfiguration/test-resources.json",
+      "words": [
+        "azconfig"
+      ]
+    },
+    {
+      "filename": "sdk/personalizer/test-resources.json",
+      "words": [
+        "euap"
+      ]
+    },
+    {
+      "filename": "sdk/webpubsub/azure-messaging-webpubsubservice/azure/messaging/webpubsubservice/_serialization.py",
+      "words": [
+        "Nify",
+        "ctxt",
+        "unflattened",
+        "wday",
+        "deseralize"
       ]
     }
   ],

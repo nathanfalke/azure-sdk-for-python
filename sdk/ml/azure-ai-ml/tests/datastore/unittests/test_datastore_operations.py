@@ -11,17 +11,18 @@ from azure.ai.ml.operations import DatastoreOperations
 
 @pytest.fixture
 def mock_datastore_operation(
-    mock_workspace_scope: OperationScope, mock_operation_config: OperationConfig, mock_aml_services_2022_05_01: Mock
+    mock_workspace_scope: OperationScope, mock_operation_config: OperationConfig, mock_aml_services_2022_10_01: Mock
 ) -> DatastoreOperations:
     yield DatastoreOperations(
         operation_scope=mock_workspace_scope,
         operation_config=mock_operation_config,
-        serviceclient_2022_05_01=mock_aml_services_2022_05_01,
+        serviceclient_2022_10_01=mock_aml_services_2022_10_01,
     )
 
 
 @patch.object(Datastore, "_from_rest_object")
 @pytest.mark.unittest
+@pytest.mark.data_experiences_test
 class TestDatastoreOperations:
     def test_list(self, mock_from_rest, mock_datastore_operation: DatastoreOperations) -> None:
         mock_datastore_operation.list()

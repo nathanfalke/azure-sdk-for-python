@@ -1,5 +1,26 @@
 # Release History
 
+## 7.8.3 (Unreleased)
+
+### Features Added
+
+### Breaking Changes
+
+### Bugs Fixed
+
+### Other Changes
+
+## 7.8.2 (2023-01-10)
+
+### Bugs Fixed
+
+- Fixed a bug that would cause an exception when `None` was sent to `set_state` instead of clearing session state (Issue #27582).
+
+### Other Changes
+
+- Updated uAMQP dependency to 1.6.3.
+  - Added support for Python 3.11.
+
 ## 7.8.1 (2022-10-11)
 
 This version and all future versions will require Python 3.7+. Python 3.6 is no longer supported.

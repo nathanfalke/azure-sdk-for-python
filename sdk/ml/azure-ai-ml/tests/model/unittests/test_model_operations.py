@@ -20,12 +20,12 @@ from azure.ai.ml.operations import DatastoreOperations, ModelOperations
 
 @pytest.fixture
 def mock_datastore_operation(
-    mock_workspace_scope: OperationScope, mock_operation_config: OperationConfig, mock_aml_services_2022_05_01: Mock
+    mock_workspace_scope: OperationScope, mock_operation_config: OperationConfig, mock_aml_services_2022_10_01: Mock
 ) -> DatastoreOperations:
     yield DatastoreOperations(
         operation_scope=mock_workspace_scope,
         operation_config=mock_operation_config,
-        serviceclient_2022_05_01=mock_aml_services_2022_05_01,
+        serviceclient_2022_10_01=mock_aml_services_2022_10_01,
     )
 
 
@@ -45,6 +45,7 @@ def mock_model_operation(
 
 
 @pytest.mark.unittest
+@pytest.mark.production_experiences_test
 class TestModelOperations:
     def test_create_with_spec_file(
         self,
@@ -90,6 +91,7 @@ version: 3"""
                 sas_uri=None,
                 artifact_type=ErrorTarget.MODEL,
                 show_progress=True,
+                ignore_file=None,
             )
         mock_model_operation._model_versions_operation.create_or_update.assert_called_once()
         assert "version='3'" in str(mock_model_operation._model_versions_operation.create_or_update.call_args)
@@ -252,4 +254,5 @@ path: ./model.pkl"""
                 sas_uri=None,
                 artifact_type=ErrorTarget.MODEL,
                 show_progress=True,
+                ignore_file=None,
             )

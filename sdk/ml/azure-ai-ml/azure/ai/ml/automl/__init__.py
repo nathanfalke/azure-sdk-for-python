@@ -2,14 +2,20 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # ---------------------------------------------------------
 
+"""Contains automated machine learning classes for Azure Machine Learning SDKv2.
+
+Main areas include managing AutoML tasks.
+"""
 from azure.ai.ml.entities._job.automl.image import (
     ImageClassificationJob,
     ImageClassificationMultilabelJob,
     ImageClassificationSearchSpace,
+    ImageInstanceSegmentationJob,
     ImageLimitSettings,
+    ImageModelSettingsClassification,
+    ImageModelSettingsObjectDetection,
     ImageObjectDetectionJob,
     ImageObjectDetectionSearchSpace,
-    ImageInstanceSegmentationJob,
     ImageSweepSettings,
 )
 from azure.ai.ml.entities._job.automl.nlp import (
@@ -22,6 +28,8 @@ from azure.ai.ml.entities._job.automl.nlp import (
     TextClassificationMultilabelJob,
     TextNerJob,
 )
+from azure.ai.ml.entities._job.automl.search_space import SearchSpace
+from azure.ai.ml.entities._job.automl.stack_ensemble_settings import StackEnsembleSettings
 from azure.ai.ml.entities._job.automl.tabular import (
     ClassificationJob,
     ColumnTransformer,
@@ -29,9 +37,9 @@ from azure.ai.ml.entities._job.automl.tabular import (
     ForecastingSettings,
     RegressionJob,
     TabularFeaturizationSettings,
-    TabularLimitSettings
+    TabularLimitSettings,
 )
-from azure.ai.ml.entities._job.automl.search_space import SearchSpace
+
 from .._restclient.v2022_10_01_preview.models import (
     BlockedTransformers,
     ClassificationModels,
@@ -48,8 +56,8 @@ from .._restclient.v2022_10_01_preview.models import (
     RegressionModels,
     RegressionPrimaryMetrics,
     SamplingAlgorithmType,
-    StochasticOptimizer,
     ShortSeriesHandlingConfiguration,
+    StochasticOptimizer,
     TargetAggregationFunction,
     TargetLagsMode,
     TargetRollingWindowSizeMode,
@@ -93,6 +101,8 @@ __all__ = [
     "NlpSweepSettings",
     "NlpSearchSpace",
     "ImageLimitSettings",
+    "ImageModelSettingsClassification",
+    "ImageModelSettingsObjectDetection",
     "ImageSweepSettings",
     "ImageObjectDetectionSearchSpace",
     "ImageClassificationSearchSpace",
@@ -107,6 +117,7 @@ __all__ = [
     "regression",
     "forecasting",
     "SearchSpace",
+    "StackEnsembleSettings",
     "BlockedTransformers",
     "ClassificationJob",
     "ForecastingJob",
@@ -121,5 +132,5 @@ __all__ = [
     "TextClassificationJob",
     "TextClassificationMultilabelJob",
     "TextNerJob",
-    "ValidationMetricType"
+    "ValidationMetricType",
 ]

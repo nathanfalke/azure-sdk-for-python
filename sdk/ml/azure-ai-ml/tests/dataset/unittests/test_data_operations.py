@@ -6,14 +6,19 @@ import pytest
 from test_utilities.constants import Test_Resource_Group, Test_Workspace_Name
 
 from azure.ai.ml import load_data
-from azure.ai.ml._restclient.v2021_10_01.models._models_py3 import (
-    DatasetContainerData,
-    DatasetContainerDetails,
-    DatasetVersionData,
-    DatasetVersionDetails,
+from azure.ai.ml._restclient.v2022_10_01.models._models_py3 import (
+    DataContainer,
+    DataContainerProperties,
+    DataVersionBase,
+    DataVersionBaseProperties,
 )
 from azure.ai.ml._scope_dependent_operations import OperationConfig, OperationScope
-from azure.ai.ml.constants._common import AssetTypes
+from azure.ai.ml.constants._common import (
+    REF_DOC_YAML_SCHEMA_ERROR_MSG_FORMAT,
+    AssetTypes,
+    YAMLRefDocLinks,
+    YAMLRefDocSchemaNames,
+)
 from azure.ai.ml.entities._assets import Data
 from azure.ai.ml.entities._assets._artifacts.artifact import ArtifactStorageInfo
 from azure.ai.ml.exceptions import ErrorTarget
@@ -23,12 +28,12 @@ from azure.core.paging import ItemPaged
 
 @pytest.fixture
 def mock_datastore_operation(
-    mock_workspace_scope: OperationScope, mock_operation_config: OperationConfig, mock_aml_services_2022_05_01: Mock
+    mock_workspace_scope: OperationScope, mock_operation_config: OperationConfig, mock_aml_services_2022_10_01: Mock
 ) -> DatastoreOperations:
     yield DatastoreOperations(
         operation_scope=mock_workspace_scope,
         operation_config=mock_operation_config,
-        serviceclient_2022_05_01=mock_aml_services_2022_05_01,
+        serviceclient_2022_10_01=mock_aml_services_2022_10_01,
     )
 
 
@@ -36,14 +41,14 @@ def mock_datastore_operation(
 def mock_data_operations(
     mock_workspace_scope: OperationScope,
     mock_operation_config: OperationConfig,
-    mock_aml_services_2022_05_01: Mock,
+    mock_aml_services_2022_10_01: Mock,
     mock_datastore_operation: Mock,
     mock_machinelearning_client: Mock,
 ) -> DataOperations:
     yield DataOperations(
         operation_scope=mock_workspace_scope,
         operation_config=mock_operation_config,
-        service_client=mock_aml_services_2022_05_01,
+        service_client=mock_aml_services_2022_10_01,
         datastore_operations=mock_datastore_operation,
         requests_pipeline=mock_machinelearning_client._requests_pipeline,
     )
@@ -64,6 +69,7 @@ def mock_artifact_storage(_one, _two, _three, **kwargs) -> Mock:
 @patch("azure.ai.ml._artifacts._artifact_utilities._upload_to_datastore", new=mock_artifact_storage)
 @patch.object(Data, "_from_rest_object", new=Mock())
 @patch.object(Data, "_from_container_rest_object", new=Mock())
+@pytest.mark.data_experiences_test
 class TestDataOperations:
     def test_list(self, mock_data_operations: DataOperations) -> None:
         mock_data_operations._operation.list.return_value = [Mock(Data) for _ in range(10)]
@@ -86,8 +92,9 @@ class TestDataOperations:
 
     def test_get_no_version(self, mock_data_operations: DataOperations) -> None:
         name = "random_name"
-        with pytest.raises(Exception):
+        with pytest.raises(Exception) as ex:
             mock_data_operations.get(name=name)
+        assert "At least one required parameter is missing" in str(ex.value)
 
     def test_create_with_spec_file(
         self,
@@ -122,6 +129,7 @@ class TestDataOperations:
                 sas_uri=None,
                 artifact_type=ErrorTarget.DATA,
                 show_progress=True,
+                ignore_file=None,
             )
         mock_data_operations._operation.create_or_update.assert_called_once()
         assert "version='1'" in str(mock_data_operations._operation.create_or_update.call_args)
@@ -161,6 +169,7 @@ class TestDataOperations:
                 sas_uri=None,
                 artifact_type=ErrorTarget.DATA,
                 show_progress=True,
+                ignore_file=None,
             )
         mock_data_operations._operation.create_or_update.assert_called_once()
         assert "version='1'" in str(mock_data_operations._operation.create_or_update.call_args)
@@ -170,12 +179,16 @@ class TestDataOperations:
         Expect to raise ValidationException for missing path
         """
         name = "random_name"
-        data = Data(name=name, version="1", description="this is an mltable dataset", type=AssetTypes.MLTABLE)
+        data1 = Data(name=name, version="1", description="this is an mltable dataset", type=AssetTypes.MLTABLE)
 
         with pytest.raises(Exception) as ex:
-            mock_data_operations.create_or_update(data)
+            mock_data_operations.create_or_update(data1)
         assert "At least one required parameter is missing" in str(ex.value)
         mock_data_operations._operation.create_or_update.assert_not_called()
+
+        with pytest.raises(Exception) as ex:
+            load_data("tests/test_configs/dataset/data_missing_path_test.yml")
+        assert REF_DOC_YAML_SCHEMA_ERROR_MSG_FORMAT.format(YAMLRefDocSchemaNames.DATA, YAMLRefDocLinks.DATA) in str(ex.value)
 
     @patch("azure.ai.ml.operations._data_operations.read_local_mltable_metadata_contents")
     @patch("azure.ai.ml.operations._data_operations.read_remote_mltable_metadata_contents")
@@ -203,7 +216,7 @@ class TestDataOperations:
         mock_data_operations.create_or_update(data)
 
         _mock_read_remote_mltable_metadata_contents.assert_called_once_with(
-            path=data_path,
+            base_uri=data_path,
             datastore_operations=mock_datastore_operation,
             requests_pipeline=mock_data_operations._requests_pipeline,
         )
@@ -378,7 +391,7 @@ class TestDataOperations:
 
     def test_archive_version(self, mock_data_operations: DataOperations):
         name = "random_name"
-        dataset_version = Mock(DatasetVersionData(properties=Mock(DatasetVersionDetails(paths=[]))))
+        dataset_version = Mock(DataVersionBase(properties=Mock(DataVersionBaseProperties(data_uri="http://test.com"))))
         version = "1"
         mock_data_operations._operation.get.return_value = dataset_version
         mock_data_operations.archive(name=name, version=version)
@@ -392,7 +405,7 @@ class TestDataOperations:
 
     def test_archive_container(self, mock_data_operations: DataOperations):
         name = "random_name"
-        dataset_container = Mock(DatasetContainerData(properties=Mock(DatasetContainerDetails())))
+        dataset_container = Mock(DataContainer(properties=Mock(DataContainerProperties(data_type="uri_folder"))))
         mock_data_operations._container_operation.get.return_value = dataset_container
         mock_data_operations.archive(name=name)
         mock_data_operations._container_operation.create_or_update.assert_called_once_with(
@@ -404,7 +417,7 @@ class TestDataOperations:
 
     def test_restore_version(self, mock_data_operations: DataOperations):
         name = "random_name"
-        dataset_version = Mock(DatasetVersionData(properties=Mock(DatasetVersionDetails(paths=[]))))
+        dataset_version = Mock(DataVersionBase(properties=Mock(DataVersionBaseProperties(data_uri="http://test.com"))))
         version = "1"
         mock_data_operations._operation.get.return_value = dataset_version
         mock_data_operations.restore(name=name, version=version)
@@ -418,7 +431,7 @@ class TestDataOperations:
 
     def test_restore_container(self, mock_data_operations: DataOperations):
         name = "random_name"
-        dataset_container = Mock(DatasetContainerData(properties=Mock(DatasetContainerDetails())))
+        dataset_container = Mock(DataContainer(properties=Mock(DataContainerProperties(data_type="uri_folder"))))
         mock_data_operations._container_operation.get.return_value = dataset_container
         mock_data_operations.restore(name=name)
         mock_data_operations._container_operation.create_or_update.assert_called_once_with(
@@ -463,4 +476,5 @@ class TestDataOperations:
                 sas_uri=None,
                 artifact_type=ErrorTarget.DATA,
                 show_progress=True,
+                ignore_file=None,
             )
